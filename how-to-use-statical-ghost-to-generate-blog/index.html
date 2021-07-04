@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>怎样使用statical-ghost静态博客生成软件?</title>
+  
+  <link rel="canonical" href="https://zaaack.github.io/how-to-use-statical-ghost-to-generate-blog/">
+  
+  <meta name="description" content="又一个静态博客生成器, 基于node, 使用ghost主题。现在已经有很多静态博客生成器了，最常见的是基于ruby的jekyll, orgpress ，奈何我对ruby不熟,或者没有ruby环境，或者安装麻烦, 或者太过复杂，其实我都没用过，但是造轮子总是可以找到无数的理由。。  node下有大名鼎">
+  
+  
+  <meta name="author" content="Zack">
+  
+  <meta property="og:image" content="https://zaaack.github.ioundefined">
+  
+  <meta property="og:site_name" content="Zack&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="怎样使用statical-ghost静态博客生成软件?" />
+  
+  <meta property="og:description" content="又一个静态博客生成器, 基于node, 使用ghost主题。现在已经有很多静态博客生成器了，最常见的是基于ruby的jekyll, orgpress ，奈何我对ruby不熟,或者没有ruby环境，或者安装麻烦, 或者太过复杂，其实我都没用过，但是造轮子总是可以找到无数的理由。。  node下有大名鼎">
+  
+  <meta property="og:url" content="https://zaaack.github.io/how-to-use-statical-ghost-to-generate-blog/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="怎样使用statical-ghost静态博客生成软件?">
+  
+  <meta name="twitter:description" content="又一个静态博客生成器, 基于node, 使用ghost主题。现在已经有很多静态博客生成器了，最常见的是基于ruby的jekyll, orgpress ，奈何我对ruby不熟,或者没有ruby环境，或者安装麻烦, 或者太过复杂，其实我都没用过，但是造轮子总是可以找到无数的理由。。  node下有大名鼎">
+  
+  
+  <meta name="twitter:image" content="https://zaaack.github.ioundefined">
+  
+  <meta name="twitter:url" content="https://zaaack.github.io/how-to-use-statical-ghost-to-generate-blog/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/avatar.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Zack&#39;s blog
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">首页</a>
+        
+          
+          <a href="/projects" class="ml">项目</a>
+          
+        
+          
+          <a href="/tools" class="ml">工具</a>
+          
+        
+          
+          <a href="/archives" class="ml">归档</a>
+          
+        
+          
+          <a href="/about" class="ml">关于</a>
+          
+        
+        
+          
+            <a href="mailto:zaaack@qq.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>怎样使用statical-ghost静态博客生成软件?</h2>
+
+  <p>又一个静态博客生成器, 基于node, 使用ghost主题。现在已经有很多静态博客生成器了，最常见的是基于ruby的jekyll, orgpress ，奈何我对ruby不熟,或者没有ruby环境，或者安装麻烦, 或者太过复杂，其实我都没用过，但是造轮子总是可以找到无数的理由。。</p>
+<p> node下有大名鼎鼎的hexo，但是比较复杂，而且官方主题数量有限，而ghost作为wordpress的劲敌，进过数年的发展已经比较稳定，并且积累了相当数量的主题，不需要担心主题的问题，而且功能简单，方便自定义。总之，由于种种原因，这个博客生成器便诞生了。第一次写node工具，走了些弯路，node异步文件读写踩了不少坑，诞生总算基本完成了，希望大家多多指教。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm i -g statical-ghost<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
+<li>迅速，由于使用node的多进程技术，生成上千篇文章只需几秒。</li>
+<li>容易使用, 只需记住几条简单的命令即可。</li>
+<li>基于ghost主题，大量的免费主题可供挑选(<a target="_blank" rel="noopener" href="http://marketplace.ghost.org/themes/free/">http://marketplace.ghost.org/themes/free/</a>)。</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>首先</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sg init # or sg i<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后，你会得到一个如下的文件夹结构</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;current directory&gt;
+  |-posts   # 你的markdown文章(以.md结尾), 支持多级目录
+  |-public # 生成博客所在目录
+  |-tmp # 缓存文件夹
+  |-themes # 主题目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个命令不仅生成了文件夹，还自动生成了一份默认配置文件和一篇示例文章， 甚至下载了一个默认ghost主题。</p>
+<p>也就是说这个命令之后就已经可以进入下一步进行生成博客了。当然你也可以尝试在<code>/posts</code>目录下写一些文章。</p>
+<h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><p>这一步进行生成博客。</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sg generate # or sg g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="server"><a href="#server" class="headerlink" title="server"></a>server</h2><p>当你看到<code>/public</code>目录下产生了很多文件之后， 就可以使用这个命令</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sg server # or sg s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>来启动一个本地静态服务器了, 这个命令也可以通过监听文件, 主题或配置改变自动生成博客。<br>现在点击 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a> 来看你的博客吧 !!!</p>
+<h2 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sg -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后就可以看到如下的帮助信息:</p>
+<pre class="line-numbers language-none"><code class="language-none">Usage: sg [command] [options]
+
+
+  Commands:
+
+    generate|g             generate blog
+    init|i                 initialize blog structure in current directory
+    clean|c                clean temp dir
+    deploy|d               deploy to server, use config.deploy in config.yaml as command
+    generateAndDeploy|gd   generate and deploy
+    server|s               start a static server, which would auto generate when posts changed
+
+  another static glog generator by ghost theme
+
+  Options:
+
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -c, --config &lt;path&gt;  set config path. default is .&#x2F;config.yaml
+    -p, --port           the port of local server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="config-file"><a href="#config-file" class="headerlink" title="config file"></a>config file</h2><p>配置文件为工作目录下的<code>config.yaml</code>文件，使用yaml书写。</p>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
+  <p><a class="classtest-link" href="/tags/node/" rel="tag">node</a>, <a class="classtest-link" href="/tags/statical-ghost/" rel="tag">statical-ghost</a> — Dec 29, 2015</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/zaaack" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

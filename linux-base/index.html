@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>linux基础和常用命令</title>
+  
+  <link rel="canonical" href="https://zaaack.github.io/linux-base/">
+  
+  <meta name="description" content="#linux 简介和常用命令 ##linux目录结构 (摘自:http://www.360doc.com/content/14/0607/16/203871_384577619.shtml)    目录 功能    / 第一层次结构的根、整个文件系统层次结构的根目录。   /bin/ 需要在单用户模">
+  
+  
+  <meta name="author" content="Zack">
+  
+  <meta property="og:image" content="https://zaaack.github.ioundefined">
+  
+  <meta property="og:site_name" content="Zack&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="linux基础和常用命令" />
+  
+  <meta property="og:description" content="#linux 简介和常用命令 ##linux目录结构 (摘自:http://www.360doc.com/content/14/0607/16/203871_384577619.shtml)    目录 功能    / 第一层次结构的根、整个文件系统层次结构的根目录。   /bin/ 需要在单用户模">
+  
+  <meta property="og:url" content="https://zaaack.github.io/linux-base/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="linux基础和常用命令">
+  
+  <meta name="twitter:description" content="#linux 简介和常用命令 ##linux目录结构 (摘自:http://www.360doc.com/content/14/0607/16/203871_384577619.shtml)    目录 功能    / 第一层次结构的根、整个文件系统层次结构的根目录。   /bin/ 需要在单用户模">
+  
+  
+  <meta name="twitter:image" content="https://zaaack.github.ioundefined">
+  
+  <meta name="twitter:url" content="https://zaaack.github.io/linux-base/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/avatar.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Zack&#39;s blog
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">首页</a>
+        
+          
+          <a href="/projects" class="ml">项目</a>
+          
+        
+          
+          <a href="/tools" class="ml">工具</a>
+          
+        
+          
+          <a href="/archives" class="ml">归档</a>
+          
+        
+          
+          <a href="/about" class="ml">关于</a>
+          
+        
+        
+          
+            <a href="mailto:zaaack@qq.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>linux基础和常用命令</h2>
+
+  <p>#linux 简介和常用命令</p>
+<p>##linux目录结构</p>
+<p>(摘自:<a target="_blank" rel="noopener" href="http://www.360doc.com/content/14/0607/16/203871_384577619.shtml">http://www.360doc.com/content/14/0607/16/203871_384577619.shtml</a>)</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td>第一层次结构的根、整个文件系统层次结构的根目录。</td>
+</tr>
+<tr>
+<td>/bin/</td>
+<td>需要在单用户模式可用的必要命令（可执行文件）；面向所有用户，例如：cat、ls、cp，和/usr/bin类似。</td>
+</tr>
+<tr>
+<td>/boot/</td>
+<td>引导程序文件，例如：kernel、initrd；时常是一个单独的分区[6]</td>
+</tr>
+<tr>
+<td>/dev/</td>
+<td>必要设备, 例如：, /dev/null.</td>
+</tr>
+<tr>
+<td>/etc/</td>
+<td>特定主机，系统范围内的配置文件。关于这个名称目前有争议。在贝尔实验室关于UNIX实现文档的早期版本中，/etc 被称为/etcetra 目录，[7]这是由于过去此目录中存放所有不属于别处的所有东西（然而，FHS限制/etc存放静态配置文件，不能包含二进制文件）。[8]自从早期文档出版以来，目录名称已被以各种方式重新称呼。最近的解释包括反向缩略语如：”可编辑的文本配置”（英文 “Editable Text Configuration”）或”扩展工具箱”（英文 “Extended Tool Chest”)。[9]</td>
+</tr>
+<tr>
+<td>/etc/opt/</td>
+<td>/opt/的配置文件</td>
+</tr>
+<tr>
+<td>/etc/X11/</td>
+<td>X_Window系统(版本11)的配置文件</td>
+</tr>
+<tr>
+<td>/etc/sgml/</td>
+<td>SGML的配置文件</td>
+</tr>
+<tr>
+<td>/etc/xml/</td>
+<td>XML的配置文件</td>
+</tr>
+<tr>
+<td>/home/</td>
+<td>用户的家目录，包含保存的文件、个人设置等，一般为单独的分区。</td>
+</tr>
+<tr>
+<td>/lib/</td>
+<td>/bin/ and /sbin/中二进制文件必要的库文件。</td>
+</tr>
+<tr>
+<td>/media/</td>
+<td>可移除媒体(如CD-ROM)的挂载点 (在FHS-2.3中出现)。</td>
+</tr>
+<tr>
+<td>/lost+found</td>
+<td>在ext3文件系统中，当系统意外崩溃或机器意外关机，会产生一些文件碎片在这里。当系统在开机启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。当系统发生问题。可能会有文件被移动到这个目录中，可能需要用手工的方式来修复，或移到文件到原来的位置上。</td>
+</tr>
+<tr>
+<td>/mnt/</td>
+<td>临时挂载的文件系统。比如cdrom,u盘等，直接插入光驱无法使用，要先挂载后使用</td>
+</tr>
+<tr>
+<td>/opt/</td>
+<td>可选应用软件包。</td>
+</tr>
+<tr>
+<td>/proc/</td>
+<td>虚拟文件系统，将内核与进程状态归档为文本文件（系统信息都存放这目录下）。例如：uptime、 network。在Linux中，对应Procfs格式挂载。该目录下文件只能看不能改（包括root）</td>
+</tr>
+<tr>
+<td>/root/</td>
+<td>超级用户的家目录</td>
+</tr>
+<tr>
+<td>/sbin/</td>
+<td>必要的系统二进制文件，例如： init、 ip、 mount。sbin目录下的命令，普通用户都执行不了。</td>
+</tr>
+<tr>
+<td>/srv/</td>
+<td>站点的具体数据，由系统提供。</td>
+</tr>
+<tr>
+<td>/tmp/</td>
+<td>临时文件(参见 /var/tmp)，在系统重启时目录中文件不会被保留。</td>
+</tr>
+<tr>
+<td>/usr/</td>
+<td>默认软件都会存于该目录下.用于存储只读用户数据的第二层次;包含绝大多数的(多)用户工具和应用程序。</td>
+</tr>
+<tr>
+<td>/var/</td>
+<td>变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。有时是一个单独的分区。如果不单独分区，有可能会把整个分区充满。如果单独分区，给大给小都不合适。</td>
+</tr>
+</tbody></table>
+<p>##linux下的常用命令</p>
+<p>###文件操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat</td>
+<td></td>
+</tr>
+<tr>
+<td>mv(move)</td>
+<td></td>
+</tr>
+<tr>
+<td>cp(copy)</td>
+<td></td>
+</tr>
+<tr>
+<td>find</td>
+<td>find <dir> -d(only directory) -maxdepth &lt;搜索深度&gt; -name <name></td>
+</tr>
+</tbody></table>
+<p>###目录操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>切换目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>罗列当前目录下的文件</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>常看当前进程列表</td>
+</tr>
+</tbody></table>
+<p>###权限操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chmod</td>
+<td></td>
+</tr>
+<tr>
+<td>chown</td>
+<td></td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td></td>
+</tr>
+<tr>
+<td>sudo+commands</td>
+<td>以管理员运行</td>
+</tr>
+</tbody></table>
+<p>###编辑操作<br>命令              |功能<br>——————|—————————–</p>
+<p>##linux下的常用操作</p>
+<p>###linux 查看端口占用并杀掉</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">ps -aux | grep 9200 #过滤  or
+netstat –apn
+
+kill &lt;pid&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+  <p><a class="classtest-link" href="/tags/linux/" rel="tag">linux</a> — Jun 5, 2016</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/zaaack" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

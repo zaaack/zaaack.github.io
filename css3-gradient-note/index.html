@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>css3渐变笔记</title>
+  
+  <link rel="canonical" href="https://zaaack.github.io/css3-gradient-note/">
+  
+  <meta name="description" content="css3中增加了很多新的特性，然而自己一直没有系统的学习过，只能在项目里边用边记录了。。 最近项目中需要在背景图片上加上渐变的效果，像以往这种效果一般需要图片来实现，但是移动端由于网速和高昂流量费等原因，太多的图片无疑会极大的降低体验。由于现在css3的兼容性已经越来越好了，通过Can I Use网">
+  
+  
+  <meta name="author" content="Zack">
+  
+  <meta property="og:image" content="https://zaaack.github.ioundefined">
+  
+  <meta property="og:site_name" content="Zack&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="css3渐变笔记" />
+  
+  <meta property="og:description" content="css3中增加了很多新的特性，然而自己一直没有系统的学习过，只能在项目里边用边记录了。。 最近项目中需要在背景图片上加上渐变的效果，像以往这种效果一般需要图片来实现，但是移动端由于网速和高昂流量费等原因，太多的图片无疑会极大的降低体验。由于现在css3的兼容性已经越来越好了，通过Can I Use网">
+  
+  <meta property="og:url" content="https://zaaack.github.io/css3-gradient-note/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="css3渐变笔记">
+  
+  <meta name="twitter:description" content="css3中增加了很多新的特性，然而自己一直没有系统的学习过，只能在项目里边用边记录了。。 最近项目中需要在背景图片上加上渐变的效果，像以往这种效果一般需要图片来实现，但是移动端由于网速和高昂流量费等原因，太多的图片无疑会极大的降低体验。由于现在css3的兼容性已经越来越好了，通过Can I Use网">
+  
+  
+  <meta name="twitter:image" content="https://zaaack.github.ioundefined">
+  
+  <meta name="twitter:url" content="https://zaaack.github.io/css3-gradient-note/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/avatar.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Zack&#39;s blog
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">首页</a>
+        
+          
+          <a href="/projects" class="ml">项目</a>
+          
+        
+          
+          <a href="/tools" class="ml">工具</a>
+          
+        
+          
+          <a href="/archives" class="ml">归档</a>
+          
+        
+          
+          <a href="/about" class="ml">关于</a>
+          
+        
+        
+          
+            <a href="mailto:zaaack@qq.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>css3渐变笔记</h2>
+
+  <p>css3中增加了很多新的特性，然而自己一直没有系统的学习过，只能在项目里边用边记录了。。</p>
+<p>最近项目中需要在背景图片上加上渐变的效果，像以往这种效果一般需要图片来实现，但是移动端由于网速和高昂流量费等原因，太多的图片无疑会极大的降低体验。由于现在css3的兼容性已经越来越好了，通过<a target="_blank" rel="noopener" href="http://caniuse.com/#search=gradient">Can I Use</a>网站可以看出，即使是没有前缀的渐变函数的支持率也已经很高了，因此我们可以通过css3的渐变效果来模拟。</p>
+<p>css3的渐变函数有4种分别是</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>linear-gradient</td>
+<td>线性渐变</td>
+</tr>
+<tr>
+<td>radial-gradient</td>
+<td>环形渐变</td>
+</tr>
+<tr>
+<td>repeating-linear-gradient</td>
+<td>重复线性渐变</td>
+</tr>
+<tr>
+<td>repeating-radial-gradient</td>
+<td>重复环形渐变</td>
+</tr>
+</tbody></table>
+<p>需要注意的是，渐变函数的返回是一个图片，因此你不能在background-color中使用，只能在background-image中使用。</p>
+<h2 id="linear-gradient"><a href="#linear-gradient" class="headerlink" title="linear-gradient"></a>linear-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">linear-gradient(
+  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+  \---------------------------------&#x2F; \----------------------------&#x2F;
+    Definition of the gradient line        List of color stops
+
+where &lt;side-or-corner&gt; &#x3D; [left | right] || [top | bottom]
+  and &lt;color-stop&gt;     &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中第一个参数是角度或关键字，MDN上的例子中角度的单位都是角度deg(degree)，经过测试发现也可以是弧度rad(radian)</p>
+<p>需要注意的是这个角度的计算方式和数学里的坐标系不同，是从Y轴的正半轴沿顺时针计算的，因此<br>to top = 0deg = 0rad<br>to right = 90deg = 1.57rad<br>to bottom = 180deg = 3.14rad<br>to left = 270deg = 4.71rad</p>
+<p>第二个参数是颜色帧，包含颜色和位置(可以是百分比或长度)，颜色可以使用rgba支持透明度，再配合css3的多背景的特性就可以实现强大的渐变遮罩效果了。</p>
+<p>具体操作上有几个问题:</p>
+<ul>
+<li>css3 multi background特性是第一个图片在最上面，后面的依次在下面，因此图片得放在最后，渐变遮罩得放在前面</li>
+<li>渐变遮罩默认是全部铺满的，因此得使用透明度使下面的图片显露出来</li>
+<li>其他背景属性也是通过逗号分开，分别对应背景图片</li>
+</ul>
+<p data-height="265" data-theme-id="0" data-slug-hash="XKkAmy" data-default-tab="css,result" data-user="zaaack" data-embed-version="2" class="codepen">See the Pen <a target="_blank" rel="noopener" href="http://codepen.io/zaaack/pen/XKkAmy/">linear-gradient demo</a> by Zack Young (<a target="_blank" rel="noopener" href="http://codepen.io/zaaack">@zaaack</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
+
+
+
+
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+<h2 id="radial-gradient"><a href="#radial-gradient" class="headerlink" title="radial-gradient"></a>radial-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">radial-gradient(   [ circle || &lt;length&gt; ] [ at &lt;position&gt; ]? ,
+                 | [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [ at &lt;position&gt; ]? ,
+                 | [ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [ at &lt;position&gt; ]? ,
+                 | at &lt;position&gt; ,
+                 &lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )
+where &lt;extent-keyword&gt; &#x3D; closest-corner | closest-side | farthest-corner | farthest-side
+  and &lt;color-stop&gt; &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中大小可以是关键字也可以是长度，不过貌似只有椭圆的支持百分比，分别是元素的宽高为基准。</p>
+<table>
+<thead>
+<tr>
+<th>常量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>closest-side</td>
+<td>圆或椭圆的边在最近的边</td>
+</tr>
+<tr>
+<td>closest-corner</td>
+<td>圆或椭圆的边在最近的角</td>
+</tr>
+<tr>
+<td>farthest-side</td>
+<td>圆或椭圆的边在最远的边</td>
+</tr>
+<tr>
+<td>farthest-corner</td>
+<td>圆或椭圆的边在最远的角</td>
+</tr>
+</tbody></table>
+<p data-height="265" data-theme-id="0" data-slug-hash="BzwrPG" data-default-tab="css,result" data-user="zaaack" data-embed-version="2" class="codepen">See the Pen <a target="_blank" rel="noopener" href="http://codepen.io/zaaack/pen/BzwrPG/">radial-gradient demo</a> by Zack Young (<a target="_blank" rel="noopener" href="http://codepen.io/zaaack">@zaaack</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
+
+<h2 id="repeating-linear-gradient"><a href="#repeating-linear-gradient" class="headerlink" title="repeating-linear-gradient"></a>repeating-linear-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">repeating-linear-gradient(  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+                            \---------------------------------&#x2F; \----------------------------&#x2F;
+                              Definition of the gradient line         List of color stops
+
+where &lt;side-or-corner&gt; &#x3D; [left | right] || [top | bottom]
+   and &lt;color-stop&gt;     &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>与linear-gradient基本一致，只不过如果颜色帧没有设置的部分按设置的在两个方向上重复，比如只设置了40%和50%，那么0%到40%和50%到100%均按0%到10%的部分重复。</p>
+<h2 id="repeating-radial-gradient"><a href="#repeating-radial-gradient" class="headerlink" title="repeating-radial-gradient"></a>repeating-radial-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">
+repeating-radial-gradient(
+       [[ circle  || &lt;length&gt; ]                     [at &lt;position&gt;]? , |
+        [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [at &lt;position&gt;]? , |
+        [[ circle | ellipse ] || &lt;extent-keyword&gt; ] [at &lt;position&gt;]? , |
+                                                     at &lt;position&gt;   ,    &lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )
+        \---------------------------------------------------------------&#x2F;\--------------------------------&#x2F;
+                  Contour, size and position of the ending shape               List of color stops
+
+where &lt;extent-keyword&gt; &#x3D; closest-corner | closest-side | farthest-corner | farthest-side
+  and &lt;color-stop&gt; &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>同上。</p>
+<h2 id="渐变叠加计算"><a href="#渐变叠加计算" class="headerlink" title="渐变叠加计算"></a>渐变叠加计算</h2><p>多个带透明度的背景叠加时遵循以下公式：</p>
+<p>假设rgb颜色A,B,C，B带不透明度alpha且叠加在A上面，C为叠加后效果<br>则</p>
+<p>$$A*(1-alpha)+B*alpha=C$$</p>
+<p>即C等于A乘以B的透明度(1-alpha)加上B乘以B的不透明度alpha</p>
+<p>可以写个求渐变遮罩颜色值的函数如下：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getMask</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span><span class="token constant">C</span><span class="token punctuation">,</span> alpha</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> rgbA <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+  <span class="token keyword">var</span> rgbC <span class="token operator">=</span> <span class="token constant">C</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">var</span> <span class="token constant">B</span>
+  <span class="token constant">B</span> <span class="token operator">=</span> rgbA<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span><span class="token operator">=></span>
+    <span class="token punctuation">(</span>rgbC<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> a<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>alpha<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span>alpha
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token constant">B</span>
+<span class="token punctuation">&#125;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getMask</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">77</span><span class="token punctuation">,</span> <span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果我们想得到叠加后的颜色为rgb(0, 77, 68)的话，可以这样写：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgb</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 60<span class="token punctuation">,</span> 60<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to left<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 117<span class="token punctuation">,</span> 87<span class="token punctuation">,</span> 0.3<span class="token punctuation">)</span> 0%<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 117<span class="token punctuation">,</span> 87<span class="token punctuation">,</span> 0.3<span class="token punctuation">)</span> 100%<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+  <p><a class="classtest-link" href="/tags/css/" rel="tag">css</a>, <a class="classtest-link" href="/tags/css3/" rel="tag">css3</a> — Jul 17, 2016</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/zaaack" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

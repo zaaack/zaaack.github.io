@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>webpack2 -从0搭建一个完整的前端开发技术栈(6)</title>
+  
+  <link rel="canonical" href="https://zaaack.github.io/setup-your-front-end-stack-from-zero-6-webpack2/">
+  
+  <meta name="description" content="之前的框架是 full-stack 的，最近需要帮以前工作室的学妹弄一个简单的 h5 页面时才发现，自己居然手头没有一套靠谱的纯粹配置，如果从其他项目中剥离出来又实在提不起兴趣，于是下了官方的 create-react-app, 发现各种问题，比如  不支持 react 热更新，只支持热刷新 与 s">
+  
+  
+  <meta name="author" content="Zack">
+  
+  <meta property="og:image" content="https://zaaack.github.ioundefined">
+  
+  <meta property="og:site_name" content="Zack&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="webpack2 -从0搭建一个完整的前端开发技术栈(6)" />
+  
+  <meta property="og:description" content="之前的框架是 full-stack 的，最近需要帮以前工作室的学妹弄一个简单的 h5 页面时才发现，自己居然手头没有一套靠谱的纯粹配置，如果从其他项目中剥离出来又实在提不起兴趣，于是下了官方的 create-react-app, 发现各种问题，比如  不支持 react 热更新，只支持热刷新 与 s">
+  
+  <meta property="og:url" content="https://zaaack.github.io/setup-your-front-end-stack-from-zero-6-webpack2/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="webpack2 -从0搭建一个完整的前端开发技术栈(6)">
+  
+  <meta name="twitter:description" content="之前的框架是 full-stack 的，最近需要帮以前工作室的学妹弄一个简单的 h5 页面时才发现，自己居然手头没有一套靠谱的纯粹配置，如果从其他项目中剥离出来又实在提不起兴趣，于是下了官方的 create-react-app, 发现各种问题，比如  不支持 react 热更新，只支持热刷新 与 s">
+  
+  
+  <meta name="twitter:image" content="https://zaaack.github.ioundefined">
+  
+  <meta name="twitter:url" content="https://zaaack.github.io/setup-your-front-end-stack-from-zero-6-webpack2/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/avatar.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Zack&#39;s blog
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">首页</a>
+        
+          
+          <a href="/projects" class="ml">项目</a>
+          
+        
+          
+          <a href="/tools" class="ml">工具</a>
+          
+        
+          
+          <a href="/archives" class="ml">归档</a>
+          
+        
+          
+          <a href="/about" class="ml">关于</a>
+          
+        
+        
+          
+            <a href="mailto:zaaack@qq.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>webpack2 -从0搭建一个完整的前端开发技术栈(6)</h2>
+
+  <p>之前的框架是 full-stack 的，最近需要帮以前工作室的学妹弄一个简单的 h5 页面时才发现，自己居然手头没有一套靠谱的纯粹配置，如果从其他项目中剥离出来又实在提不起兴趣，于是下了官方的 create-react-app, 发现各种问题，比如</p>
+<ol>
+<li>不支持 react 热更新，只支持热刷新</li>
+<li>与 sass 整合很不方便，sass 直接编译到源码目录，干扰视线。。</li>
+<li>babel，webpack 也不支持扩展；</li>
+<li>…</li>
+</ol>
+<p>无法适应大型项目，和我理解中的只是用来写 demo, 或者简单页面的脚手架差不多。临时看了一下 styled-components, 发现这货比我想象的要高级，支持嵌套语法，auto-prefixer, 既然是 css-in-js,那么动态复用就完全不用担心了，更让我惊艳的是工具链的支持，在 atom 中，基本上必装的 language-babel 插件已经默认支持了，在 js 中也可以享受到强大的 css 提示。</p>
+<p>于是在 create-react-app + styled-components 的组合下写起展示类页面来体验也挺不错的。</p>
+<p>不过，没有一套自己常用的纯前端的脚手架总感觉心里不太安稳，而且转眼过去大半年了，webpack2, react-hot-loader v3 已经是正式版了，个人也积累了一些不错的库，于是便打算再折腾一个最新的脚手架。</p>
+<p>作为一名合格的「前端配置工程师」，每半年~一年升级一次配置才能紧跟前端的潮流。。</p>
+<p>先放代码：<a target="_blank" rel="noopener" href="https://github.com/zaaack/react-starter.git">https://github.com/zaaack/react-starter.git</a></p>
+<p>这里主要记录一下猜到的坑。。</p>
+<h4 id="react-hot-loader"><a href="#react-hot-loader" class="headerlink" title="react-hot-loader"></a>react-hot-loader</h4><p>毫无悬念，虽然之前有过成功配置 react-hot-loader 的经历，而且那时也是 v3，只不是是 v3-beta, 现在是 v3 正式版，但是还是在这里卡住了大部分时间…</p>
+<p>其实官方的两个 demo 已经是非常友好的了，</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wkwiatek/react-hot-loader-minimal-boilerplate">https://github.com/wkwiatek/react-hot-loader-minimal-boilerplate</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gaearon/react-hot-boilerplate/tree/next">https://github.com/gaearon/react-hot-boilerplate/tree/next</a></li>
+</ul>
+<p>webpack2 官方也有一个教程，不过需要注意的是 babel-preset-es2015 的参数配置有点老了，具体可以参考上面的 <a target="_blank" rel="noopener" href="https://github.com/wkwiatek/react-hot-loader-minimal-boilerplate">react-hot-loader-minimal-boilerplate</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://webpack.js.org/guides/hmr-react/">https://webpack.js.org/guides/hmr-react/</a></li>
+</ul>
+<p>不过 react-hot-loader 还是太 hack了点，很多地方都需要加 patch，不仅仅是在 entry 中，babel presets 中也要加。开始时就是忘了加 babel presets 中的 <code>react-hot-loader/babel</code>, 导致虽然 log 正常，但是却完全没反应。没有报错提示无意是最难调试的了，只能去翻源码以及在源码中加 log。</p>
+<p>发现之后加上去了，但是还是老样子，到底是哪里有问题呢？经过反复耐心测试才发现居然是少了 babel-polyfill, 而且还不能使用 babel-transform-runtime, 虽然之前的配置中 可以通过对 transform-runtime 加 {polyfill:false} 参数使之共存，但是这个 trick 貌似在最新版中不能用了，不过没关系，可以通过 NODE_ENV 区分啊，大不了 开发环境就不加嘛。</p>
+<p>可是这样还是不行，不过还好在反复实践中发现<br>虽然 webpack 中配置了 babel, 但是还是会去读取 .bablerc 文件，在翻 babel-loader 的源码时在文档中成功找到了相关依据，改了一个配置就搞定了。。此时 react-hot-loader 所有的坑都已填满，可以放心食用了。。</p>
+<h4 id="react-测试"><a href="#react-测试" class="headerlink" title="react 测试"></a>react 测试</h4><p>其实之前一直都没写过 react 测试，老实说除了一些基础 node 库之外，我还没在业务代码中写过测试呢，更不用说 UI 测试了。。所以这次就干脆把测试也加上了。React 自带了 <code>react-dom/test-utils</code>，不过 API 太过冗长，Facebook 自己都不用， 参考了下阮老师的<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/02/react-testing-tutorial.html">这篇</a>, 发现很多 demo 都跑不起来了，倒不仅仅是因为接口的变动，更坑的是 bug…bug.</p>
+<p>比如 <code>renderIntoDocument</code> 这个方法，最新的 react 已经去掉了返回值，就算看源码自己用 callback 实现也不行，因为我就尝试了，callback 也没有返回值了！连之前 callback 可以用的 <code>this</code>也变成 null 了。。所以要么直接用 document，要么用 airbnb 的 enzyme, 考虑到写测试是一件很痛苦的事情, 而且<br>enzyme 的接口其实和 jquery 很类似，目测挺方便的，本着不给自己添麻烦原则，就只能牺牲一下硬盘空间了。。我的 node_modules 目录已经快撑爆了吧。。</p>
+<p>然而，随便给 demo 代码写了点 测试，想点击一个 react-router 的 Link 实现跳转，死活没反应。在 js-dom 的官方 readme 上看见了巨大的 “不支持跳转” 的说明，好吧，这很好解决，加个 <code>NODE_ENV=test</code> 换成 <code>createMemoryHistory</code> 不就可以了，issue 中也有类似的解决方案。可以还不行！！！一样的没有任何报错，任何反应（可见良好的错误提示是多么重要）。无聊之下又开始翻源码，打 log, 可以确定事件是触发了的，于是又去看 react-router 的 Link 组件，打 log, 终于发现是 因为 Link 中为了确保是鼠标左键点击做了 <code>event.button === 0</code> 的判断，而 jsdom 中的 <code>MouseEvent.button === undefined</code>, 并且是个老 issue 了，果断再来<a target="_blank" rel="noopener" href="https://github.com/tmpvar/jsdom/issues/1831">一发</a>。</p>
+<p>至于 Facebook 官方的测试框架 jest 强大的 snapshot 功能，可喜的发现 AVA 已经 内置了，使用非常方便，就不细说了，直接看代码和官方文档吧。</p>
+<p>恩，至此所有坑已填完，可以上传 repo 了。是的，这篇文章其实不是什么分享，只是单纯的吐槽，解决这些坑其实几乎毫无价值，半年之后，可能有些修了，可能又会有新的 bug。。人生苦短，且行且珍惜，所以半年更新一下配置，又可以保持一下自己的折腾能力了。。</p>
+<p>最后，再来安利一发自己的 react 脚手架 <a target="_blank" rel="noopener" href="https://github.com/zaaack/react-starter.git">react-starter</a>。</p>
+<p>以后有时间再整个 koa 后台的 starter，graphql 的，ssr 的。。。</p>
+
+  <p><a class="classtest-link" href="/tags/fe-stack/" rel="tag">fe-stack</a>, <a class="classtest-link" href="/tags/webpack/" rel="tag">webpack</a> — Apr 28, 2017</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/zaaack" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

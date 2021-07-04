@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>mac 下代理开发环境总结</title>
+  
+  <link rel="canonical" href="https://zaaack.github.io/mac-proxy-dev/">
+  
+  <meta name="description" content="在工作中开发，代理技术对于开发环境是不可避免的，小到入职时配置 VPN，再到开发环境中通过代理使用线上 API，通过代理拦截 App 请求，合理的代理应用对于开发来说经常会有事半功倍的作用。这里记录一下我在工作中代理的运用。 1. 代理服务器我这里用的使用的是由阿里巴巴开源的基于 nodejs 的代">
+  
+  
+  <meta name="author" content="Zack">
+  
+  <meta property="og:image" content="https://zaaack.github.ioundefined">
+  
+  <meta property="og:site_name" content="Zack&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="mac 下代理开发环境总结" />
+  
+  <meta property="og:description" content="在工作中开发，代理技术对于开发环境是不可避免的，小到入职时配置 VPN，再到开发环境中通过代理使用线上 API，通过代理拦截 App 请求，合理的代理应用对于开发来说经常会有事半功倍的作用。这里记录一下我在工作中代理的运用。 1. 代理服务器我这里用的使用的是由阿里巴巴开源的基于 nodejs 的代">
+  
+  <meta property="og:url" content="https://zaaack.github.io/mac-proxy-dev/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mac 下代理开发环境总结">
+  
+  <meta name="twitter:description" content="在工作中开发，代理技术对于开发环境是不可避免的，小到入职时配置 VPN，再到开发环境中通过代理使用线上 API，通过代理拦截 App 请求，合理的代理应用对于开发来说经常会有事半功倍的作用。这里记录一下我在工作中代理的运用。 1. 代理服务器我这里用的使用的是由阿里巴巴开源的基于 nodejs 的代">
+  
+  
+  <meta name="twitter:image" content="https://zaaack.github.ioundefined">
+  
+  <meta name="twitter:url" content="https://zaaack.github.io/mac-proxy-dev/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/avatar.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      Zack&#39;s blog
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">首页</a>
+        
+          
+          <a href="/projects" class="ml">项目</a>
+          
+        
+          
+          <a href="/tools" class="ml">工具</a>
+          
+        
+          
+          <a href="/archives" class="ml">归档</a>
+          
+        
+          
+          <a href="/about" class="ml">关于</a>
+          
+        
+        
+          
+            <a href="mailto:zaaack@qq.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>mac 下代理开发环境总结</h2>
+
+  <p>在工作中开发，代理技术对于开发环境是不可避免的，小到入职时配置 VPN，再到开发环境中通过代理使用线上 API，通过代理拦截 App 请求，合理的代理应用对于开发来说经常会有事半功倍的作用。这里记录一下我在工作中代理的运用。</p>
+<h2 id="1-代理服务器"><a href="#1-代理服务器" class="headerlink" title="1. 代理服务器"></a>1. 代理服务器</h2><p>我这里用的使用的是由阿里巴巴开源的基于 nodejs 的代理工具— <a target="_blank" rel="noopener" href="https://github.com/alibaba/anyproxy">anyproxy</a>，优点是支持 https，使用 nodejs 作为配置文件，学习成本低，<del>缺点是配置 API 看起来太老，连 promise 都不支持，大公司的开源项目不知道什么时候会挂</del>刚上了官网，4.0 beta 已经开始支持 promise 了。</p>
+<h2 id="2-手机代理软件"><a href="#2-手机代理软件" class="headerlink" title="2. 手机代理软件"></a>2. 手机代理软件</h2><p>Android 5.0 以下可以使用 DroidProxy 直接修改 wifi 代理配置，但是 5.0 以上更新了安全策略，只能用开 VPN 的了。我这里用的是虽然界面很丑，但是好得能用的 Drony. （以上 APK 可以去 <a target="_blank" rel="noopener" href="https://apkpure.com/">https://apkpure.com</a>搜索下载）。虽然占用了 VPN，不过一般电脑上各种代理和 VPN 都是开启状态，因此手机上还是能走电脑上的代理和 VPN 的。</p>
+<p>Drony 和 connectbot 的 ssh 端口转发冲突，导致无法代理 dns 访问电脑 vpn 的内网，localproxy chains 相关配置未测试..</p>
+
+  <p><a class="classtest-link" href="/tags/mac/" rel="tag">mac</a>, <a class="classtest-link" href="/tags/proxy/" rel="tag">proxy</a> — Apr 6, 2017</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/zaaack" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

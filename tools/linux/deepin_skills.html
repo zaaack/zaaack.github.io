@@ -1,0 +1,12 @@
+<p>title: deepin技巧汇总<br>permalink: deepin_skills/<br>tags: [linux]<br>date: 2016-05-26 09:29:42</p>
+<hr>
+<blockquote>
+<p>这里主要是记录切换开发环境到deepinlinux下后遇到的一些常见问题和解决方案。deepinlinux是深度开发的一款国产Linux，曾经基于ubuntu，不过最新版的2015.2已经基于debian了，因此许多教程不再适用。其特色是包含已经购买的了的crossover，能正常运行QQ等软件，还和网易云音乐合作开发了linux版，开箱即用，非常方便。</p>
+</blockquote>
+<h3 id="deepin-ctrl-shift-F4切换到命令行后如何启动gui"><a href="#deepin-ctrl-shift-F4切换到命令行后如何启动gui" class="headerlink" title="deepin ctrl+shift+F4切换到命令行后如何启动gui"></a>deepin ctrl+shift+F4切换到命令行后如何启动gui</h3><p><code>sudo service lightdm restart</code></p>
+<h3 id="deepin-启动器图标所在文件夹"><a href="#deepin-启动器图标所在文件夹" class="headerlink" title="deepin 启动器图标所在文件夹"></a>deepin 启动器图标所在文件夹</h3><p><code> ~/.local/share/applications/</code><br>or<br><code>/usr/share/applications</code></p>
+<h3 id="添加windows字体文件"><a href="#添加windows字体文件" class="headerlink" title="添加windows字体文件"></a>添加windows字体文件</h3><pre><code class="sh">sudo ln -s /home/z/deepin_tricks/fonts /usr/share/fonts/winfonts
+cd /usr/share/fonts/winfonts
+mkfontscale &amp;&amp; mkfontdir
+</code></pre>
+<h3 id="解决atom-beautify-插件ctrl-alt-b快捷键冲突"><a href="#解决atom-beautify-插件ctrl-alt-b快捷键冲突" class="headerlink" title="解决atom beautify 插件ctrl-alt-b快捷键冲突"></a>解决atom beautify 插件ctrl-alt-b快捷键冲突</h3><p>右键搜狗输入法-&gt;设置-&gt;高级-&gt;打开fcitx设置-&gt;全局配置-&gt;高级-&gt;找到ctrl-alt-b修改未ctrl-alt-v</p>
