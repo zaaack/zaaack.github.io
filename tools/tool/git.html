@@ -1,0 +1,75 @@
+<p>title: git基础知识<br>permalink: git-base/<br>tags: [git]<br>date: 2016-06-05 09:32:53</p>
+<hr>
+<p>基本的提交流程请参照<a href="../pr-workflow/">pr-workflow</a>，这里主要讲git的版本回退和一些细节问题</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><p>git diff可以用来比较两个文件的变动，或者两个分支的变动</p>
+<p>git diff &lt;变动前的文件&gt; &lt;变动后的文件&gt; #比较两个文件 git diff &lt;变动前的提交&gt; &lt;变动后的提交&gt; #比较两个文件</p>
+<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><p>git reset –mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息</p>
+<p>git reset –soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可</p>
+<p>git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
+<p>以下是一些reset的示例：</p>
+<pre><code class="sh"># 回退所有内容到上一个版本
+git reset HEAD^
+
+# 回退a.py这个文件的版本到上一个版本
+git reset HEAD^ a.py
+
+# 向前回退到第3个版本
+git reset –soft HEAD~3
+
+# 将本地的状态回退到和远程的一样
+git reset –hard origin/master
+
+# 回退到某个版本
+git reset 057d
+
+# 回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit
+git revert HEAD
+</code></pre>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-如何回退某个文件到指定提交"><a href="#1-如何回退某个文件到指定提交" class="headerlink" title="1. 如何回退某个文件到指定提交"></a>1. 如何回退某个文件到指定提交</h3><pre><code class="sh">git reset &lt;commit&gt; &lt;path/to/file&gt;  #恢复文件版本
+git checkout &lt;path/to/file&gt;         #检出原来版本的文件
+</code></pre>
+<h3 id="2-删除本次提交（保留代码）"><a href="#2-删除本次提交（保留代码）" class="headerlink" title="2. 删除本次提交（保留代码）"></a>2. 删除本次提交（保留代码）</h3><pre><code class="sh">git reset &lt;commit&gt; #默认为 –mixed，保留代码，可以查看修改，重新提交
+git status
+</code></pre>
+<h3 id="3-切换未提交的分支时如何保存原来的代码"><a href="#3-切换未提交的分支时如何保存原来的代码" class="headerlink" title="3. 切换未提交的分支时如何保存原来的代码"></a>3. 切换未提交的分支时如何保存原来的代码</h3><pre><code class="sh">git stash #缓存当前分支的修改，切换分支后不会丢失之前的修改。。
+</code></pre>
+<h3 id="4-git-合并多个提交-包括message"><a href="#4-git-合并多个提交-包括message" class="headerlink" title="4. git 合并多个提交(包括message)"></a>4. git 合并多个提交(包括message)</h3><pre><code class="sh">git log #查看提交历史
+git rebase -i HEAD
+# or git rebase -i &lt;commit&gt;
+# 如果遇到冲突
+# 需要先解决冲突 然后git add . 再git rebase --continue
+git push origin dev -f #-f 强制提交
+</code></pre>
+<h3 id="5-本地过滤文件"><a href="#5-本地过滤文件" class="headerlink" title="5. 本地过滤文件"></a>5. 本地过滤文件</h3><p>有时需要过滤一些自己个人用的测试代码，但是又不想修改.gitignore 可以在.git/info/exclude中添加需要过滤的路径或文件。</p>
+<p>比如</p>
+<pre><code class="sh">gulpfile.js/task/mobile-test.js
+static/
+static_resource/mobile/test
+
+mobile/views/test/
+templates/mobile/test
+
+.ftpconfig
+</code></pre>
+<p>但是这种方法只能忽略未加入git版本库的文件，如果是已经加入版本库的文件，可以使用以下方法：</p>
+<pre><code class="sh">git update-index --assume-unchanged /path/to/file
+</code></pre>
+<p>如果需要取消，只需要运行以下命令就可以了</p>
+<pre><code class="sh">git update-index --no-assume-unchanged /path/to/file
+</code></pre>
+<h3 id="6-只clone一个最新的commit"><a href="#6-只clone一个最新的commit" class="headerlink" title="6.只clone一个最新的commit"></a>6.只clone一个最新的commit</h3><p>这种方法可以避免clone github上的项目因为太大而太慢..</p>
+<p>git clone –depth=1 <a href="https://github.com/angular/angular-seed.git">https://github.com/angular/angular-seed.git</a> <your-project-name></p>
+<h3 id="7-git-patch"><a href="#7-git-patch" class="headerlink" title="7. git patch"></a>7. git patch</h3><p>git可以将diff导出为一个文件（patch)，然后通过再应用这个文件，有两种方式</p>
+<h4 id="git-diff的"><a href="#git-diff的" class="headerlink" title="git diff的"></a>git diff的</h4><pre><code>git diff &lt;prev_commit&gt; &lt;commit&gt; &gt; patch.diff
+git apply patch.diff
+</code></pre>
+<h4 id="git-本身的"><a href="#git-本身的" class="headerlink" title="git 本身的"></a>git 本身的</h4><pre><code>git format-patch &lt;commit1&gt;..&lt;commit2&gt; #从commit1 到commit2的diff
+git format-patch -1 &lt;c1&gt; # 单独一个commit
+git format-patch &lt;c1&gt; # 从某commit以来的修改（不包含该commit）
+
+git am xxx.patch
+</code></pre>
+<h4 id="检查是否应用成功"><a href="#检查是否应用成功" class="headerlink" title="检查是否应用成功"></a>检查是否应用成功</h4><pre><code>git apply --stat patch.patch # 检查patch
+git apply --check patch.diff # 测试应用patch
+</code></pre>
+<h2 id="常用概念"><a href="#常用概念" class="headerlink" title="常用概念"></a>常用概念</h2><p>HEAD 指向当前提交的一个指针 HEAD^^ HEAD往前两个版本 HEAD~3 HEAD回退3个版本</p>

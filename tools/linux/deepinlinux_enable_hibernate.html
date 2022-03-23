@@ -1,0 +1,33 @@
+<p>title: 怎样开启deepinlinux/debian的休眠模式<br>permalink: how-to-enable-deepinlinux/debian-hiberate<br>tags: [linux]<br>date: 2016-05-26 09:22:40</p>
+<hr>
+<blockquote>
+<p>参考教程:<a href="https://wiki.debian.org/Hibernation/Hibernate_Without_Swap_Partition">https://wiki.debian.org/Hibernation/Hibernate_Without_Swap_Partition</a></p>
+</blockquote>
+<h1 id="1-开启虚拟内存"><a href="#1-开启虚拟内存" class="headerlink" title="1.开启虚拟内存"></a>1.开启虚拟内存</h1><p>一般需要大于电脑实际使用内存，Uswsusp支持压缩，所以我电脑8g，但是还是分配4G内存</p>
+<pre><code class="sh">sudo dd if=/dev/zero of=/srv/swapfile bs=1M count=4096
+sudo mkswap /srv/swapfile
+sudo swapon /srv/swapfile
+</code></pre>
+<p>关闭分区可以运行</p>
+<pre><code>sudo swapoff /srv/swapfile
+</code></pre>
+<p>为了每次开机自动挂载swap分区，需要在 /etc/fstab中加上下面一行:<br><code>/srv/swapfile   swap    swap    defaults        0       0</code><br>修改/etc/fstab文件若有错误可能导致开不起机，因此需要测试下，命令含义是挂载全部分区</p>
+<pre><code class="sh">sudo mount -a
+</code></pre>
+<h1 id="2-安装配置Uswsusp"><a href="#2-安装配置Uswsusp" class="headerlink" title="2.安装配置Uswsusp"></a>2.安装配置Uswsusp</h1><pre><code class="sh">sudo apt-get install uswsusp
+dpkg-reconfigure -pmedium uswsusp
+</code></pre>
+<p>配置对话如下:</p>
+<blockquote>
+<p>At the “Continue without a valid swap space?” question, answer Yes.<br>At the “Swap space to resume from:” prompt, select the partition where the file above was created.<br>Answer the “Encrypt snapshot?” and “Show splash screen?” questions as you please.</p>
+</blockquote>
+<p>修改/etc/defaults/grub启动脚本</p>
+<pre><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;resume=/dev/sda7 quiet&quot;
+</code></pre>
+<p>其中 “/dev/sda7” 是swap file所在的分区</p>
+<h1 id="3-创建休眠脚本"><a href="#3-创建休眠脚本" class="headerlink" title="3.创建休眠脚本"></a>3.创建休眠脚本</h1><p>我 的是在<code>~/bin</code>下，并且这个目录以及放到环境变量中了。由于deepin的锁屏命令运行后就不再执行脚本了，所以我”创新”的把这个脚本放到了后面。在休眠前最好关闭一些占用内存并且有记忆功能的应用比如chrome，IDE，虚拟机(有bug，休眠一般会造成正在运行的虚拟机崩溃)等。<br>susp.sh</p>
+<pre><code class="sh">sudo swapoff /srv/swapfile
+sudo swapon  /srv/swapfile #清空虚拟内存
+sudo /usr/sbin/s2disk
+dde-lock # 锁定
+</code></pre>

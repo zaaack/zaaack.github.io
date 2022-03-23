@@ -1,0 +1,167 @@
+<p>title: tmux使用介绍<br>permalink: tmux-intro/<br>tags: [linux, tmux]<br>date: 2016-06-05 09:32:53</p>
+<hr>
+<p>tmux是一个linux分屏软件，可以将ssh登陆的命令行窗口进行自由分屏，避免了开多个连接增加服务器负担。<br>安装命令：</p>
+<pre><code class="sh">apt-get install tmux
+</code></pre>
+<p>基本使用指令</p>
+<h2 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tmux</td>
+<td>进入到tmux分屏模式</td>
+</tr>
+<tr>
+<td>tmux kill-server</td>
+<td>关闭服务器</td>
+</tr>
+<tr>
+<td>tmux list-session</td>
+<td>列出所有会话</td>
+</tr>
+<tr>
+<td>tmux kill-session [-t <session id>]</td>
+<td>关闭(某个)会话</td>
+</tr>
+<tr>
+<td>man tmux</td>
+<td>进入到tmux帮助文档</td>
+</tr>
+<tr>
+<td>ctrl+b</td>
+<td>进入到tmux命令模式(类似vi的命令模式)</td>
+</tr>
+</tbody></table>
+<h2 id="2-面板管理-Panel"><a href="#2-面板管理-Panel" class="headerlink" title="2. 面板管理(Panel)"></a>2. 面板管理(Panel)</h2><blockquote>
+<p>tmux最常用的功能就是把命令行窗口分屏，下面让我们看看面板的常用操作</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>将当前面板纵向分成两个</td>
+</tr>
+<tr>
+<td>“</td>
+<td>将当前面板横向分成两个</td>
+</tr>
+<tr>
+<td>o(other panel)</td>
+<td>切换面板</td>
+</tr>
+<tr>
+<td>x(close panel)</td>
+<td>关闭当前面板</td>
+</tr>
+<tr>
+<td>PageUp</td>
+<td>1.向上翻页 2.进入复制模式(Esc退出)</td>
+</tr>
+<tr>
+<td>PageDown</td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td>Ctrl+方向键</td>
+<td>以1个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td>Alt+方向键</td>
+<td>以5个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+</tbody></table>
+<h2 id="3-窗口管理-Window"><a href="#3-窗口管理-Window" class="headerlink" title="3. 窗口管理(Window)"></a>3. 窗口管理(Window)</h2><blockquote>
+<p>tmux还提供了模拟命令行窗口的功能，这意味着你可以新建一个命令行窗口隐藏在后台运行一些东西。。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>c(create window)</td>
+<td>新建窗口</td>
+</tr>
+<tr>
+<td>w(windows)</td>
+<td>显示所有窗口的列表</td>
+</tr>
+<tr>
+<td>n(next window)</td>
+<td>下一个窗口</td>
+</tr>
+<tr>
+<td>p(previous window)</td>
+<td>上一个窗口</td>
+</tr>
+<tr>
+<td>,</td>
+<td>重命名窗口</td>
+</tr>
+<tr>
+<td>.</td>
+<td>修改当前窗口编号；相当于窗口重新排序</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>删除当前窗口</td>
+</tr>
+<tr>
+<td>!</td>
+<td>将当前面板跳出来作为单独一个窗口运行</td>
+</tr>
+<tr>
+<td>Ctrl+方向键</td>
+<td>以1个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td>Alt+方向键</td>
+<td>以5个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td>:pane-resize -L/R/T/B <number></td>
+<td>左/右/上/下移动窗口边缘</td>
+</tr>
+</tbody></table>
+<h2 id="4-会话管理-Session"><a href="#4-会话管理-Session" class="headerlink" title="4. 会话管理(Session)"></a>4. 会话管理(Session)</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tmux detach(C+b,d)</td>
+<td>分离当前会话，可以后台运行tmux管理的命令</td>
+</tr>
+<tr>
+<td>tmux attach</td>
+<td>附加会话</td>
+</tr>
+</tbody></table>
+<h2 id="5-复制模式"><a href="#5-复制模式" class="headerlink" title="5. 复制模式"></a>5. 复制模式</h2><ul>
+<li>前缀 [ 进入复制模式</li>
+<li>按 space 开始复制，移动光标选择复制区域</li>
+<li>按 Enter 复制并退出copy-mode。</li>
+<li>将光标移动到指定位置，按 PREIFX ] 粘贴</li>
+</ul>
+<h2 id="6-启动鼠标滚轮"><a href="#6-启动鼠标滚轮" class="headerlink" title="6. 启动鼠标滚轮"></a>6. 启动鼠标滚轮</h2><p>有时想通过鼠标滚轮来滚动 tmux 界面，只需要 在 <code>~/.tmux.conf</code> 中加入以下几行就可以了。</p>
+<pre><code class="sh">bind -n WheelUpPane if-shell -F -t = &quot;#{mouse_any_flag}&quot; &quot;send-keys -M&quot; &quot;if -Ft= &#39;#{pane_in_mode}&#39; &#39;send-keys -M&#39; &#39;select-pane -t=; copy-mode -e; send-keys -M&#39;&quot;
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+setw -g mouse on
+</code></pre>
+<p>如果报错的话可能和 tmux 版本有关，我的版本号是 2.1</p>
+<pre><code class="sh">$ tmux -V
+tmux 2.1
+</code></pre>

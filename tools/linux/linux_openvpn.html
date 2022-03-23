@@ -1,0 +1,9 @@
+<p>title: 解决linux配置openvpn客户端不能push dns的问题<br>permalink: linux-openvpn/<br>tags: [linux]<br>date: 2016-07-08 09:32:53</p>
+<hr>
+<p>在openvpn的配置文件**.conf中添加下面两行</p>
+<pre><code class="sh">up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf
+</code></pre>
+<p>然后需要手动安装包:<br><code>sudo apt-get install openresolv</code><br>or<br><code>sudo apt-get install resolvconf</code></p>
+<p>由于在linux下很多软件都可以修改dns配置文件（<code>/etc/resolv.conf</code>)，为了避免冲突一般使用<code>openresolv</code>和<code>resolvconf</code>来管理dns配置。但是若遇到两者都不能自动修改<code>/etc/resolv.conf</code>文件的问题，可以手动编辑<code>/etc/openvpn/update-resolv-conf</code>文件来实现修改dns：</p>
+<p> <a href="https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121">https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121</a></p>
