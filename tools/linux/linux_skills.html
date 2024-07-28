@@ -1,0 +1,21 @@
+<p>title: linux技巧汇总<br>permalink: linux-skills/<br>tags: [linux]<br>date: 2016-05-26 09:29:42</p>
+<hr>
+<blockquote>
+<p>一些linux技巧的备忘记录</p>
+</blockquote>
+<h3 id="linux全局代理"><a href="#linux全局代理" class="headerlink" title="linux全局代理"></a>linux全局代理</h3><h4 id="proxychains-通常不好用"><a href="#proxychains-通常不好用" class="headerlink" title="proxychains(通常不好用)"></a>proxychains(通常不好用)</h4><p>/etc/proxychains.conf</p>
+<pre><code class="sh">socks5  127.0.0.1 1080
+proxychains wget http://www.youtube.com -r
+</code></pre>
+<h4 id="cow-https-github-com-cyfdecyf-cow"><a href="#cow-https-github-com-cyfdecyf-cow" class="headerlink" title="cow(https://github.com/cyfdecyf/cow)"></a>cow(<a href="https://github.com/cyfdecyf/cow">https://github.com/cyfdecyf/cow</a>)</h4><p>cow可以作为二级代理，自动学习分流.<br>cow可以作为二级代理，自动学习分流.<br>然后在<del>/.zshrc或</del>/.bashrc中配置变量 ,还可以设置ftp代理ftp_proxy</p>
+<pre><code class="sh">export http_proxy=&#39;http://localhost:8118&#39;
+export https_proxy=&#39;http://localhost:8118&#39;
+</code></pre>
+<h3 id="linux系统更新命令"><a href="#linux系统更新命令" class="headerlink" title="linux系统更新命令"></a>linux系统更新命令</h3><pre><code class="sh">sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade -y
+</code></pre>
+<h4 id="开机启动脚本"><a href="#开机启动脚本" class="headerlink" title="开机启动脚本"></a>开机启动脚本</h4><p><code>/etc/rc.local </code>写入命令 or <code>~/.config/autostart</code>写入.desktop</p>
+<h4 id="解决ntfs挂载问题"><a href="#解决ntfs挂载问题" class="headerlink" title="解决ntfs挂载问题"></a>解决ntfs挂载问题</h4><p>安装nftsfix,然后：</p>
+<pre><code class="sh">sudo ntfsfix /dev/sda1
+sudo ntfsfix /dev/sda5
+sudo ntfsfix /dev/sda6
+</code></pre>

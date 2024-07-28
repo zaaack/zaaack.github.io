@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="从0搭建一个完整的前端开发技术栈(0)"/><meta name="keywords" content="fe-stack, Zack's Blog" /><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/setup-your-front-end-stack-from-zero-0/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>从0搭建一个完整的前端开发技术栈(0) - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">从0搭建一个完整的前端开发技术栈(0)
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-07-31
+        </span></div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%85%A8%E9%83%A8%E6%96%87%E7%AB%A0"><span class="toc-text">查看全部文章</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>看着github上的前端项目往往会包含很多牛逼的配置文件，一直想整合一个属于自己的前端开发技术栈，将webpack, lint, flow, editconfig, test, travis等技术搭配在一起，以免自己以后的项目显得太过业余。。。</p>
+<p>这是个很大的坑，看看<a target="_blank" rel="noopener" href="https://github.com/mxstbr/react-boilerplate">react-boilerplate</a>有多复杂就知道了，然而大部分时候我并不需要这么复杂，我希望能构建一个比较通用的开发模型，然后再根据项目需要适当加减，比如我想用sass，然而react-boilerplate并没有，而且使用起来也略过复杂，光npm scripts就有20多条命令，对于大部分项目来说还是略显笨重，短平快才是我的目标，当然里面很多已有的实践对于初学者还是有很大的参考价值的。</p>
+<p>本系列会逐步记录我开发一个代替Chrome已经移除的应用启动器的Chrome应用的过程，重点是开发环境的搭建，计划采用如下技术栈：</p>
+<ul>
+<li>编译框架：babel+flow+webpack编译js代码， scss+webpack编译css代码</li>
+<li>代码风格：editconfig配置通用的编辑器配置，airbnb的eslint和stylelint</li>
+<li>MVVM框架：redux+react</li>
+<li>测试：ava</li>
+<li>持续集成：travis</li>
+</ul>
+<p>后续会逐渐记录每个框架的学习过程。。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p><img src="http://i0.sinaimg.cn/IT/cr/2013/0221/1719482159.png"></p>
+<p>上面是搜索框，下面是4*4的应用面板，可以随鼠标滚轮左右滚动，每页数量超出自动排到右边新页，数量不足不会自动挤满。右上角菜单点击弹出二级菜单，暂时有显示/隐藏disable的应用，显示扩展，设置（跳到设置页面），关于（调chrome api弹window窗显示）。</p>
+<p>应用右键弹出启用/禁用/卸载/添加快捷方式到桌面等菜单</p>
+<p>应用面版数量可以设置</p>
+<p>数据获取：由于只有chrome扩展可以得到全部应用数据，因此采用在线（github.io）网页+扩展注入js相互通信的模式，而在线网页可以包装成chrome app，然后就可以固定到docker上了（也许这里会有权限问题，不过应该可以通过app弹出新窗口绕过）</p>
+<h2 id="查看全部文章"><a href="#查看全部文章" class="headerlink" title="查看全部文章"></a>查看全部文章</h2><p><a href="/tags/fe-stack">点击查看全部文章</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/setup-your-front-end-stack-from-zero-0/">https://zaaack.github.io/setup-your-front-end-stack-from-zero-0/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/fe-stack/">fe-stack</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/setup-your-front-end-stack-from-zero-2-code-style/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">代码风格-从0搭建一个完整的前端开发技术栈(2)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/setup-your-front-end-stack-from-zero-1-webpack/">
+        <span class="next-text nav-default">webpack简单配置-从0搭建一个完整的前端开发技术栈(1)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

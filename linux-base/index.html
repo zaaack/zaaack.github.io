@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="linux基础和常用命令"/><meta name="keywords" content="linux, Zack's Blog" /><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/linux-base/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>linux基础和常用命令 - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">linux基础和常用命令
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-06-05
+        </span></div>
+    </header>
+
+    <div class="post-content"><p>#linux 简介和常用命令</p>
+<p>##linux目录结构</p>
+<p>(摘自:<a target="_blank" rel="noopener" href="http://www.360doc.com/content/14/0607/16/203871_384577619.shtml">http://www.360doc.com/content/14/0607/16/203871_384577619.shtml</a>)</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td>第一层次结构的根、整个文件系统层次结构的根目录。</td>
+</tr>
+<tr>
+<td>/bin/</td>
+<td>需要在单用户模式可用的必要命令（可执行文件）；面向所有用户，例如：cat、ls、cp，和/usr/bin类似。</td>
+</tr>
+<tr>
+<td>/boot/</td>
+<td>引导程序文件，例如：kernel、initrd；时常是一个单独的分区[6]</td>
+</tr>
+<tr>
+<td>/dev/</td>
+<td>必要设备, 例如：, /dev/null.</td>
+</tr>
+<tr>
+<td>/etc/</td>
+<td>特定主机，系统范围内的配置文件。关于这个名称目前有争议。在贝尔实验室关于UNIX实现文档的早期版本中，/etc 被称为/etcetra 目录，[7]这是由于过去此目录中存放所有不属于别处的所有东西（然而，FHS限制/etc存放静态配置文件，不能包含二进制文件）。[8]自从早期文档出版以来，目录名称已被以各种方式重新称呼。最近的解释包括反向缩略语如：”可编辑的文本配置”（英文 “Editable Text Configuration”）或”扩展工具箱”（英文 “Extended Tool Chest”)。[9]</td>
+</tr>
+<tr>
+<td>/etc/opt/</td>
+<td>/opt/的配置文件</td>
+</tr>
+<tr>
+<td>/etc/X11/</td>
+<td>X_Window系统(版本11)的配置文件</td>
+</tr>
+<tr>
+<td>/etc/sgml/</td>
+<td>SGML的配置文件</td>
+</tr>
+<tr>
+<td>/etc/xml/</td>
+<td>XML的配置文件</td>
+</tr>
+<tr>
+<td>/home/</td>
+<td>用户的家目录，包含保存的文件、个人设置等，一般为单独的分区。</td>
+</tr>
+<tr>
+<td>/lib/</td>
+<td>/bin/ and /sbin/中二进制文件必要的库文件。</td>
+</tr>
+<tr>
+<td>/media/</td>
+<td>可移除媒体(如CD-ROM)的挂载点 (在FHS-2.3中出现)。</td>
+</tr>
+<tr>
+<td>/lost+found</td>
+<td>在ext3文件系统中，当系统意外崩溃或机器意外关机，会产生一些文件碎片在这里。当系统在开机启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。当系统发生问题。可能会有文件被移动到这个目录中，可能需要用手工的方式来修复，或移到文件到原来的位置上。</td>
+</tr>
+<tr>
+<td>/mnt/</td>
+<td>临时挂载的文件系统。比如cdrom,u盘等，直接插入光驱无法使用，要先挂载后使用</td>
+</tr>
+<tr>
+<td>/opt/</td>
+<td>可选应用软件包。</td>
+</tr>
+<tr>
+<td>/proc/</td>
+<td>虚拟文件系统，将内核与进程状态归档为文本文件（系统信息都存放这目录下）。例如：uptime、 network。在Linux中，对应Procfs格式挂载。该目录下文件只能看不能改（包括root）</td>
+</tr>
+<tr>
+<td>/root/</td>
+<td>超级用户的家目录</td>
+</tr>
+<tr>
+<td>/sbin/</td>
+<td>必要的系统二进制文件，例如： init、 ip、 mount。sbin目录下的命令，普通用户都执行不了。</td>
+</tr>
+<tr>
+<td>/srv/</td>
+<td>站点的具体数据，由系统提供。</td>
+</tr>
+<tr>
+<td>/tmp/</td>
+<td>临时文件(参见 /var/tmp)，在系统重启时目录中文件不会被保留。</td>
+</tr>
+<tr>
+<td>/usr/</td>
+<td>默认软件都会存于该目录下.用于存储只读用户数据的第二层次;包含绝大多数的(多)用户工具和应用程序。</td>
+</tr>
+<tr>
+<td>/var/</td>
+<td>变量文件——在正常运行的系统中其内容不断变化的文件，如日志，脱机文件和临时电子邮件文件。有时是一个单独的分区。如果不单独分区，有可能会把整个分区充满。如果单独分区，给大给小都不合适。</td>
+</tr>
+</tbody></table>
+<p>##linux下的常用命令</p>
+<p>###文件操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat</td>
+<td></td>
+</tr>
+<tr>
+<td>mv(move)</td>
+<td></td>
+</tr>
+<tr>
+<td>cp(copy)</td>
+<td></td>
+</tr>
+<tr>
+<td>find</td>
+<td>find <dir> -d(only directory) -maxdepth &lt;搜索深度&gt; -name <name></td>
+</tr>
+</tbody></table>
+<p>###目录操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>切换目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>罗列当前目录下的文件</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>常看当前进程列表</td>
+</tr>
+</tbody></table>
+<p>###权限操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chmod</td>
+<td></td>
+</tr>
+<tr>
+<td>chown</td>
+<td></td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td></td>
+</tr>
+<tr>
+<td>sudo+commands</td>
+<td>以管理员运行</td>
+</tr>
+</tbody></table>
+<p>###编辑操作<br>命令              |功能<br>——————|—————————–</p>
+<p>##linux下的常用操作</p>
+<p>###linux 查看端口占用并杀掉</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">ps -aux | grep 9200 #过滤  or
+netstat –apn
+
+kill &lt;pid&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/linux-base/">https://zaaack.github.io/linux-base/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/linux/">linux</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/css-selector/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CSS 选择器</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/git-base/">
+        <span class="next-text nav-default">git基础知识</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

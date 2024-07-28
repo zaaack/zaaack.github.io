@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="rem 布局"/><meta name="keywords" content="css3, css, Zack's Blog" /><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/rem-layout/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>rem 布局 - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">rem 布局
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-02-10
+        </span></div>
+    </header>
+
+    <div class="post-content"><pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">/**
+* /js/lib/flexrem.js
+ *
+ */</span>
+
+<span class="token property"><span class="token variable">$inital-rem-size</span></span><span class="token punctuation">:</span> 100px <span class="token statement keyword">!default</span><span class="token punctuation">;</span>
+<span class="token property"><span class="token variable">$design-width</span></span><span class="token punctuation">:</span> 375px <span class="token statement keyword">!default</span><span class="token punctuation">;</span>
+
+
+<span class="token selector">html </span><span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token variable">$inital-rem-size</span> <span class="token operator">/</span> <span class="token variable">$design-width</span> <span class="token operator">*</span> 320px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">@each</span> <span class="token variable">$width</span> in <span class="token punctuation">(</span>320px<span class="token punctuation">,</span> 360px<span class="token punctuation">,</span> 400px<span class="token punctuation">,</span> 414px<span class="token punctuation">,</span> 480px<span class="token punctuation">,</span> 500px<span class="token punctuation">,</span> 650px<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token atrule"><span class="token rule">@media</span> only screen <span class="token operator">and</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token variable">#&#123;$width&#125;</span><span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">html </span><span class="token punctuation">&#123;</span>
+      <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token variable">$inital-rem-size</span> <span class="token operator">/</span> <span class="token variable">$design-width</span> <span class="token operator">*</span> <span class="token variable">$width</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">@function</span> <span class="token function">px2rem</span><span class="token punctuation">(</span><span class="token variable">$px</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">@if</span> <span class="token function">unitless</span><span class="token punctuation">(</span><span class="token variable">$px</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 不管带不带单位都可以</span>
+    <span class="token property"><span class="token variable">$px</span></span><span class="token punctuation">:</span> <span class="token variable">$px</span> <span class="token operator">*</span> 1px<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">@return</span> <span class="token variable">$px</span> <span class="token operator">/</span> <span class="token variable">$inital-rem-size</span> <span class="token operator">*</span> 1rem<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+ *
+ * 根据屏幕宽度自动设置html的fontSize, 使rem的大小自适应
+ * usage:
+ * dui.flexrem(&#123;
+ *            //设计稿宽度
+ *         		designWidth: &lt;number>, initial: 375
+ *         		//rem 初始像素值，initial: 100
+ *         		//html的fontSize = (opts.initRem/opts.designWidth*winWidth)+'px'
+ *         		initRem: &lt;number>,
+ *            //用来计算的最大的 winWidth, initial: 640
+ *         		maxWinWidth: &lt;number>
+ *            //用来计算的最小的 winWidth, initial: 320
+ *            minWinWidth: &lt;number>,
+ * &#125;)
+ *
+ * 由于android webview 偶尔会在 document.load 之后识别 viewport 导致 window.innerWidth 发生变化, 这段 js 需要在 window.onload 后运行，因此还需要配合 css 使加载前页面也能正确显示
+ *
+ *
+ * $inital-rem-size: 100px; // 默认值
+ * $design-width: 375px;// 默认值
+ * @import '/css/card/widgets/_flexrem.scss';
+ *
+ * width: @px2rem(12)rem; => 12/100 = 0.12rem
+ *
+ */</span>
+
+<span class="token operator">!</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">win<span class="token punctuation">,</span> doc</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+  <span class="token keyword">var</span> dui <span class="token operator">=</span> window<span class="token punctuation">.</span>dui <span class="token operator">||</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>dui <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    timer <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    firstCalled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    defaults <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      designWidth<span class="token operator">:</span> <span class="token number">375</span><span class="token punctuation">,</span>
+      initRem<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+      maxWinWidth<span class="token operator">:</span> <span class="token number">640</span><span class="token punctuation">,</span>
+      minWinWidth<span class="token operator">:</span> <span class="token number">320</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    evts <span class="token operator">=</span> <span class="token string">'onorientationchange'</span> <span class="token keyword">in</span> win <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'orientationchange'</span><span class="token punctuation">,</span> <span class="token string">'resize'</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'resize'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>dui<span class="token punctuation">.</span>flexrem <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'flexrem.js shouldn\'t be called twice!!'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+    <span class="token comment">/**
+     * auto set html's fontSize to make rem flexable
+     * @param  &#123;object&#125; opts
+     *         &#123;
+     *            //设计稿宽度
+     *         		designWidth: &lt;number>, initial: 375
+     *         		//rem 初始像素值，initial: 100
+     *         		//html的fontSize = (opts.initRem/opts.designWidth*winWidth)+'px'
+     *         		initRem: &lt;number>,
+     *            //用来计算的最大的 winWidth, initial: 960
+     *         		maxWinWidth: &lt;number>
+     *         &#125;
+     * @return
+     */</span>
+  dui<span class="token punctuation">.</span><span class="token function-variable function">flexrem</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">opts</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>firstCalled<span class="token punctuation">)</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'flexrem() can only be called once!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    firstCalled <span class="token operator">=</span><span class="token boolean">false</span>
+    <span class="token keyword">var</span> options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> defaults<span class="token punctuation">,</span> opts<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> evts<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      win<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>evts<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>setFontSize<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    win<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"pageshow"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>persisted<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>setFontSize<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 初始化</span>
+    <span class="token function">setFontSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">function</span> <span class="token function">setFontSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">var</span> winWidth <span class="token operator">=</span> window<span class="token punctuation">.</span>innerWidth <span class="token operator">||</span> window<span class="token punctuation">.</span>clientWidth<span class="token punctuation">;</span>
+      winWidth <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>winWidth<span class="token punctuation">,</span> options<span class="token punctuation">.</span>maxWinWidth<span class="token punctuation">)</span>
+      winWidth <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>winWidth<span class="token punctuation">,</span> options<span class="token punctuation">.</span>minWinWidth<span class="token punctuation">)</span>
+      <span class="token keyword">var</span> size <span class="token operator">=</span> <span class="token punctuation">(</span>winWidth <span class="token operator">/</span> options<span class="token punctuation">.</span>designWidth<span class="token punctuation">)</span> <span class="token operator">*</span> options<span class="token punctuation">.</span>initRem<span class="token punctuation">;</span>
+      doc<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>fontSize <span class="token operator">=</span> size <span class="token operator">+</span> <span class="token string">'px'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+
+  <span class="token keyword">function</span> <span class="token function">toType</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\s([a-zA-Z]+)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> Object<span class="token punctuation">.</span>assign <span class="token operator">!=</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  Object<span class="token punctuation">.</span><span class="token function-variable function">assign</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> varArgs</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// .length of function is 2</span>
+    <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>target <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// TypeError if undefined or null</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'Cannot convert undefined or null to object'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">var</span> to <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> index <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> index <span class="token operator">&lt;</span> arguments<span class="token punctuation">.</span>length<span class="token punctuation">;</span> index<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">var</span> nextSource <span class="token operator">=</span> arguments<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>nextSource <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// Skip over if undefined or null</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> nextKey <span class="token keyword">in</span> nextSource<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// Avoid bugs when hasOwnProperty is shadowed</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>nextSource<span class="token punctuation">,</span> nextKey<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            to<span class="token punctuation">[</span>nextKey<span class="token punctuation">]</span> <span class="token operator">=</span> nextSource<span class="token punctuation">[</span>nextKey<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> to<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> document<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/rem-layout/">https://zaaack.github.io/rem-layout/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/css3/">css3</a>
+            <a href="/tags/css/">css</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/mac-proxy-dev/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">mac 下代理开发环境总结</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/linux_import_cert/">
+        <span class="next-text nav-default">linux 导入证书</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

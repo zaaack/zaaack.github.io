@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="css3渐变笔记"/><meta name="keywords" content="css3, css, Zack's Blog" /><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/css3-gradient-note/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>css3渐变笔记 - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">css3渐变笔记
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-07-17
+        </span></div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-gradient"><span class="toc-text">linear-gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#radial-gradient"><span class="toc-text">radial-gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#repeating-linear-gradient"><span class="toc-text">repeating-linear-gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#repeating-radial-gradient"><span class="toc-text">repeating-radial-gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%90%E5%8F%98%E5%8F%A0%E5%8A%A0%E8%AE%A1%E7%AE%97"><span class="toc-text">渐变叠加计算</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>css3中增加了很多新的特性，然而自己一直没有系统的学习过，只能在项目里边用边记录了。。</p>
+<p>最近项目中需要在背景图片上加上渐变的效果，像以往这种效果一般需要图片来实现，但是移动端由于网速和高昂流量费等原因，太多的图片无疑会极大的降低体验。由于现在css3的兼容性已经越来越好了，通过<a target="_blank" rel="noopener" href="http://caniuse.com/#search=gradient">Can I Use</a>网站可以看出，即使是没有前缀的渐变函数的支持率也已经很高了，因此我们可以通过css3的渐变效果来模拟。</p>
+<p>css3的渐变函数有4种分别是</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>linear-gradient</td>
+<td>线性渐变</td>
+</tr>
+<tr>
+<td>radial-gradient</td>
+<td>环形渐变</td>
+</tr>
+<tr>
+<td>repeating-linear-gradient</td>
+<td>重复线性渐变</td>
+</tr>
+<tr>
+<td>repeating-radial-gradient</td>
+<td>重复环形渐变</td>
+</tr>
+</tbody></table>
+<p>需要注意的是，渐变函数的返回是一个图片，因此你不能在background-color中使用，只能在background-image中使用。</p>
+<h2 id="linear-gradient"><a href="#linear-gradient" class="headerlink" title="linear-gradient"></a>linear-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">linear-gradient(
+  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+  \---------------------------------&#x2F; \----------------------------&#x2F;
+    Definition of the gradient line        List of color stops
+
+where &lt;side-or-corner&gt; &#x3D; [left | right] || [top | bottom]
+  and &lt;color-stop&gt;     &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中第一个参数是角度或关键字，MDN上的例子中角度的单位都是角度deg(degree)，经过测试发现也可以是弧度rad(radian)</p>
+<p>需要注意的是这个角度的计算方式和数学里的坐标系不同，是从Y轴的正半轴沿顺时针计算的，因此<br>to top = 0deg = 0rad<br>to right = 90deg = 1.57rad<br>to bottom = 180deg = 3.14rad<br>to left = 270deg = 4.71rad</p>
+<p>第二个参数是颜色帧，包含颜色和位置(可以是百分比或长度)，颜色可以使用rgba支持透明度，再配合css3的多背景的特性就可以实现强大的渐变遮罩效果了。</p>
+<p>具体操作上有几个问题:</p>
+<ul>
+<li>css3 multi background特性是第一个图片在最上面，后面的依次在下面，因此图片得放在最后，渐变遮罩得放在前面</li>
+<li>渐变遮罩默认是全部铺满的，因此得使用透明度使下面的图片显露出来</li>
+<li>其他背景属性也是通过逗号分开，分别对应背景图片</li>
+</ul>
+<p data-height="265" data-theme-id="0" data-slug-hash="XKkAmy" data-default-tab="css,result" data-user="zaaack" data-embed-version="2" class="codepen">See the Pen <a target="_blank" rel="noopener" href="http://codepen.io/zaaack/pen/XKkAmy/">linear-gradient demo</a> by Zack Young (<a target="_blank" rel="noopener" href="http://codepen.io/zaaack">@zaaack</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
+
+
+
+
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+<h2 id="radial-gradient"><a href="#radial-gradient" class="headerlink" title="radial-gradient"></a>radial-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">radial-gradient(   [ circle || &lt;length&gt; ] [ at &lt;position&gt; ]? ,
+                 | [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [ at &lt;position&gt; ]? ,
+                 | [ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [ at &lt;position&gt; ]? ,
+                 | at &lt;position&gt; ,
+                 &lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )
+where &lt;extent-keyword&gt; &#x3D; closest-corner | closest-side | farthest-corner | farthest-side
+  and &lt;color-stop&gt; &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中大小可以是关键字也可以是长度，不过貌似只有椭圆的支持百分比，分别是元素的宽高为基准。</p>
+<table>
+<thead>
+<tr>
+<th>常量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>closest-side</td>
+<td>圆或椭圆的边在最近的边</td>
+</tr>
+<tr>
+<td>closest-corner</td>
+<td>圆或椭圆的边在最近的角</td>
+</tr>
+<tr>
+<td>farthest-side</td>
+<td>圆或椭圆的边在最远的边</td>
+</tr>
+<tr>
+<td>farthest-corner</td>
+<td>圆或椭圆的边在最远的角</td>
+</tr>
+</tbody></table>
+<p data-height="265" data-theme-id="0" data-slug-hash="BzwrPG" data-default-tab="css,result" data-user="zaaack" data-embed-version="2" class="codepen">See the Pen <a target="_blank" rel="noopener" href="http://codepen.io/zaaack/pen/BzwrPG/">radial-gradient demo</a> by Zack Young (<a target="_blank" rel="noopener" href="http://codepen.io/zaaack">@zaaack</a>) on <a target="_blank" rel="noopener" href="http://codepen.io">CodePen</a>.</p>
+
+<h2 id="repeating-linear-gradient"><a href="#repeating-linear-gradient" class="headerlink" title="repeating-linear-gradient"></a>repeating-linear-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">repeating-linear-gradient(  [ &lt;angle&gt; | to &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;]+ )
+                            \---------------------------------&#x2F; \----------------------------&#x2F;
+                              Definition of the gradient line         List of color stops
+
+where &lt;side-or-corner&gt; &#x3D; [left | right] || [top | bottom]
+   and &lt;color-stop&gt;     &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>与linear-gradient基本一致，只不过如果颜色帧没有设置的部分按设置的在两个方向上重复，比如只设置了40%和50%，那么0%到40%和50%到100%均按0%到10%的部分重复。</p>
+<h2 id="repeating-radial-gradient"><a href="#repeating-radial-gradient" class="headerlink" title="repeating-radial-gradient"></a>repeating-radial-gradient</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">
+repeating-radial-gradient(
+       [[ circle  || &lt;length&gt; ]                     [at &lt;position&gt;]? , |
+        [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [at &lt;position&gt;]? , |
+        [[ circle | ellipse ] || &lt;extent-keyword&gt; ] [at &lt;position&gt;]? , |
+                                                     at &lt;position&gt;   ,    &lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )
+        \---------------------------------------------------------------&#x2F;\--------------------------------&#x2F;
+                  Contour, size and position of the ending shape               List of color stops
+
+where &lt;extent-keyword&gt; &#x3D; closest-corner | closest-side | farthest-corner | farthest-side
+  and &lt;color-stop&gt; &#x3D; &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>同上。</p>
+<h2 id="渐变叠加计算"><a href="#渐变叠加计算" class="headerlink" title="渐变叠加计算"></a>渐变叠加计算</h2><p>多个带透明度的背景叠加时遵循以下公式：</p>
+<p>假设rgb颜色A,B,C，B带不透明度alpha且叠加在A上面，C为叠加后效果<br>则</p>
+<p>$$A*(1-alpha)+B*alpha=C$$</p>
+<p>即C等于A乘以B的透明度(1-alpha)加上B乘以B的不透明度alpha</p>
+<p>可以写个求渐变遮罩颜色值的函数如下：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getMask</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span><span class="token constant">C</span><span class="token punctuation">,</span> alpha</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> rgbA <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+  <span class="token keyword">var</span> rgbC <span class="token operator">=</span> <span class="token constant">C</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">var</span> <span class="token constant">B</span>
+  <span class="token constant">B</span> <span class="token operator">=</span> rgbA<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span><span class="token operator">=></span>
+    <span class="token punctuation">(</span>rgbC<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> a<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>alpha<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span>alpha
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token constant">B</span>
+<span class="token punctuation">&#125;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getMask</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">77</span><span class="token punctuation">,</span> <span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果我们想得到叠加后的颜色为rgb(0, 77, 68)的话，可以这样写：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgb</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 60<span class="token punctuation">,</span> 60<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to left<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 117<span class="token punctuation">,</span> 87<span class="token punctuation">,</span> 0.3<span class="token punctuation">)</span> 0%<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 117<span class="token punctuation">,</span> 87<span class="token punctuation">,</span> 0.3<span class="token punctuation">)</span> 100%<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/css3-gradient-note/">https://zaaack.github.io/css3-gradient-note/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/css3/">css3</a>
+            <a href="/tags/css/">css</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/css-text-overflow/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">css文本溢出省略号处理</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/linux-openvpn/">
+        <span class="next-text nav-default">解决linux配置openvpn客户端不能push dns的问题</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

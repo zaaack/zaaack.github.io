@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="git基础知识"/><meta name="keywords" content="git, Zack's Blog" /><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/git-base/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>git基础知识 - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">git基础知识
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-06-05
+        </span></div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff"><span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset"><span class="toc-text">git reset</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%9B%9E%E9%80%80%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%88%B0%E6%8C%87%E5%AE%9A%E6%8F%90%E4%BA%A4"><span class="toc-text">1. 如何回退某个文件到指定提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%A0%E9%99%A4%E6%9C%AC%E6%AC%A1%E6%8F%90%E4%BA%A4%EF%BC%88%E4%BF%9D%E7%95%99%E4%BB%A3%E7%A0%81%EF%BC%89"><span class="toc-text">2. 删除本次提交（保留代码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%87%E6%8D%A2%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84%E5%88%86%E6%94%AF%E6%97%B6%E5%A6%82%E4%BD%95%E4%BF%9D%E5%AD%98%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-text">3. 切换未提交的分支时如何保存原来的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-git-%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AA%E6%8F%90%E4%BA%A4-%E5%8C%85%E6%8B%ACmessage"><span class="toc-text">4. git 合并多个提交(包括message)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9C%AC%E5%9C%B0%E8%BF%87%E6%BB%A4%E6%96%87%E4%BB%B6"><span class="toc-text">5. 本地过滤文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%8F%AAclone%E4%B8%80%E4%B8%AA%E6%9C%80%E6%96%B0%E7%9A%84commit"><span class="toc-text">6.只clone一个最新的commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-git-patch"><span class="toc-text">7. git patch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-diff%E7%9A%84"><span class="toc-text">git diff的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-%E6%9C%AC%E8%BA%AB%E7%9A%84"><span class="toc-text">git 本身的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%BA%94%E7%94%A8%E6%88%90%E5%8A%9F"><span class="toc-text">检查是否应用成功</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A6%82%E5%BF%B5"><span class="toc-text">常用概念</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>基本的提交流程请参照<a href="../pr-workflow/">pr-workflow</a>，这里主要讲git的版本回退和一些细节问题</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><p>git diff可以用来比较两个文件的变动，或者两个分支的变动</p>
+<p>git diff &lt;变动前的文件&gt; &lt;变动后的文件&gt; #比较两个文件 git diff &lt;变动前的提交&gt; &lt;变动后的提交&gt; #比较两个文件</p>
+<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><p>git reset –mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息</p>
+<p>git reset –soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可</p>
+<p>git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
+<p>以下是一些reset的示例：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 回退所有内容到上一个版本
+git reset HEAD^
+
+# 回退a.py这个文件的版本到上一个版本
+git reset HEAD^ a.py
+
+# 向前回退到第3个版本
+git reset –soft HEAD~3
+
+# 将本地的状态回退到和远程的一样
+git reset –hard origin&#x2F;master
+
+# 回退到某个版本
+git reset 057d
+
+# 回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit
+git revert HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-如何回退某个文件到指定提交"><a href="#1-如何回退某个文件到指定提交" class="headerlink" title="1. 如何回退某个文件到指定提交"></a>1. 如何回退某个文件到指定提交</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git reset &lt;commit&gt; &lt;path&#x2F;to&#x2F;file&gt;  #恢复文件版本
+git checkout &lt;path&#x2F;to&#x2F;file&gt;         #检出原来版本的文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="2-删除本次提交（保留代码）"><a href="#2-删除本次提交（保留代码）" class="headerlink" title="2. 删除本次提交（保留代码）"></a>2. 删除本次提交（保留代码）</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git reset &lt;commit&gt; #默认为 –mixed，保留代码，可以查看修改，重新提交
+git status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="3-切换未提交的分支时如何保存原来的代码"><a href="#3-切换未提交的分支时如何保存原来的代码" class="headerlink" title="3. 切换未提交的分支时如何保存原来的代码"></a>3. 切换未提交的分支时如何保存原来的代码</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git stash #缓存当前分支的修改，切换分支后不会丢失之前的修改。。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-git-合并多个提交-包括message"><a href="#4-git-合并多个提交-包括message" class="headerlink" title="4. git 合并多个提交(包括message)"></a>4. git 合并多个提交(包括message)</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git log #查看提交历史
+git rebase -i HEAD
+# or git rebase -i &lt;commit&gt;
+# 如果遇到冲突
+# 需要先解决冲突 然后git add . 再git rebase --continue
+git push origin dev -f #-f 强制提交<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-本地过滤文件"><a href="#5-本地过滤文件" class="headerlink" title="5. 本地过滤文件"></a>5. 本地过滤文件</h3><p>有时需要过滤一些自己个人用的测试代码，但是又不想修改.gitignore 可以在.git/info/exclude中添加需要过滤的路径或文件。</p>
+<p>比如</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">gulpfile.js&#x2F;task&#x2F;mobile-test.js
+static&#x2F;
+static_resource&#x2F;mobile&#x2F;test
+
+mobile&#x2F;views&#x2F;test&#x2F;
+templates&#x2F;mobile&#x2F;test
+
+.ftpconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但是这种方法只能忽略未加入git版本库的文件，如果是已经加入版本库的文件，可以使用以下方法：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git update-index --assume-unchanged &#x2F;path&#x2F;to&#x2F;file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果需要取消，只需要运行以下命令就可以了</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git update-index --no-assume-unchanged &#x2F;path&#x2F;to&#x2F;file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="6-只clone一个最新的commit"><a href="#6-只clone一个最新的commit" class="headerlink" title="6.只clone一个最新的commit"></a>6.只clone一个最新的commit</h3><p>这种方法可以避免clone github上的项目因为太大而太慢..</p>
+<p>git clone –depth=1 <a target="_blank" rel="noopener" href="https://github.com/angular/angular-seed.git">https://github.com/angular/angular-seed.git</a> <your-project-name></p>
+<h3 id="7-git-patch"><a href="#7-git-patch" class="headerlink" title="7. git patch"></a>7. git patch</h3><p>git可以将diff导出为一个文件（patch)，然后通过再应用这个文件，有两种方式</p>
+<h4 id="git-diff的"><a href="#git-diff的" class="headerlink" title="git diff的"></a>git diff的</h4><pre class="line-numbers language-none"><code class="language-none">git diff &lt;prev_commit&gt; &lt;commit&gt; &gt; patch.diff
+git apply patch.diff<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="git-本身的"><a href="#git-本身的" class="headerlink" title="git 本身的"></a>git 本身的</h4><pre class="line-numbers language-none"><code class="language-none">git format-patch &lt;commit1&gt;..&lt;commit2&gt; #从commit1 到commit2的diff
+git format-patch -1 &lt;c1&gt; # 单独一个commit
+git format-patch &lt;c1&gt; # 从某commit以来的修改（不包含该commit）
+
+git am xxx.patch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="检查是否应用成功"><a href="#检查是否应用成功" class="headerlink" title="检查是否应用成功"></a>检查是否应用成功</h4><pre class="line-numbers language-none"><code class="language-none">git apply --stat patch.patch # 检查patch
+git apply --check patch.diff # 测试应用patch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="常用概念"><a href="#常用概念" class="headerlink" title="常用概念"></a>常用概念</h2><p>HEAD 指向当前提交的一个指针 HEAD^^ HEAD往前两个版本 HEAD~3 HEAD回退3个版本</p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/git-base/">https://zaaack.github.io/git-base/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/git/">git</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/linux-base/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">linux基础和常用命令</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/pr-workflow/">
+        <span class="next-text nav-default">pull request 工作流基础</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

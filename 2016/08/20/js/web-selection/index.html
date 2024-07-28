@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="web-selection"/><link rel="alternate" href="/atom.xml" title="Zack's Blog" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/avatar.png?v=2.11.0" />
+<link rel="canonical" href="https://zaaack.github.io/2016/08/20/js/web-selection/"/>
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>web-selection - Zack's Blog</title>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zack's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">首页
+          </li>
+      </a><a href="/projects">
+        <li class="mobile-menu-item">项目
+          </li>
+      </a><a href="/tools">
+        <li class="mobile-menu-item">工具
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a><a href="/archives">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zack's Blog</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            首页
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/projects">
+            项目
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tools">
+            工具
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            标签
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            归档
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            关于
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">web-selection
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-08-20
+        </span></div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%93%8D%E4%BD%9C%E5%85%89%E6%A0%87"><span class="toc-text">js操作光标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#textarea-%E6%88%96%E8%80%85-input%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">textarea 或者 input的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#div-contenteditable-%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%88%E5%85%B6%E5%AE%9E%E5%B0%B1%E6%98%AF%E5%92%8C%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E7%9A%84%E6%99%AE%E9%80%9A%E8%8A%82%E7%82%B9%E7%9A%84%E6%83%85%E5%86%B5%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84%EF%BC%89"><span class="toc-text">div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="js操作光标"><a href="#js操作光标" class="headerlink" title="js操作光标"></a>js操作光标</h2><h3 id="textarea-或者-input的情况"><a href="#textarea-或者-input的情况" class="headerlink" title="textarea 或者 input的情况"></a>textarea 或者 input的情况</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getCursorPosition</span> <span class="token punctuation">(</span><span class="token parameter">ctrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//获取光标位置函数</span>
+    <span class="token keyword">var</span> pos <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment">// IE Support</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>selection<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      ctrl<span class="token punctuation">.</span><span class="token function">focus</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> Sel <span class="token operator">=</span> document<span class="token punctuation">.</span>selection<span class="token punctuation">.</span><span class="token function">createRange</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      Sel<span class="token punctuation">.</span><span class="token function">moveStart</span> <span class="token punctuation">(</span><span class="token string">'character'</span><span class="token punctuation">,</span> <span class="token operator">-</span>ctrl<span class="token punctuation">.</span>value<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      pos <span class="token operator">=</span> Sel<span class="token punctuation">.</span>text<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// Firefox support</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>selectionStart <span class="token keyword">in</span> ctrl<span class="token punctuation">)</span>
+      pos <span class="token operator">=</span> ctrl<span class="token punctuation">.</span>selectionStart<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">setCursorPosition</span><span class="token punctuation">(</span><span class="token parameter">ctrl<span class="token punctuation">,</span> pos</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//设置光标位置函数</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ctrl<span class="token punctuation">.</span>setSelectionRange<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      ctrl<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      ctrl<span class="token punctuation">.</span><span class="token function">setSelectionRange</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ctrl<span class="token punctuation">.</span>createTextRange<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">var</span> range <span class="token operator">=</span> ctrl<span class="token punctuation">.</span><span class="token function">createTextRange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      range<span class="token punctuation">.</span><span class="token function">collapse</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      range<span class="token punctuation">.</span><span class="token function">moveEnd</span><span class="token punctuation">(</span><span class="token string">'character'</span><span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      range<span class="token punctuation">.</span><span class="token function">moveStart</span><span class="token punctuation">(</span><span class="token string">'character'</span><span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      range<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）"><a href="#div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）" class="headerlink" title="div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）"></a>div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<span class="token keyword">var</span> sel <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">getSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 获取全部range</span>
+<span class="token keyword">var</span> ranges <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> sel<span class="token punctuation">.</span>rangeCount<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+ ranges<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sel<span class="token punctuation">.</span><span class="token function">getRangeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 获取第一个range，一般也只有一个</span>
+<span class="token keyword">var</span> range <span class="token operator">=</span> sel<span class="token punctuation">.</span><span class="token function">getRangeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>range的属性:</p>
+<pre class="line-numbers language-coffee" data-language="coffee"><code class="language-coffee">startContainer: Node # 开始位置所在节点
+startOffset: number # 开始位置在所在节点的偏移
+endContainer: Node # 结束位置在所在节点的偏移
+endOffset: number # 结束位置在所在节点的偏移<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>需要注意的是这里的节点是Node而不是Element， 区别请看：<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html">http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType?redirectlocale=en-US&amp;redirectslug=nodeType">https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType?redirectlocale=en-US&amp;redirectslug=nodeType</a></p>
+<p>简单讲Element就是我们平时所看到的标签节点，它是Node的子集，Node还包括</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Node.ELEMENT_NODE</td>
+<td>1</td>
+<td>一个dom节点如 c or &lt;div&gt;.</td>
+</tr>
+<tr>
+<td>Node.TEXT_NODE</td>
+<td>3</td>
+<td>文本节点</td>
+</tr>
+<tr>
+<td>Node.PROCESSING_INSTRUCTION_NODE</td>
+<td>7</td>
+<td>Axml文档解析指示节点 如 &lt;?xml-stylesheet … ?&gt; .</td>
+</tr>
+<tr>
+<td>Node.COMMENT_NODE</td>
+<td>8</td>
+<td>注释节点，如&lt;!– 我是注释~~ –&gt;.</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_NODE</td>
+<td>9</td>
+<td>document节点， &lt;html&gt;.</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_TYPE_NODE</td>
+<td>10</td>
+<td>DocumentType 节点，如 HTML5 文档的 &lt;!DOCTYPE html&gt;.</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_FRAGMENT_NODE</td>
+<td>11</td>
+<td>DocumentFragment 节点.</td>
+</tr>
+</tbody></table>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Range">https://developer.mozilla.org/en-US/docs/Web/API/Range</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://zaaack.github.io">Zack</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://zaaack.github.io/2016/08/20/js/web-selection/">https://zaaack.github.io/2016/08/20/js/web-selection/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        
+        <nav class="post-nav"><a class="prev" href="/setup-your-front-end-develop-stack-from-zero-5-graphql/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">graphql学习笔记-从0搭建一个完整的前端开发技术栈(5)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/08/20/react/react-note/">
+        <span class="next-text nav-default">react笔记</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="gitalk-container"></div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:zaaack@qq.com" class="iconfont icon-email" title="email"></a>
+        <a target="_blank" rel="noopener" href="https://github.com/zaaack" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zack</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'be48866144c64ffb2234',
+    clientSecret: '41e310c3bfa89705e3494aafe1b12693371a290d',
+    repo: 'blog',
+    owner: 'zaaack',
+    admin: ['zaaack'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
