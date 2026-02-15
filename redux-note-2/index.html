@@ -38,7 +38,7 @@
 </script>
 
     <title>redux和react-redux api学习--redux学习笔记(2) - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -133,7 +133,7 @@
 </blockquote>
 <h3 id="configureStore"><a href="#configureStore" class="headerlink" title="configureStore"></a>configureStore</h3><p>在redux的demo中经常可以看到configureStore.js这个文件，从外部看，这个文件一般用来构建store，构建完后传入Provider就基本没它啥事了，但是打开一看，里面到底干了些啥，怎么改动还是不懂。。</p>
 <p>从redux的examples中的<a target="_blank" rel="noopener" href="https://github.com/reactjs/redux/blob/master/examples/real-world/store/configureStore.dev.js">real-world</a>中贴段代码：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore<span class="token punctuation">,</span> applyMiddleware<span class="token punctuation">,</span> compose <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore<span class="token punctuation">,</span> applyMiddleware<span class="token punctuation">,</span> compose <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
 <span class="token keyword">import</span> thunk <span class="token keyword">from</span> <span class="token string">'redux-thunk'</span>
 <span class="token keyword">import</span> createLogger <span class="token keyword">from</span> <span class="token string">'redux-logger'</span>
 <span class="token keyword">import</span> api <span class="token keyword">from</span> <span class="token string">'../middleware/api'</span>
@@ -180,7 +180,7 @@
 </ul>
 <ul>
 <li><p>compose：这是一个这是函数式编程中的方法，作用是从右到左来组合多个函数，其实就是让你少写几个函数嵌套。。没有函数式编程基础的话光靠“看”肯定是看不出其作用的。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">compose</span><span class="token punctuation">(</span>funcA<span class="token punctuation">,</span> funcB<span class="token punctuation">,</span> funcC<span class="token punctuation">)</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">compose</span><span class="token punctuation">(</span>funcA<span class="token punctuation">,</span> funcB<span class="token punctuation">,</span> funcC<span class="token punctuation">)</span>
 
 <span class="token comment">// 等效于 ==></span>
 <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token function">funcB</span><span class="token punctuation">(</span>funcC<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
@@ -198,7 +198,7 @@
 </li>
 </ul>
 <p>贴下官网的middleware的demo：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">logger</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> getState <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">logger</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> getState <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'will dispatch'</span><span class="token punctuation">,</span> action<span class="token punctuation">)</span>
 
@@ -215,7 +215,7 @@
 
 <p>其实所谓的middlewares就是用来管理 dispatch 的状态的中间件，next是下一个middleware, 最后一个middleware的next直接传入dispatch，返回的函数是一个包装后的dispatch函数。 之所以applyMiddleware最后会传入createStore, 根据函数式思维，肯定不会取修改createStore，而是对于进行包装，返回一个新的createStore函数。</p>
 <p>看下源码实现，其实非常简单，只是没有函数式思维略优点跟不上而已</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// applyMiddleware源码</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// applyMiddleware源码</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>middlewares</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">createStore</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token comment">//返回一个用来包装createStore的函数，传入createStore然后返回一个新的createStore的包装函数，参数和返回值都和createStore一样</span>
     <span class="token keyword">var</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer<span class="token punctuation">)</span>
@@ -223,7 +223,7 @@
     <span class="token keyword">var</span> chain <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 
     <span class="token keyword">var</span> middlewareAPI <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-      getState<span class="token operator">:</span> store<span class="token punctuation">.</span>getState<span class="token punctuation">,</span>
+      <span class="token literal-property property">getState</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getState<span class="token punctuation">,</span>
       <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
     chain <span class="token operator">=</span> middlewares<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">middleware</span> <span class="token operator">=></span> <span class="token function">middleware</span><span class="token punctuation">(</span>middlewareAPI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//执行每个middleware获得dispatch的包装函数</span>
@@ -237,7 +237,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>而enhancer（增强子）又是什么鬼？直接看源码，十几行的源码都看不懂那么js真是白学了。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> preloadedState <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> enhancer <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     enhancer <span class="token operator">=</span> preloadedState
     preloadedState <span class="token operator">=</span> <span class="token keyword">undefined</span>
@@ -257,7 +257,7 @@
 <p>读了这些源码，是不是感觉对于redux的逻辑有了一些了解？关键就是函数式的思维，像react那种面向对象的框架其实还是很好理解的，各种组件状态方法，和其他的面向对象的框架都大同小异，因为大部分程序猿都接受过大量面向对象的编程思维的训练。但是函数式的思维的逻辑则由于缺少基础，因此粗看很难理解其中奥妙，貌似很复杂，其实很简单，大部分的api都是纯函数，所有的类型都尽量不可变，尽量返回新的类型。</p>
 <h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>这个函数的作用是把传入的对象的每一个action creator(action工厂函数，只返回纯的action对象)包装一层dispatch</p>
 <p>看下源码：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 绑定action creator和dispatch，相当于不用你自己去写 this.props.dispatch(actionCreator(...args))了， ps: this.props.dispatch是react-redux的connect函数注入的</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 绑定action creator和dispatch，相当于不用你自己去写 this.props.dispatch(actionCreator(...args))了， ps: this.props.dispatch是react-redux的connect函数注入的</span>
 <span class="token keyword">function</span> <span class="token function">bindActionCreator</span><span class="token punctuation">(</span><span class="token parameter">actionCreator<span class="token punctuation">,</span> dispatch</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">actionCreator</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -304,7 +304,7 @@
 <li>如果传入属性值为actionCreator(action的工厂函数，返回一个action)的object则会这样绑定: <code>this.props[objectKey] = (...args) =&gt; this.dispatch(objectValue(...args))</code>,</li>
 <li>如果是函数则自己定义如何绑定dispatch到props，</li>
 </ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">connect</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>todos<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">connect</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>todos<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
   loadTodos
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>MyTodoListComponent<span class="token punctuation">)</span>
 
@@ -336,7 +336,7 @@
 </li>
 </ul>
 <p>从文档和我的注解，可以看出，connect是实redux单一状态树很关键的一个函数，并且它通过四个参数让用户来决定如何在单一状态更新时去更新组件的状态（或者说属性），这样也避免了绑定model(state)到view的性能问题，因为组件的props是否改变都是由组件自身决定的(mapStateToProps)，如果是其他组件的state</p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// Root.jsx</span>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Root.jsx</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Provider <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-redux'</span>
 <span class="token keyword">import</span> configureStore <span class="token keyword">from</span> <span class="token string">'./store/configureStore'</span>
 
@@ -376,7 +376,7 @@ actionCreators = &#123;
 <span class="token punctuation">&#125;</span>
 
 <span class="token keyword">function</span> <span class="token function">mapStateToProps</span><span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>todos<span class="token operator">:</span> state<span class="token punctuation">.</span>todos<span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">todos</span><span class="token operator">:</span> state<span class="token punctuation">.</span>todos<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">connect</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">,</span> actionCreators<span class="token punctuation">)</span>
 
@@ -448,7 +448,7 @@ actionCreators = &#123;
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

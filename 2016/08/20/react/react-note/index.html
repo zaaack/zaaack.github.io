@@ -38,7 +38,7 @@
 </script>
 
     <title>react笔记 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -131,7 +131,7 @@
   </div><div class="post-content"><h2 id="react笔记"><a href="#react笔记" class="headerlink" title="react笔记"></a>react笔记</h2><p>最近项目中用到了react，记录些自己的思考。。</p>
 <h3 id="focus是使用属性还是方法"><a href="#focus是使用属性还是方法" class="headerlink" title="focus是使用属性还是方法"></a>focus是使用属性还是方法</h3><p>原先使用属性，但是问题是focus、value等都是可能由用户改变的，而属性是不可变的，父级组件不知道组件的状态发生了改变，则此时的focus还是原来的，下次更新属性时可能会“误”改变focus状态。解决办法主要是通过<code>onBlur/onFocus</code>实现双向绑定，保证父级组件的状态中的focus和子级组件的实际状态保持一致。。这样一不小心就多了很多方法。。</p>
 <p>事实上我们看dom的设计，虽然dom的api大部分都是由属性构成的，但是focus恰好就是一个函数。。于是最终我的解决办法是给组件增加一个focus函数，调用时通过设置ref标签，通过<code>this.refs.myInput.focus()</code>来改变组件的focus状态…</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">var</span> Input <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> ref<span class="token operator">=</span><span class="token string">"input"</span> <span class="token operator">/</span><span class="token operator">></span>
@@ -157,7 +157,7 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="react实现模态窗"><a href="#react实现模态窗" class="headerlink" title="react实现模态窗"></a>react实现模态窗</h3><p>实现模态窗有个坑就是挂载点一般需要在body最后append一个节点，这样可以实现全局位置。但是react的组件是分层封装的，如何实现一个子组件挂载在别的挂载点呢?看下已有的优秀实践，发现一般都是用 <code>unstable_renderSubtreeIntoContainer</code> 这个不稳定的接口实现的（如：<a target="_blank" rel="noopener" href="https://github.com/reactjs/react-modal">https://github.com/reactjs/react-modal</a>) 这个方法和render的区别是增加了一个组件实例的参数用来指定父级组件。借此原理写了一个工具函数，用来对组件进行一个包装，返回一个包装组件，不仅可以将属性传递给真实组件，还可以调用真实组件的成员方法。开始时由于项目太老还通过render+setProps模拟，不过现在升级了还是用新方法吧。。写这个函数的个中曲折（踩坑）一言难述，看注释吧。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
  * 在body最后面单独append一个挂载点来挂载组件，用来制作弹窗等。
  * @param  &#123;React.Component&#125; Component
  * @param  &#123;object&#125; config
@@ -166,7 +166,7 @@
 <span class="token keyword">function</span> <span class="token function">makeSingletonDom</span><span class="token punctuation">(</span><span class="token parameter">Component<span class="token punctuation">,</span> config</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 
   config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-    containerId<span class="token operator">:</span> config <span class="token operator">&amp;&amp;</span> config<span class="token punctuation">.</span>containerId <span class="token operator">||</span> <span class="token keyword">null</span>
+    <span class="token literal-property property">containerId</span><span class="token operator">:</span> config <span class="token operator">&amp;&amp;</span> config<span class="token punctuation">.</span>containerId <span class="token operator">||</span> <span class="token keyword">null</span>
   <span class="token punctuation">&#125;</span>
 
   <span class="token keyword">var</span> SingletonDomWrapper
@@ -292,7 +292,7 @@
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

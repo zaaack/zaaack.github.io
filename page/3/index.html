@@ -38,7 +38,7 @@
 </script>
 
     <title>Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -125,12 +125,12 @@
 
     <div class="post-content"><p>在ios的safari上的事件系统有个很古老的bug，在较老的zepto和react上都全线中枪，直至今日也是这样。。</p>
 <p>比如以下这两种写法很有可能在ios上无效：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token string">'div.target'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token string">'div.target'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'clicked!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> App <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> App <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
     <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
       <span class="token keyword">return</span> <span class="token punctuation">(</span>
         <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>onClick<span class="token punctuation">&#125;</span><span class="token operator">></span>点我<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
@@ -185,7 +185,7 @@
 </ul>
 <p>symbol的好处是可以在symbol标签上设置一些属性，比如设置viewBox实现自动缩放，而这在defs的g标签中是无法做到的。。</p>
 <p>其中viewBox是原图像缩放区域(x,y,width,height),对原图像进行裁剪后再缩放到svg的viewport，可以实现svg图标随css<code>svg&#123; width: 100px; height: 100px;&#125;</code>进行缩放。</p>
-<pre class="line-numbers language-svg" data-language="svg"><code class="language-svg"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>symbol</span> <span class="token attr-name">viewBox</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0,0,26,24<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token comment">&lt;!-- 第1个图标路径形状之类代码 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>symbol</span><span class="token punctuation">></span></span>
@@ -201,7 +201,7 @@
 <li>使用defs</li>
 </ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>假设有一个svg链接<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/svg/a_1.svg">http://www.w3school.com.cn/svg/a_1.svg</a> ，那么使用方式如下,和html一样，#后面跟着的是图像的id。</p>
-<pre class="line-numbers language-svg" data-language="svg"><code class="language-svg"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name"><span class="token namespace">xlink:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3school.com.cn/svg/a_1.svg#Fill-1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>use</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -244,7 +244,7 @@
 </blockquote>
 <h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>官方介绍上说，Redux是一种用于JavaScript应用的可预测的状态管理器，它可以用于多种环境，如client，server和native，并且提供了一个可以实时的带时光机功能的调试器。</p>
 <p>看到官网介绍，其实redux是不仅仅局限于react的，甚至不仅仅局限于客户端，服务端也是可以用的。其核心api非常简洁，看看官方README的例子基本就懂了，这意味着项目中往往还得搭配大量其他的包，然后分别去看各个包的文档。。好吧。。慢慢来吧。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span><span class="token comment">//从redux中引入createStore方法</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span><span class="token comment">//从redux中引入createStore方法</span>
 
 <span class="token comment">//reducer，redux的核心概念之一，只是一个简单的参数为(state, action)的函数，用于修改state</span>
 <span class="token keyword">function</span> <span class="token function">counter</span><span class="token punctuation">(</span><span class="token parameter">state <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> action</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -268,11 +268,11 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <span class="token punctuation">)</span>
 
 <span class="token comment">//分发action，唯一修改状态state的方法</span>
-store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'INCREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'INCREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token comment">// 1</span>
-store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'INCREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'INCREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token comment">// 2</span>
-store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'DECREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'DECREMENT'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token comment">// 1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
@@ -300,7 +300,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 </blockquote>
 <h3 id="configureStore"><a href="#configureStore" class="headerlink" title="configureStore"></a>configureStore</h3><p>在redux的demo中经常可以看到configureStore.js这个文件，从外部看，这个文件一般用来构建store，构建完后传入Provider就基本没它啥事了，但是打开一看，里面到底干了些啥，怎么改动还是不懂。。</p>
 <p>从redux的examples中的<a target="_blank" rel="noopener" href="https://github.com/reactjs/redux/blob/master/examples/real-world/store/configureStore.dev.js">real-world</a>中贴段代码：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore<span class="token punctuation">,</span> applyMiddleware<span class="token punctuation">,</span> compose <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore<span class="token punctuation">,</span> applyMiddleware<span class="token punctuation">,</span> compose <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
 <span class="token keyword">import</span> thunk <span class="token keyword">from</span> <span class="token string">'redux-thunk'</span>
 <span class="token keyword">import</span> createLogger <span class="token keyword">from</span> <span class="token string">'redux-logger'</span>
 <span class="token keyword">import</span> api <span class="token keyword">from</span> <span class="token string">'../middleware/api'</span>
@@ -347,7 +347,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 </ul>
 <ul>
 <li><p>compose：这是一个这是函数式编程中的方法，作用是从右到左来组合多个函数，其实就是让你少写几个函数嵌套。。没有函数式编程基础的话光靠“看”肯定是看不出其作用的。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">compose</span><span class="token punctuation">(</span>funcA<span class="token punctuation">,</span> funcB<span class="token punctuation">,</span> funcC<span class="token punctuation">)</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">compose</span><span class="token punctuation">(</span>funcA<span class="token punctuation">,</span> funcB<span class="token punctuation">,</span> funcC<span class="token punctuation">)</span>
 
 <span class="token comment">// 等效于 ==></span>
 <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token function">funcB</span><span class="token punctuation">(</span>funcC<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
@@ -365,7 +365,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 </li>
 </ul>
 <p>贴下官网的middleware的demo：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">logger</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> getState <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">logger</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> getState <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'will dispatch'</span><span class="token punctuation">,</span> action<span class="token punctuation">)</span>
 
@@ -382,7 +382,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 
 <p>其实所谓的middlewares就是用来管理 dispatch 的状态的中间件，next是下一个middleware, 最后一个middleware的next直接传入dispatch，返回的函数是一个包装后的dispatch函数。 之所以applyMiddleware最后会传入createStore, 根据函数式思维，肯定不会取修改createStore，而是对于进行包装，返回一个新的createStore函数。</p>
 <p>看下源码实现，其实非常简单，只是没有函数式思维略优点跟不上而已</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// applyMiddleware源码</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// applyMiddleware源码</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>middlewares</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">createStore</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token comment">//返回一个用来包装createStore的函数，传入createStore然后返回一个新的createStore的包装函数，参数和返回值都和createStore一样</span>
     <span class="token keyword">var</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer<span class="token punctuation">)</span>
@@ -390,7 +390,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
     <span class="token keyword">var</span> chain <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 
     <span class="token keyword">var</span> middlewareAPI <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-      getState<span class="token operator">:</span> store<span class="token punctuation">.</span>getState<span class="token punctuation">,</span>
+      <span class="token literal-property property">getState</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getState<span class="token punctuation">,</span>
       <span class="token function-variable function">dispatch</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
     chain <span class="token operator">=</span> middlewares<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">middleware</span> <span class="token operator">=></span> <span class="token function">middleware</span><span class="token punctuation">(</span>middlewareAPI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//执行每个middleware获得dispatch的包装函数</span>
@@ -404,7 +404,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>而enhancer（增强子）又是什么鬼？直接看源码，十几行的源码都看不懂那么js真是白学了。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token parameter">reducer<span class="token punctuation">,</span> preloadedState<span class="token punctuation">,</span> enhancer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> preloadedState <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> enhancer <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     enhancer <span class="token operator">=</span> preloadedState
     preloadedState <span class="token operator">=</span> <span class="token keyword">undefined</span>
@@ -424,7 +424,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 <p>读了这些源码，是不是感觉对于redux的逻辑有了一些了解？关键就是函数式的思维，像react那种面向对象的框架其实还是很好理解的，各种组件状态方法，和其他的面向对象的框架都大同小异，因为大部分程序猿都接受过大量面向对象的编程思维的训练。但是函数式的思维的逻辑则由于缺少基础，因此粗看很难理解其中奥妙，貌似很复杂，其实很简单，大部分的api都是纯函数，所有的类型都尽量不可变，尽量返回新的类型。</p>
 <h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>这个函数的作用是把传入的对象的每一个action creator(action工厂函数，只返回纯的action对象)包装一层dispatch</p>
 <p>看下源码：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 绑定action creator和dispatch，相当于不用你自己去写 this.props.dispatch(actionCreator(...args))了， ps: this.props.dispatch是react-redux的connect函数注入的</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 绑定action creator和dispatch，相当于不用你自己去写 this.props.dispatch(actionCreator(...args))了， ps: this.props.dispatch是react-redux的connect函数注入的</span>
 <span class="token keyword">function</span> <span class="token function">bindActionCreator</span><span class="token punctuation">(</span><span class="token parameter">actionCreator<span class="token punctuation">,</span> dispatch</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token function">actionCreator</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -471,7 +471,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 <li>如果传入属性值为actionCreator(action的工厂函数，返回一个action)的object则会这样绑定: <code>this.props[objectKey] = (...args) =&gt; this.dispatch(objectValue(...args))</code>,</li>
 <li>如果是函数则自己定义如何绑定dispatch到props，</li>
 </ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">connect</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>todos<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">connect</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>todos<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
   loadTodos
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>MyTodoListComponent<span class="token punctuation">)</span>
 
@@ -503,7 +503,7 @@ store<span class="token punctuation">.</span><span class="token function">dispat
 </li>
 </ul>
 <p>从文档和我的注解，可以看出，connect是实redux单一状态树很关键的一个函数，并且它通过四个参数让用户来决定如何在单一状态更新时去更新组件的状态（或者说属性），这样也避免了绑定model(state)到view的性能问题，因为组件的props是否改变都是由组件自身决定的(mapStateToProps)，如果是其他组件的state</p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// Root.jsx</span>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Root.jsx</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Provider <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-redux'</span>
 <span class="token keyword">import</span> configureStore <span class="token keyword">from</span> <span class="token string">'./store/configureStore'</span>
 
@@ -543,7 +543,7 @@ actionCreators = &#123;
 <span class="token punctuation">&#125;</span>
 
 <span class="token keyword">function</span> <span class="token function">mapStateToProps</span><span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>todos<span class="token operator">:</span> state<span class="token punctuation">.</span>todos<span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">todos</span><span class="token operator">:</span> state<span class="token punctuation">.</span>todos<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">connect</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">,</span> actionCreators<span class="token punctuation">)</span>
 
@@ -736,7 +736,7 @@ where &lt;extent-keyword&gt; &#x3D; closest-corner | closest-side | farthest-cor
 <p>$$A*(1-alpha)+B*alpha=C$$</p>
 <p>即C等于A乘以B的透明度(1-alpha)加上B乘以B的不透明度alpha</p>
 <p>可以写个求渐变遮罩颜色值的函数如下：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getMask</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span><span class="token constant">C</span><span class="token punctuation">,</span> alpha</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getMask</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span><span class="token constant">C</span><span class="token punctuation">,</span> alpha</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">var</span> rgbA <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
   <span class="token keyword">var</span> rgbC <span class="token operator">=</span> <span class="token constant">C</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
 
@@ -765,8 +765,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </header>
 
     <div class="post-content"><p>在openvpn的配置文件**.conf中添加下面两行</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">up &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf
-down &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后需要手动安装包:<br><code>sudo apt-get install openresolv</code><br>or<br><code>sudo apt-get install resolvconf</code></p>
 <p>由于在linux下很多软件都可以修改dns配置文件（<code>/etc/resolv.conf</code>)，为了避免冲突一般使用<code>openresolv</code>和<code>resolvconf</code>来管理dns配置。但是若遇到两者都不能自动修改<code>/etc/resolv.conf</code>文件的问题，可以手动编辑<code>/etc/openvpn/update-resolv-conf</code>文件来实现修改dns：</p>
 <p> <a target="_blank" rel="noopener" href="https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121">https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121</a></p>
@@ -796,7 +796,7 @@ down &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf<span aria-hidden="true" clas
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

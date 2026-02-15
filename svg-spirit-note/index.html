@@ -38,7 +38,7 @@
 </script>
 
     <title>使用svg图标 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -135,7 +135,7 @@
 </ul>
 <p>symbol的好处是可以在symbol标签上设置一些属性，比如设置viewBox实现自动缩放，而这在defs的g标签中是无法做到的。。</p>
 <p>其中viewBox是原图像缩放区域(x,y,width,height),对原图像进行裁剪后再缩放到svg的viewport，可以实现svg图标随css<code>svg&#123; width: 100px; height: 100px;&#125;</code>进行缩放。</p>
-<pre class="line-numbers language-svg" data-language="svg"><code class="language-svg"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>symbol</span> <span class="token attr-name">viewBox</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0,0,26,24<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token comment">&lt;!-- 第1个图标路径形状之类代码 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>symbol</span><span class="token punctuation">></span></span>
@@ -151,7 +151,7 @@
 <li>使用defs</li>
 </ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>假设有一个svg链接<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/svg/a_1.svg">http://www.w3school.com.cn/svg/a_1.svg</a> ，那么使用方式如下,和html一样，#后面跟着的是图像的id。</p>
-<pre class="line-numbers language-svg" data-language="svg"><code class="language-svg"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>use</span> <span class="token attr-name"><span class="token namespace">xlink:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3school.com.cn/svg/a_1.svg#Fill-1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>use</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -209,7 +209,7 @@
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

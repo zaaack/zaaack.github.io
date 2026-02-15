@@ -38,7 +38,7 @@
 </script>
 
     <title>Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -316,12 +316,12 @@
 <td></td>
 </tr>
 <tr>
-<td align="left"></td>
-<td></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://github.com/TransposonY/GestureSign">GestureSign</a></td>
+<td>c#写的更稳定的鼠标手势</td>
 </tr>
 <tr>
-<td align="left"></td>
-<td></td>
+<td align="left">mem reduct</td>
+<td>强力内存清理工具，适合后台玩游戏</td>
 </tr>
 <tr>
 <td align="left"></td>
@@ -354,6 +354,10 @@
 <tr>
 <td>spacedesk</td>
 <td>屏幕扩展</td>
+</tr>
+<tr>
+<td>rustdeck</td>
+<td>局域网远程软件</td>
 </tr>
 </tbody></table>
 <h1 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h1><table>
@@ -551,7 +555,7 @@
 
     <div class="post-content"><p>SVG 的 text 标签是不支持自动换行的，但是如果想用 svg 作为一个画图模版还是需要文本换行。这个组件可以自动对 svg 节点进行截断，支持 tspan 单独设置样式，比如改变颜色啥的，但是暂时不支持 tspan 改变文本宽度，因为用的是别人写的测量宽度的包。本来这个作者也有个换行组件的，但是看源码发现不支持中文，所以写了这个组件。</p>
 <p>用法:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 
 <span class="token operator">&lt;</span>AutoText
     width<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">50</span> <span class="token operator">/</span> <span class="token number">375</span> <span class="token operator">*</span> window<span class="token punctuation">.</span>innerWidth<span class="token punctuation">&#125;</span> <span class="token comment">// width should be 'px'</span>
@@ -564,13 +568,13 @@
     lineSpacing<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">30</span><span class="token punctuation">&#125;</span> <span class="token comment">// or line-height</span>
     spans<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">[</span>
         <span class="token string">'Helllo，'</span><span class="token punctuation">,</span>
-        <span class="token punctuation">&#123;</span> tag<span class="token operator">:</span> <span class="token string">'tspan'</span><span class="token punctuation">,</span> text<span class="token operator">:</span> <span class="token string">'Amy'</span><span class="token punctuation">,</span> props<span class="token operator">:</span> <span class="token punctuation">&#123;</span> fill<span class="token operator">:</span> <span class="token string">'#B09148'</span> <span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span> <span class="token literal-property property">tag</span><span class="token operator">:</span> <span class="token string">'tspan'</span><span class="token punctuation">,</span> <span class="token literal-property property">text</span><span class="token operator">:</span> <span class="token string">'Amy'</span><span class="token punctuation">,</span> <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">fill</span><span class="token operator">:</span> <span class="token string">'#B09148'</span> <span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
         <span class="token string">', '</span><span class="token punctuation">,</span>
         <span class="token string">'what can I do for you?'</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
 <span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">import</span> <span class="token string">'core-js/fn/set'</span>
 <span class="token keyword">import</span> <span class="token string">'core-js/fn/map'</span>
 
@@ -699,9 +703,9 @@ props: &#123;
       <span class="token parameter">span</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>span<span class="token punctuation">.</span>tag<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
           <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-            tag<span class="token operator">:</span> <span class="token string">'tspan'</span><span class="token punctuation">,</span>
-            text<span class="token operator">:</span> span <span class="token operator">?</span> span <span class="token operator">+</span> <span class="token string">''</span> <span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
-            props<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">tag</span><span class="token operator">:</span> <span class="token string">'tspan'</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">text</span><span class="token operator">:</span> span <span class="token operator">?</span> span <span class="token operator">+</span> <span class="token string">''</span> <span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
           <span class="token punctuation">&#125;</span>
         <span class="token punctuation">&#125;</span>
         span<span class="token punctuation">.</span>text <span class="token operator">+=</span> <span class="token string">''</span>
@@ -712,7 +716,7 @@ props: &#123;
       <span class="token keyword">let</span> end <span class="token operator">=</span> startIdx <span class="token operator">+</span> span<span class="token punctuation">.</span>text<span class="token punctuation">.</span>length
       spanSlices<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
         <span class="token operator">...</span>span<span class="token punctuation">,</span>
-        start<span class="token operator">:</span> startIdx<span class="token punctuation">,</span>
+        <span class="token literal-property property">start</span><span class="token operator">:</span> startIdx<span class="token punctuation">,</span>
         end<span class="token punctuation">,</span>
       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
       startIdx <span class="token operator">=</span> end
@@ -727,7 +731,7 @@ props: &#123;
     <span class="token keyword">let</span> sliceLen <span class="token operator">=</span> <span class="token number">0</span>
 
     <span class="token keyword">let</span> lastLine <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
-    <span class="token keyword">let</span> <span class="token punctuation">&#123;</span> x<span class="token operator">:</span> offsetX <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token operator">:</span> offsetY <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">let</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> offsetX <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">y</span><span class="token operator">:</span> offsetY <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
     <span class="token keyword">let</span> lineHeight <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>globalProps<span class="token punctuation">[</span><span class="token string">'lineSpacing'</span><span class="token punctuation">]</span> <span class="token operator">||</span> globalProps<span class="token punctuation">[</span><span class="token string">'lineHeight'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
     <span class="token keyword">let</span> fontSize <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>globalProps<span class="token punctuation">[</span><span class="token string">'fontSize'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">16</span>
     <span class="token keyword">function</span> <span class="token function">makeTspan</span><span class="token punctuation">(</span><span class="token parameter">text<span class="token punctuation">,</span> props<span class="token punctuation">,</span> lineIdx</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -799,7 +803,7 @@ set up your Android development environment:
 https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;docs&#x2F;android-setup.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这个错误的解释废话太多，还是错的, 其实手动运行下命令<code>cd android &amp;&amp; ./gradlew installDebug</code>就会发现是<code>./android/.gradlew</code> 这个文件没有执行权限导致的，运行一下</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">chmod +x .&#x2F;android&#x2F;.gradlew<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> +x ./android/.gradlew<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>就可以了</p>
 
@@ -909,7 +913,7 @@ https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;docs&#x2F;android-se
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
  *
  * 根据屏幕宽度自动设置html的fontSize, 使rem的大小自适应
  * usage:
@@ -942,10 +946,10 @@ https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;docs&#x2F;android-se
     timer <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
     firstCalled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     defaults <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-      designWidth<span class="token operator">:</span> <span class="token number">375</span><span class="token punctuation">,</span>
-      initRem<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
-      maxWinWidth<span class="token operator">:</span> <span class="token number">640</span><span class="token punctuation">,</span>
-      minWinWidth<span class="token operator">:</span> <span class="token number">320</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">designWidth</span><span class="token operator">:</span> <span class="token number">375</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">initRem</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">maxWinWidth</span><span class="token operator">:</span> <span class="token number">640</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">minWinWidth</span><span class="token operator">:</span> <span class="token number">320</span><span class="token punctuation">,</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
     evts <span class="token operator">=</span> <span class="token string">'onorientationchange'</span> <span class="token keyword">in</span> win <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'orientationchange'</span><span class="token punctuation">,</span> <span class="token string">'resize'</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'resize'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
@@ -1043,7 +1047,7 @@ https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;docs&#x2F;android-se
     </header>
 
     <div class="post-content"><p>把<code>xx.crt</code> 文件拷贝到 <code>/usr/local/share/ca-certificates/</code><br>然后运行</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo update-ca-certificates<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> update-ca-certificates<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后就可以了</p>
 
         </div></article>
@@ -1067,7 +1071,7 @@ https:&#x2F;&#x2F;facebook.github.io&#x2F;react-native&#x2F;docs&#x2F;android-se
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

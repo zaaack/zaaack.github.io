@@ -38,7 +38,7 @@
 </script>
 
     <title>windows下配置vagrant的笔记 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -137,7 +137,7 @@
 </blockquote>
 <h2 id="1-下载虚拟镜像"><a href="#1-下载虚拟镜像" class="headerlink" title="1. 下载虚拟镜像"></a>1. 下载虚拟镜像</h2><p>如果自动安装软件包失败（表现为很多软件在命令行上找不到，比如git，python。。），那么还是放弃使用默认的在线安装吧，可以手动下载box文件进行配置，在这些网站可以找到很多box，豆瓣的是Ubuntu 12.04.5 LTS 64位，也直接找导师要box文件(强烈推荐)：<br><a target="_blank" rel="noopener" href="https://atlas.hashicorp.com/boxes/search">https://atlas.hashicorp.com/boxes/search</a><br><a target="_blank" rel="noopener" href="http://www.vagrantbox.es/">http://www.vagrantbox.es/</a></p>
 <p>可能会用到的命令</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">vagrant box add &lt;box name&gt; &lt;path to box&gt;
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vagrant box <span class="token function">add</span> <span class="token operator">&lt;</span>box name<span class="token operator">></span> <span class="token operator">&lt;</span>path to box<span class="token operator">></span>
 vagrant init
 vagrant up<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -151,74 +151,74 @@ vagrant up<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 </ul>
 <h3 id="可行且兼容性最强的方案"><a href="#可行且兼容性最强的方案" class="headerlink" title="可行且兼容性最强的方案"></a>可行且兼容性最强的方案</h3><h4 id="RSync"><a href="#RSync" class="headerlink" title="RSync"></a>RSync</h4><p>RSync是一个ssh同步工具，也就是直接通过ssh协议将本机某个文件夹的文件同步到服务器上。。不过可惜的是这种同步是单向的，貌似也有双向同步的工具,如<a target="_blank" rel="noopener" href="http://www.oschina.net/p/unison">unison</a>，暂时不需要就没研究了。。</p>
 <p>据vagrant说是可以直接集成的，但是我在win8.1 64位下没有配置成功。现在采用的方案是用node监听文件夹变化，然后调用外部命令进行同步</p>
-<h5 id="1-首先配置Vagrantfile，如果遇到问题请将中文注释删掉："><a href="#1-首先配置Vagrantfile，如果遇到问题请将中文注释删掉：" class="headerlink" title="1. 首先配置Vagrantfile，如果遇到问题请将中文注释删掉："></a>1. 首先配置Vagrantfile，如果遇到问题请将中文注释删掉：</h5><pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"># -*- mode: ruby -*-
-# vi: set ft&#x3D;ruby :
+<h5 id="1-首先配置Vagrantfile，如果遇到问题请将中文注释删掉："><a href="#1-首先配置Vagrantfile，如果遇到问题请将中文注释删掉：" class="headerlink" title="1. 首先配置Vagrantfile，如果遇到问题请将中文注释删掉："></a>1. 首先配置Vagrantfile，如果遇到问题请将中文注释删掉：</h5><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># -*- mode: ruby -*-</span>
+<span class="token comment"># vi: set ft=ruby :</span>
 
-# All Vagrant configuration is done below. The &quot;2&quot; in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don&#39;t change it unless you know what
-# you&#39;re doing.
-Vagrant.configure(2) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https:&#x2F;&#x2F;docs.vagrantup.com.
+<span class="token comment"># All Vagrant configuration is done below. The "2" in Vagrant.configure</span>
+<span class="token comment"># configures the configuration version (we support older styles for</span>
+<span class="token comment"># backwards compatibility). Please don't change it unless you know what</span>
+<span class="token comment"># you're doing.</span>
+Vagrant<span class="token punctuation">.</span>configure<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>config<span class="token operator">|</span>
+  <span class="token comment"># The most common configuration options are documented and commented below.</span>
+  <span class="token comment"># For a complete reference, please see the online documentation at</span>
+  <span class="token comment"># https://docs.vagrantup.com.</span>
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https:&#x2F;&#x2F;atlas.hashicorp.com&#x2F;search.
-  #这里必须和vagrant box add &lt;box name&gt; &lt;path to box&gt;的box name一致
-  config.vm.box &#x3D; &quot;package&quot;
+  <span class="token comment"># Every Vagrant development environment requires a box. You can search for</span>
+  <span class="token comment"># boxes at https://atlas.hashicorp.com/search.</span>
+  <span class="token comment">#这里必须和vagrant box add &lt;box name> &lt;path to box>的box name一致</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>box <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"package"</span></span>
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # &#96;vagrant box outdated&#96;. This is not recommended.
-  # config.vm.box_check_update &#x3D; false
+  <span class="token comment"># Disable automatic box update checking. If you disable this, then</span>
+  <span class="token comment"># boxes will only be checked for updates when the user runs</span>
+  <span class="token comment"># `vagrant box outdated`. This is not recommended.</span>
+  <span class="token comment"># config.vm.box_check_update = false</span>
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.
-  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080
+  <span class="token comment"># Create a forwarded port mapping which allows access to a specific port</span>
+  <span class="token comment"># within the machine from a port on the host machine. In the example below,</span>
+  <span class="token comment"># accessing "localhost:8080" will access port 80 on the guest machine.</span>
+  <span class="token comment"># config.vm.network "forwarded_port", guest: 80, host: 8080</span>
 
-  config.vm.host_name &#x3D; &quot;vagrant&quot;
-# vagrant默认是通过端口转发和虚拟机通信，也就是虚拟机可以像主机一样用127.0.0.1访问。不过这种方式无法在外部连接端口很多的软件，比如mysql。
-  config.vm.network :forwarded_port, guest: 9010, host: 9010
-  config.vm.network :forwarded_port, guest: 9015, host: 9015
-  config.vm.network :forwarded_port, guest: 9200, host: 9200
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>host_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"vagrant"</span></span>
+<span class="token comment"># vagrant默认是通过端口转发和虚拟机通信，也就是虚拟机可以像主机一样用127.0.0.1访问。不过这种方式无法在外部连接端口很多的软件，比如mysql。</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9010</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9010</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9015</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9015</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9200</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9200</span>
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  #这种方式可以用主机上的mysql管理软件连接虚拟机的mysql
- config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
+  <span class="token comment"># Create a private network, which allows host-only access to the machine</span>
+  <span class="token comment"># using a specific IP.</span>
+  <span class="token comment">#这种方式可以用主机上的mysql管理软件连接虚拟机的mysql</span>
+ config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token string-literal"><span class="token string">"private_network"</span></span><span class="token punctuation">,</span> <span class="token symbol">ip</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"192.168.33.10"</span></span>
 
- # config.vm.network &quot;private_network&quot;, type: &quot;dhcp&quot;
+ <span class="token comment"># config.vm.network "private_network", type: "dhcp"</span>
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network &quot;public_network&quot;
+  <span class="token comment"># Create a public network, which generally matched to bridged network.</span>
+  <span class="token comment"># Bridged networks make the machine appear as another physical device on</span>
+  <span class="token comment"># your network.</span>
+  <span class="token comment"># config.vm.network "public_network"</span>
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  #config.vm.synced_folder &quot;..&#x2F;vagrant&quot;, &quot;&#x2F;home&#x2F;vagrant&quot;
+  <span class="token comment"># Share an additional folder to the guest VM. The first argument is</span>
+  <span class="token comment"># the path on the host to the actual folder. The second argument is</span>
+  <span class="token comment"># the path on the guest to mount the folder. And the optional third</span>
+  <span class="token comment"># argument is a set of non-required options.</span>
+  <span class="token comment">#config.vm.synced_folder "../vagrant", "/home/vagrant"</span>
 
-  #这样就可以配置smb方式的同步了，速度应该比virtualbox自带的快，第一个参数是本机目录，第二个参数是虚拟机目录。
-  # config.vm.synced_folder &quot;..&#x2F;code&#x2F;market&quot;, &quot;&#x2F;home&#x2F;vagrant&#x2F;market&quot;, type: &quot;smb&quot;
+  <span class="token comment">#这样就可以配置smb方式的同步了，速度应该比virtualbox自带的快，第一个参数是本机目录，第二个参数是虚拟机目录。</span>
+  <span class="token comment"># config.vm.synced_folder "../code/market", "/home/vagrant/market", type: "smb"</span>
 
-  config.ssh.username &#x3D; &#39;vagrant&#39;
-  config.ssh.password &#x3D; &#39;vagrant&#39;
-  config.ssh.insert_key &#x3D; &#39;true&#39;
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>password <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>insert_key <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'true'</span></span>
 
 
-  config.vm.provider &quot;virtualbox&quot; do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    #vb.gui &#x3D; true
-    #如果嫌虚拟机太慢可以多分配些资源
-    # Customize the amount of memory on the VM:
-    vb.memory &#x3D; &quot;2048&quot;
-    vb.cpus&#x3D;4
-  end
-end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>provider <span class="token string-literal"><span class="token string">"virtualbox"</span></span> <span class="token keyword">do</span> <span class="token operator">|</span>vb<span class="token operator">|</span>
+    <span class="token comment"># Display the VirtualBox GUI when booting the machine</span>
+    <span class="token comment">#vb.gui = true</span>
+    <span class="token comment">#如果嫌虚拟机太慢可以多分配些资源</span>
+    <span class="token comment"># Customize the amount of memory on the VM:</span>
+    vb<span class="token punctuation">.</span>memory <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"2048"</span></span>
+    vb<span class="token punctuation">.</span>cpus<span class="token operator">=</span><span class="token number">4</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -249,8 +249,8 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 </ul>
 <p><em>1. 生成ssh-key。</em></p>
 <p>我需要同步的文件夹叫做share，在E:\versioncontrol\doubangit\code目录下，那么先在该目录打开命令行，运行<code>ssh-keygen</code>，输入要保存的地址:<code>E:\versioncontrol\doubangit\code\devkey</code>。然后在code目录下可以看到devkey（私钥文件）和devkey.pub（公钥文件）两个文件。将devkey.pub 上传到虚拟机的/home/vagrant/.ssh/上，运行以下命令将公钥拷贝到authorized_keys：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">cd ~&#x2F;.ssh
-cat devkey.pub&gt;&gt;authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/.ssh
+<span class="token function">cat</span> devkey.pub<span class="token operator">>></span>authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><em>2. 在命令行上运行以下命令</em></p>
 <pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">rsync -avz --delete --chmod Du&#x3D;rwx,Dog&#x3D;rx,Fu&#x3D;rwx,Fgo&#x3D;rx --chown vagrant:vagrant --rsync-path &quot;sudo rsync&quot; -e &quot;.&#x2F;ssh -p 2222 -l vagrant -i &#x2F;cygdrive&#x2F;e&#x2F;versioncontrol&#x2F;doubangit&#x2F;code&#x2F;.scripts&#x2F;devkey&quot; &#x2F;cygdrive&#x2F;e&#x2F;versioncontrol&#x2F;doubangit&#x2F;code&#x2F;share&#x2F;* vagrant@127.0.0.1:&#x2F;home&#x2F;vagrant&#x2F;share<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -279,77 +279,77 @@ rsync -avc --exclude-from&#x3D;%BASE_DIR%&#x2F;.scripts&#x2F;exclude.txt --chmod
 <p>就可以进行下一步了。</p>
 <p><em>3. 用python监听文件变动并调用同步命令</em></p>
 <p>本来我是用nodejs写的，奈何nodejs的官方api不能递归监听文件夹，而第三方实现占用资源太多，所有这里采用python的watchdog包进行监听，调用系统底层api效率高很多。<br>首先需要用pip安装watchdog包<br><code>pip install watchdog</code><br>然后编写watch.py, 监听文件夹变动就调用cwrsync.bat进行同步</p>
-<pre class="line-numbers language-py" data-language="py"><code class="language-py">#coding&#x3D;utf-8
-import sys
-import os
-import re
-import time
-import logging
-import thread
-import subprocess
-from subprocess import Popen, PIPE
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#coding=utf-8</span>
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> time
+<span class="token keyword">import</span> logging
+<span class="token keyword">import</span> thread
+<span class="token keyword">import</span> subprocess
+<span class="token keyword">from</span> subprocess <span class="token keyword">import</span> Popen<span class="token punctuation">,</span> PIPE
+<span class="token keyword">from</span> watchdog<span class="token punctuation">.</span>observers <span class="token keyword">import</span> Observer
+<span class="token keyword">from</span> watchdog<span class="token punctuation">.</span>events <span class="token keyword">import</span> FileSystemEventHandler
 
-isSyncing&#x3D;False
-# start&#x3D;time.time()
+isSyncing<span class="token operator">=</span><span class="token boolean">False</span>
+<span class="token comment"># start=time.time()</span>
 
-def rsync():
-    global isSyncing
-    # global start
-    # end&#x3D;time.time()
-    # if isSyncing or end-start&lt;3:
-    if isSyncing:
-        thread.exit_thread()
-        return
-    isSyncing&#x3D;True
-    # start&#x3D;end
-    st&#x3D;time.time()
-    # out&#x3D;os.popen(sys.path[0]+&#39;&#x2F;cwrsync.bat&#39;).readlines()
-    # for line in out:
-    #     print line
-    p&#x3D;Popen(sys.path[0]+&#39;&#x2F;cwrsync.bat &#39;+sys.argv[1], stdout&#x3D;PIPE, stderr&#x3D;subprocess.STDOUT)
-    while True:
-        line &#x3D; p.stdout.readline()
-        if not line:
-            break
-        print line.strip()
-    isSyncing&#x3D;False
-    print &#39;&#39;&#39;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-    rsync finished in %s seconds!&#39;&#39;&#39; % int(time.time()-st)
-    thread.exit_thread()
-
-
-class EventHandler(FileSystemEventHandler):
-
-    def __init__(self):
-        pass
-
-    def on_any_event(self, event):
-        if event.event_type &#x3D;&#x3D; &#39;deleted&#39;: #modified, moved,created
-            return
-        r &#x3D; re.search(&#39;\.git([\\\\&#x2F;]|$)&#39;,event.src_path)
-        if r !&#x3D; None:
-            return
-        print &#39;+++++++++++++++&#39;
-        print &#39;event:%s %s&#39; % (event.event_type,event.src_path)
-        thread.start_new_thread(rsync,())
+<span class="token keyword">def</span> <span class="token function">rsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> isSyncing
+    <span class="token comment"># global start</span>
+    <span class="token comment"># end=time.time()</span>
+    <span class="token comment"># if isSyncing or end-start&lt;3:</span>
+    <span class="token keyword">if</span> isSyncing<span class="token punctuation">:</span>
+        thread<span class="token punctuation">.</span>exit_thread<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    isSyncing<span class="token operator">=</span><span class="token boolean">True</span>
+    <span class="token comment"># start=end</span>
+    st<span class="token operator">=</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># out=os.popen(sys.path[0]+'/cwrsync.bat').readlines()</span>
+    <span class="token comment"># for line in out:</span>
+    <span class="token comment">#     print line</span>
+    p<span class="token operator">=</span>Popen<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'/cwrsync.bat '</span><span class="token operator">+</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> stdout<span class="token operator">=</span>PIPE<span class="token punctuation">,</span> stderr<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>STDOUT<span class="token punctuation">)</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        line <span class="token operator">=</span> p<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> line<span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        <span class="token keyword">print</span> line<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    isSyncing<span class="token operator">=</span><span class="token boolean">False</span>
+    <span class="token keyword">print</span> <span class="token triple-quoted-string string">'''=====================
+    rsync finished in %s seconds!'''</span> <span class="token operator">%</span> <span class="token builtin">int</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>st<span class="token punctuation">)</span>
+    thread<span class="token punctuation">.</span>exit_thread<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 
-if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
-    watchFolder&#x3D;os.path.dirname(sys.argv[0])+&#39;&#x2F;..&#x2F;share&#x2F;&#39;+sys.argv[1]
-    print &#39;start watching folder &quot;&#39;+watchFolder+&#39;&quot;...&#39;
-    event_handler &#x3D; EventHandler()
+<span class="token keyword">class</span> <span class="token class-name">EventHandler</span><span class="token punctuation">(</span>FileSystemEventHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-    observer &#x3D; Observer()
-    observer.schedule(event_handler, watchFolder, recursive&#x3D;True)
-    observer.start()
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">def</span> <span class="token function">on_any_event</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> event<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> event<span class="token punctuation">.</span>event_type <span class="token operator">==</span> <span class="token string">'deleted'</span><span class="token punctuation">:</span> <span class="token comment">#modified, moved,created</span>
+            <span class="token keyword">return</span>
+        r <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">'\.git([\\\\/]|$)'</span><span class="token punctuation">,</span>event<span class="token punctuation">.</span>src_path<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> r <span class="token operator">!=</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span>
+        <span class="token keyword">print</span> <span class="token string">'+++++++++++++++'</span>
+        <span class="token keyword">print</span> <span class="token string">'event:%s %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>event_type<span class="token punctuation">,</span>event<span class="token punctuation">.</span>src_path<span class="token punctuation">)</span>
+        thread<span class="token punctuation">.</span>start_new_thread<span class="token punctuation">(</span>rsync<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    watchFolder<span class="token operator">=</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'/../share/'</span><span class="token operator">+</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span> <span class="token string">'start watching folder "'</span><span class="token operator">+</span>watchFolder<span class="token operator">+</span><span class="token string">'"...'</span>
+    event_handler <span class="token operator">=</span> EventHandler<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    observer <span class="token operator">=</span> Observer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    observer<span class="token punctuation">.</span>schedule<span class="token punctuation">(</span>event_handler<span class="token punctuation">,</span> watchFolder<span class="token punctuation">,</span> recursive<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    observer<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> KeyboardInterrupt<span class="token punctuation">:</span>
+        observer<span class="token punctuation">.</span>stop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    observer<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><em>4. vagrant up并运行watchpy</em></p>
@@ -416,7 +416,7 @@ python ..&#x2F;code&#x2F;.scripts&#x2F;watch.py $1<span aria-hidden="true" class
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

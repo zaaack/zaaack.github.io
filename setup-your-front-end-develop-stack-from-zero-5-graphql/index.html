@@ -38,7 +38,7 @@
 </script>
 
     <title>graphql学习笔记-从0搭建一个完整的前端开发技术栈(5) - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -136,7 +136,7 @@
 <p>使用 GraphQL 时，大致流程是先需要服务端定义好各种类型，然后通过 “root” 对象类型来进行查询，官网上称作<code>entry point</code>(入口点)，然后客户端通过发送查询语句来得到相应的数据。这里先对查询语句有大致的了解，后续可以在实践中逐步学习服务端类型的定义。</p>
 <h2 id="查询和修改"><a href="#查询和修改" class="headerlink" title="查询和修改"></a>查询和修改</h2><p>直接看 Graphql 可能会感到难以接受，因为不知道背后的实现原理，对实际使用时并没有明确的概念。实际上GraphQL 只是一种协议而已，等到实现的时候其实并没有想像的那么神奇，服务度的每一个可以查询的接口都需要通过 schema 去定义出来。。</p>
 <h3 id="查询字段-Fields"><a href="#查询字段-Fields" class="headerlink" title="查询字段(Fields)"></a>查询字段(Fields)</h3><p>查询是和 json 非常类似的，只不过“只有key”部分而已，因为 value 部分等着由服务端提供啊。。<br>比如:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
   hero &#123;
     name
   &#125;
@@ -144,16 +144,16 @@
 
 <span class="token comment">// ==></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到服务端可以返回的数据结构和查询语句非常类似。</p>
 <h3 id="参数-Arguments"><a href="#参数-Arguments" class="headerlink" title="参数(Arguments)"></a>参数(Arguments)</h3><p>查询语句中可以传递参数，比如:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
   human(id: "1000") &#123;
     name
     height
@@ -163,11 +163,11 @@
 
 <span class="token comment">// =></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"human"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span><span class="token punctuation">,</span>
-      <span class="token string">"height"</span><span class="token operator">:</span> <span class="token number">1.72</span><span class="token punctuation">,</span>
-      <span class="token string">"unitHeight"</span><span class="token operator">:</span> <span class="token number">5.6430448</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"human"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"height"</span><span class="token operator">:</span> <span class="token number">1.72</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"unitHeight"</span><span class="token operator">:</span> <span class="token number">5.6430448</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
@@ -176,7 +176,7 @@
 <p>在这个例子中还使用了下面介绍的别名来得到同一字段的不同形式的值。</p>
 <p>通过参数可以很容易的实现分页，客户端框架一般会提供包装的分页方法来进行优化。</p>
 <h3 id="别名-Alias"><a href="#别名-Alias" class="headerlink" title="别名(Alias)"></a>别名(Alias)</h3><p>别名用于在同一层级获取有着相同结构的不同数据，比如</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
   empireHero: hero(episode: EMPIRE) &#123;
     name
   &#125;
@@ -186,19 +186,19 @@
 &#125;</span><span class="token template-punctuation string">`</span></span>
 <span class="token comment">// =></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"empireHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"empireHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token string">"jediHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
+    <span class="token string-property property">"jediHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="片段-Fragments"><a href="#片段-Fragments" class="headerlink" title="片段(Fragments)"></a>片段(Fragments)</h3><p>片段就是一个类型的一部分字段的集合，可以通过es6展开运算符来展开所有字段到当前的查询结构中，极大的方便了复用（感觉和类型放在一起更好理解）</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;
   empireHero: hero(episode: EMPIRE) &#123;
     name
   &#125;
@@ -208,12 +208,12 @@
 &#125;</span><span class="token template-punctuation string">`</span></span>
 <span class="token comment">// =></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"empireHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"empireHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token string">"jediHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
+    <span class="token string-property property">"jediHero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
@@ -225,7 +225,7 @@
 <li>声明<code>$variableName</code>为查询语句中可接受的变量</li>
 <li>将 <code>variableName: value</code> 通过另一个分开的变量键值传递给服务端，通常是 json 形式的 get 参数</li>
 </ol>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">query HeroNameAndFriends($episode: Episode) &#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">query HeroNameAndFriends($episode: Episode) &#123;
   hero(episode: $episode) &#123;
     name
     friends &#123;
@@ -234,22 +234,22 @@
   &#125;
 &#125;</span><span class="token template-punctuation string">`</span></span>
 <span class="token keyword">var</span> variables <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"episode"</span><span class="token operator">:</span> <span class="token string">"JEDI"</span>
+  <span class="token string-property property">"episode"</span><span class="token operator">:</span> <span class="token string">"JEDI"</span>
 <span class="token punctuation">&#125;</span>
 <span class="token comment">// =></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span><span class="token punctuation">,</span>
-      <span class="token string">"friends"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"friends"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">&#123;</span>
-          <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
+          <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Luke Skywalker"</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
         <span class="token punctuation">&#123;</span>
-          <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Han Solo"</span>
+          <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Han Solo"</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
         <span class="token punctuation">&#123;</span>
-          <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"Leia Organa"</span>
+          <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Leia Organa"</span>
         <span class="token punctuation">&#125;</span>
       <span class="token punctuation">]</span>
     <span class="token punctuation">&#125;</span>
@@ -258,7 +258,7 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="操作名-Operation-name"><a href="#操作名-Operation-name" class="headerlink" title="操作名(Operation name)"></a>操作名(Operation name)</h3><p>上面例子中的查询语句很多是一种省略形式，我们来看一个完整的：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">query HeroNameAndFriends($episode: Episode) &#123;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">query HeroNameAndFriends($episode: Episode) &#123;
   hero(episode: $episode) &#123;
     name
     friends &#123;
@@ -270,7 +270,7 @@
 
 <p>其中<code>query</code>是操作类型，是可以自定义的，比如定义成<code>mutation</code>, <code>subscription</code>,这里只是约定俗成的名字. <code>HeroNameAndFriends</code>是查询名字,服务端需要有对应的配置才能查询.</p>
 <p>在 graphql 中，服务端的定义大致如下:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> schema <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> schema <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
 type Query &#123;
   hero(episode: $episode) &#123;
     name
@@ -293,7 +293,7 @@ schema &#123;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过 schema 定义的字段在 GraphQL 中叫做 <code>entry point</code> (入口点), 其实和其他的对象类型差不多，唯一的区别在于可以通过<code>query xxx &#123; ... &#125;</code>、<code>mutation xxx &#123; ... &#125;</code>的方式用来得到内部的查询定义。</p>
 <h3 id="指令-Directives"><a href="#指令-Directives" class="headerlink" title="指令(Directives)"></a>指令(Directives)</h3><p>通过指令可以通过变量修改查询的结构</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
 query Hero($episode: Episode, $withFriends: Boolean!) &#123;
   hero(episode: $episode) &#123;
@@ -305,15 +305,15 @@ query Hero($episode: Episode, $withFriends: Boolean!) &#123;
 &#125;
 </span><span class="token template-punctuation string">`</span></span>
 <span class="token keyword">var</span> variables <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"episode"</span><span class="token operator">:</span> <span class="token string">"JEDI"</span><span class="token punctuation">,</span>
-  <span class="token string">"withFriends"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token string-property property">"episode"</span><span class="token operator">:</span> <span class="token string">"JEDI"</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"withFriends"</span><span class="token operator">:</span> <span class="token boolean">false</span>
 <span class="token punctuation">&#125;</span>
 
 <span class="token comment">// =></span>
 <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
+  <span class="token string-property property">"data"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"hero"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"R2-D2"</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -321,7 +321,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) &#123;
 <p>自带有两种指令，服务端也可以自定义更多：</p>
 <p><code>@include(if: Boolean)</code> 参数为true则包含该字段<br><code>@skip(if: Boolean)</code> 参数为true则忽略该字段</p>
 <h3 id="行内片段"><a href="#行内片段" class="headerlink" title="行内片段"></a>行内片段</h3><p>片段的简写形式</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">var</span> query <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
 query HeroForEpisode($ep: Episode!) &#123;
   hero(episode: $ep) &#123;
@@ -386,7 +386,7 @@ query HeroForEpisode($ep: Episode!) &#123;
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

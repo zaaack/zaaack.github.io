@@ -38,7 +38,7 @@
 </script>
 
     <title>Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -126,94 +126,94 @@
     <div class="post-content"><h1 id="linux配置vagrant"><a href="#linux配置vagrant" class="headerlink" title="linux配置vagrant"></a>linux配置vagrant</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.vagrantup.com/docs/">https://www.vagrantup.com/docs/</a></p>
 </blockquote>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="从本地box导入"><a href="#从本地box导入" class="headerlink" title="从本地box导入"></a>从本地box导入</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">vagrant box add &lt;box name&gt; &lt;path to box&gt; #导入box文件
-vagrant init #初始化一个Vagrantfile配置文件，若已有则跳过此步
-vagrant up #启动vagrant<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="从本地box导入"><a href="#从本地box导入" class="headerlink" title="从本地box导入"></a>从本地box导入</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vagrant box <span class="token function">add</span> <span class="token operator">&lt;</span>box name<span class="token operator">></span> <span class="token operator">&lt;</span>path to box<span class="token operator">></span> <span class="token comment">#导入box文件</span>
+vagrant init <span class="token comment">#初始化一个Vagrantfile配置文件，若已有则跳过此步</span>
+vagrant up <span class="token comment">#启动vagrant</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="配置共享"><a href="#配置共享" class="headerlink" title="配置共享"></a>配置共享</h3><p>linux和osx都支持nfs共享，但是我用的deepinlinux(基于debian)默认没有nfs包，因此需要先手动安装</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo apt-get install nfs-kernel-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nfs-kernel-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后配置Vagrantfile文件</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"># -*- mode: ruby -*-
-# vi: set ft&#x3D;ruby :
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># -*- mode: ruby -*-</span>
+<span class="token comment"># vi: set ft=ruby :</span>
 
-# All Vagrant configuration is done below. The &quot;2&quot; in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don&#39;t change it unless you know what
-# you&#39;re doing.
-Vagrant.configure(2) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https:&#x2F;&#x2F;docs.vagrantup.com.
+<span class="token comment"># All Vagrant configuration is done below. The "2" in Vagrant.configure</span>
+<span class="token comment"># configures the configuration version (we support older styles for</span>
+<span class="token comment"># backwards compatibility). Please don't change it unless you know what</span>
+<span class="token comment"># you're doing.</span>
+Vagrant<span class="token punctuation">.</span>configure<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>config<span class="token operator">|</span>
+  <span class="token comment"># The most common configuration options are documented and commented below.</span>
+  <span class="token comment"># For a complete reference, please see the online documentation at</span>
+  <span class="token comment"># https://docs.vagrantup.com.</span>
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https:&#x2F;&#x2F;atlas.hashicorp.com&#x2F;search.
-  #这里必须和vagrant box add &lt;box name&gt; &lt;path to box&gt;的box name一致
-  config.vm.box &#x3D; &quot;shire&quot;
+  <span class="token comment"># Every Vagrant development environment requires a box. You can search for</span>
+  <span class="token comment"># boxes at https://atlas.hashicorp.com/search.</span>
+  <span class="token comment">#这里必须和vagrant box add &lt;box name> &lt;path to box>的box name一致</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>box <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"shire"</span></span>
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # &#96;vagrant box outdated&#96;. This is not recommended.
-  # config.vm.box_check_update &#x3D; false
+  <span class="token comment"># Disable automatic box update checking. If you disable this, then</span>
+  <span class="token comment"># boxes will only be checked for updates when the user runs</span>
+  <span class="token comment"># `vagrant box outdated`. This is not recommended.</span>
+  <span class="token comment"># config.vm.box_check_update = false</span>
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.
-  # config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080
+  <span class="token comment"># Create a forwarded port mapping which allows access to a specific port</span>
+  <span class="token comment"># within the machine from a port on the host machine. In the example below,</span>
+  <span class="token comment"># accessing "localhost:8080" will access port 80 on the guest machine.</span>
+  <span class="token comment"># config.vm.network "forwarded_port", guest: 80, host: 8080</span>
 
-  config.vm.host_name &#x3D; &quot;vagrant&quot;
-# vagrant默认是通过端口转发和虚拟机通信，也就是虚拟机可以像主机一样用127.0.0.1访问。不过这种方式无法在外部连接端口很多的软件，比如mysql。
-  config.vm.network :forwarded_port, guest: 9010, host: 9010
-  config.vm.network :forwarded_port, guest: 9015, host: 9015
-  config.vm.network :forwarded_port, guest: 9200, host: 9200
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>host_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"vagrant"</span></span>
+<span class="token comment"># vagrant默认是通过端口转发和虚拟机通信，也就是虚拟机可以像主机一样用127.0.0.1访问。不过这种方式无法在外部连接端口很多的软件，比如mysql。</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9010</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9010</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9015</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9015</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9200</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9200</span>
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  #这种方式可以用主机上的mysql管理软件连接虚拟机的mysql
- config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;
+  <span class="token comment"># Create a private network, which allows host-only access to the machine</span>
+  <span class="token comment"># using a specific IP.</span>
+  <span class="token comment">#这种方式可以用主机上的mysql管理软件连接虚拟机的mysql</span>
+ config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token string-literal"><span class="token string">"private_network"</span></span><span class="token punctuation">,</span> <span class="token symbol">ip</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"192.168.33.10"</span></span>
 
- # config.vm.network &quot;private_network&quot;, type: &quot;dhcp&quot;
+ <span class="token comment"># config.vm.network "private_network", type: "dhcp"</span>
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network &quot;public_network&quot;
+  <span class="token comment"># Create a public network, which generally matched to bridged network.</span>
+  <span class="token comment"># Bridged networks make the machine appear as another physical device on</span>
+  <span class="token comment"># your network.</span>
+  <span class="token comment"># config.vm.network "public_network"</span>
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  #config.vm.synced_folder &quot;..&#x2F;vagrant&quot;, &quot;&#x2F;home&#x2F;vagrant&quot;
+  <span class="token comment"># Share an additional folder to the guest VM. The first argument is</span>
+  <span class="token comment"># the path on the host to the actual folder. The second argument is</span>
+  <span class="token comment"># the path on the guest to mount the folder. And the optional third</span>
+  <span class="token comment"># argument is a set of non-required options.</span>
+  <span class="token comment">#config.vm.synced_folder "../vagrant", "/home/vagrant"</span>
 
-  # config.vm.synced_folder &quot;..&#x2F;code&#x2F;market&quot;, &quot;&#x2F;home&#x2F;vagrant&#x2F;market&quot;, type: &quot;smb&quot;
-  #这样就可以配置nfs方式的同步了，第一个参数是本机目录，第二个参数是虚拟机目录。
-  config.vm.synced_folder &quot;..&#x2F;share&#x2F;&quot;, &quot;&#x2F;home&#x2F;vagrant&#x2F;share&#x2F;&quot;, type: &quot;nfs&quot;,  nfs_udp: false
-
-
-  config.ssh.username &#x3D; &#39;vagrant&#39;
-  config.ssh.password &#x3D; &#39;vagrant&#39;
-  config.ssh.insert_key &#x3D; &#39;true&#39;
+  <span class="token comment"># config.vm.synced_folder "../code/market", "/home/vagrant/market", type: "smb"</span>
+  <span class="token comment">#这样就可以配置nfs方式的同步了，第一个参数是本机目录，第二个参数是虚拟机目录。</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>synced_folder <span class="token string-literal"><span class="token string">"../share/"</span></span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">"/home/vagrant/share/"</span></span><span class="token punctuation">,</span> <span class="token symbol">type</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"nfs"</span></span><span class="token punctuation">,</span>  <span class="token symbol">nfs_udp</span><span class="token operator">:</span> <span class="token boolean">false</span>
 
 
-  config.vm.provider &quot;virtualbox&quot; do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    #vb.gui &#x3D; true
-    #如果嫌虚拟机太慢可以多分配些资源
-    # Customize the amount of memory on the VM:
-    vb.memory &#x3D; &quot;2048&quot;
-    vb.cpus&#x3D;4
-  end
-end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>password <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>insert_key <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'true'</span></span>
 
-<h2 id="常用命令介绍"><a href="#常用命令介绍" class="headerlink" title="常用命令介绍"></a>常用命令介绍</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">vagrant status #当前虚拟机的状况
-vagrant global-status #全局虚拟机的状态
-vagrant box list #查看本地已添加的box
-vagrant up [id] #启动虚拟机
-vagrant suspend [id] #休眠虚拟机
-vagrant resume [id] #恢复虚拟机
-vagrant reload [id] [--provision] #重新载入配置文件,需要重启,[--provision]表示同时根据配置文件更新虚拟机内的依赖环境
-vagrant ssh [id] #进入虚拟环境
-vagrant halt [id] #关机
-vagrant provision [id] #在一个正在运行的虚拟机中更新依赖<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>provider <span class="token string-literal"><span class="token string">"virtualbox"</span></span> <span class="token keyword">do</span> <span class="token operator">|</span>vb<span class="token operator">|</span>
+    <span class="token comment"># Display the VirtualBox GUI when booting the machine</span>
+    <span class="token comment">#vb.gui = true</span>
+    <span class="token comment">#如果嫌虚拟机太慢可以多分配些资源</span>
+    <span class="token comment"># Customize the amount of memory on the VM:</span>
+    vb<span class="token punctuation">.</span>memory <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"2048"</span></span>
+    vb<span class="token punctuation">.</span>cpus<span class="token operator">=</span><span class="token number">4</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="常用命令介绍"><a href="#常用命令介绍" class="headerlink" title="常用命令介绍"></a>常用命令介绍</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vagrant status <span class="token comment">#当前虚拟机的状况</span>
+vagrant global-status <span class="token comment">#全局虚拟机的状态</span>
+vagrant box list <span class="token comment">#查看本地已添加的box</span>
+vagrant up <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#启动虚拟机</span>
+vagrant <span class="token function">suspend</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#休眠虚拟机</span>
+vagrant resume <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#恢复虚拟机</span>
+vagrant reload <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token punctuation">[</span>--provision<span class="token punctuation">]</span> <span class="token comment">#重新载入配置文件,需要重启,[--provision]表示同时根据配置文件更新虚拟机内的依赖环境</span>
+vagrant <span class="token function">ssh</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#进入虚拟环境</span>
+vagrant <span class="token function">halt</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#关机</span>
+vagrant provision <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#在一个正在运行的虚拟机中更新依赖</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         </div></article>
       <article class="post">
@@ -303,7 +303,7 @@ Content Cell  | Content Cell| Content Cell|
 Content Cell  | Content Cell| Content Cell|
 [表格标题]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code keyword">`var x = "hello world"`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code-snippet code keyword">`var x = "hello world"`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="块代码"><a href="#块代码" class="headerlink" title="块代码"></a>块代码</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">javascript</span>
 <span class="token code-block language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">"good luck"</span><span class="token punctuation">;</span></span>
@@ -338,7 +338,7 @@ is maintained by the W3C.
 : 一种品牌，计算机，手持设备
 桔子
 : 一种水果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><h3 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">这是行内公式<span class="token code keyword">`!$ \Gamma(z) = \int_0^\infty t^&#123;z-1&#125;e^&#123;-t&#125;dt\,. $`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><h3 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">这是行内公式<span class="token code-snippet code keyword">`!$ \Gamma(z) = \int_0^\infty t^&#123;z-1&#125;e^&#123;-t&#125;dt\,. $`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="块公式"><a href="#块公式" class="headerlink" title="块公式"></a>块公式</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">mathjax!</span>
 <span class="token code-block language-mathjax">$$\Gamma(z) = \int_0^\infty t^&#123;z-1&#125;e^&#123;-t&#125;dt\,.$$</span>
 <span class="token punctuation">```</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -402,8 +402,8 @@ Note right of 小李: 小李想了想
     </header>
 
     <div class="post-content"><p>一个angular的应用可以由module, controller, service, directives,</p>
-<h2 id="模块-angular-modole"><a href="#模块-angular-modole" class="headerlink" title="模块(angular.modole)"></a>模块(angular.modole)</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js">angular<span class="token punctuation">.</span><span class="token function">module</span><span class="token punctuation">(</span>name<span class="token operator">:</span> string<span class="token punctuation">,</span> deps<span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="模块-angular-modole"><a href="#模块-angular-modole" class="headerlink" title="模块(angular.modole)"></a>模块(angular.modole)</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">angular<span class="token punctuation">.</span><span class="token function">module</span><span class="token punctuation">(</span>name<span class="token operator">:</span> string<span class="token punctuation">,</span> <span class="token literal-property property">deps</span><span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
         </div></article>
       <article class="post">
@@ -417,32 +417,32 @@ Note right of 小李: 小李想了想
         </span></div>
     </header>
 
-    <div class="post-content"><h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 不安装devDependencies
-npm i --production
-# 如果可以的就使用本地全局的依赖link到当前模块目录下
-npm i --link
+    <div class="post-content"><h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 不安装devDependencies</span>
+<span class="token function">npm</span> i <span class="token parameter variable">--production</span>
+<span class="token comment"># 如果可以的就使用本地全局的依赖link到当前模块目录下</span>
+<span class="token function">npm</span> i <span class="token parameter variable">--link</span>
 
-# 安装时更新package.json
-# 保存到dependencies
-npm i --save,-S &lt;pacakge&gt;
-# 保存到devDependencies
-npm i --save-dev,-D &lt;pacakge&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 安装时更新package.json</span>
+<span class="token comment"># 保存到dependencies</span>
+<span class="token function">npm</span> i --save,-S <span class="token operator">&lt;</span>pacakge<span class="token operator">></span>
+<span class="token comment"># 保存到devDependencies</span>
+<span class="token function">npm</span> i --save-dev,-D <span class="token operator">&lt;</span>pacakge<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h2><p>需要注意的是发布应用必须使用官方源，不能使用淘宝源</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 链接到本地环境变量目录下
-npm link
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 链接到本地环境变量目录下</span>
+<span class="token function">npm</span> <span class="token function">link</span>
 
-# 注册
-npm adduser
+<span class="token comment"># 注册</span>
+<span class="token function">npm</span> adduser
 
-# 登陆
-npm login
+<span class="token comment"># 登陆</span>
+<span class="token function">npm</span> login
 
-## 发布, 目录下
-npm publish
+<span class="token comment">## 发布, 目录下</span>
+<span class="token function">npm</span> publish
 
-## 不发布
-npm unpublish &lt;package&gt;@&lt;version&gt;
+<span class="token comment">## 不发布</span>
+<span class="token function">npm</span> unpublish <span class="token operator">&lt;</span>package<span class="token operator">></span>@<span class="token operator">&lt;</span>version<span class="token operator">></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>忽略文件，<code>.npmignore</code>, 同<code>.gitignore</code></p>
@@ -711,10 +711,10 @@ npm unpublish &lt;package&gt;@&lt;version&gt;
 <p>###编辑操作<br>命令              |功能<br>——————|—————————–</p>
 <p>##linux下的常用操作</p>
 <p>###linux 查看端口占用并杀掉</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">ps -aux | grep 9200 #过滤  or
-netstat –apn
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ps</span> <span class="token parameter variable">-aux</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">9200</span> <span class="token comment">#过滤  or</span>
+<span class="token function">netstat</span> –apn
 
-kill &lt;pid&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">kill</span> <span class="token operator">&lt;</span>pid<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
         </div></article>
       <article class="post">
@@ -735,54 +735,54 @@ kill &lt;pid&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span>
 <p>git reset –soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可</p>
 <p>git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
 <p>以下是一些reset的示例：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 回退所有内容到上一个版本
-git reset HEAD^
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 回退所有内容到上一个版本</span>
+<span class="token function">git</span> reset HEAD^
 
-# 回退a.py这个文件的版本到上一个版本
-git reset HEAD^ a.py
+<span class="token comment"># 回退a.py这个文件的版本到上一个版本</span>
+<span class="token function">git</span> reset HEAD^ a.py
 
-# 向前回退到第3个版本
-git reset –soft HEAD~3
+<span class="token comment"># 向前回退到第3个版本</span>
+<span class="token function">git</span> reset –soft HEAD~3
 
-# 将本地的状态回退到和远程的一样
-git reset –hard origin&#x2F;master
+<span class="token comment"># 将本地的状态回退到和远程的一样</span>
+<span class="token function">git</span> reset –hard origin/master
 
-# 回退到某个版本
-git reset 057d
+<span class="token comment"># 回退到某个版本</span>
+<span class="token function">git</span> reset 057d
 
-# 回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit
-git revert HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit</span>
+<span class="token function">git</span> revert HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-如何回退某个文件到指定提交"><a href="#1-如何回退某个文件到指定提交" class="headerlink" title="1. 如何回退某个文件到指定提交"></a>1. 如何回退某个文件到指定提交</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git reset &lt;commit&gt; &lt;path&#x2F;to&#x2F;file&gt;  #恢复文件版本
-git checkout &lt;path&#x2F;to&#x2F;file&gt;         #检出原来版本的文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-如何回退某个文件到指定提交"><a href="#1-如何回退某个文件到指定提交" class="headerlink" title="1. 如何回退某个文件到指定提交"></a>1. 如何回退某个文件到指定提交</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset <span class="token operator">&lt;</span>commit<span class="token operator">></span> <span class="token operator">&lt;</span>path/to/file<span class="token operator">></span>  <span class="token comment">#恢复文件版本</span>
+<span class="token function">git</span> checkout <span class="token operator">&lt;</span>path/to/file<span class="token operator">></span>         <span class="token comment">#检出原来版本的文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="2-删除本次提交（保留代码）"><a href="#2-删除本次提交（保留代码）" class="headerlink" title="2. 删除本次提交（保留代码）"></a>2. 删除本次提交（保留代码）</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git reset &lt;commit&gt; #默认为 –mixed，保留代码，可以查看修改，重新提交
-git status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2-删除本次提交（保留代码）"><a href="#2-删除本次提交（保留代码）" class="headerlink" title="2. 删除本次提交（保留代码）"></a>2. 删除本次提交（保留代码）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset <span class="token operator">&lt;</span>commit<span class="token operator">></span> <span class="token comment">#默认为 –mixed，保留代码，可以查看修改，重新提交</span>
+<span class="token function">git</span> status<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="3-切换未提交的分支时如何保存原来的代码"><a href="#3-切换未提交的分支时如何保存原来的代码" class="headerlink" title="3. 切换未提交的分支时如何保存原来的代码"></a>3. 切换未提交的分支时如何保存原来的代码</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git stash #缓存当前分支的修改，切换分支后不会丢失之前的修改。。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="3-切换未提交的分支时如何保存原来的代码"><a href="#3-切换未提交的分支时如何保存原来的代码" class="headerlink" title="3. 切换未提交的分支时如何保存原来的代码"></a>3. 切换未提交的分支时如何保存原来的代码</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> stash <span class="token comment">#缓存当前分支的修改，切换分支后不会丢失之前的修改。。</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="4-git-合并多个提交-包括message"><a href="#4-git-合并多个提交-包括message" class="headerlink" title="4. git 合并多个提交(包括message)"></a>4. git 合并多个提交(包括message)</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git log #查看提交历史
-git rebase -i HEAD
-# or git rebase -i &lt;commit&gt;
-# 如果遇到冲突
-# 需要先解决冲突 然后git add . 再git rebase --continue
-git push origin dev -f #-f 强制提交<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-git-合并多个提交-包括message"><a href="#4-git-合并多个提交-包括message" class="headerlink" title="4. git 合并多个提交(包括message)"></a>4. git 合并多个提交(包括message)</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log <span class="token comment">#查看提交历史</span>
+<span class="token function">git</span> rebase <span class="token parameter variable">-i</span> HEAD
+<span class="token comment"># or git rebase -i &lt;commit></span>
+<span class="token comment"># 如果遇到冲突</span>
+<span class="token comment"># 需要先解决冲突 然后git add . 再git rebase --continue</span>
+<span class="token function">git</span> push origin dev <span class="token parameter variable">-f</span> <span class="token comment">#-f 强制提交</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="5-本地过滤文件"><a href="#5-本地过滤文件" class="headerlink" title="5. 本地过滤文件"></a>5. 本地过滤文件</h3><p>有时需要过滤一些自己个人用的测试代码，但是又不想修改.gitignore 可以在.git/info/exclude中添加需要过滤的路径或文件。</p>
 <p>比如</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">gulpfile.js&#x2F;task&#x2F;mobile-test.js
-static&#x2F;
-static_resource&#x2F;mobile&#x2F;test
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gulpfile.js/task/mobile-test.js
+static/
+static_resource/mobile/test
 
-mobile&#x2F;views&#x2F;test&#x2F;
-templates&#x2F;mobile&#x2F;test
+mobile/views/test/
+templates/mobile/test
 
 .ftpconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>但是这种方法只能忽略未加入git版本库的文件，如果是已经加入版本库的文件，可以使用以下方法：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git update-index --assume-unchanged &#x2F;path&#x2F;to&#x2F;file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> update-index --assume-unchanged /path/to/file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果需要取消，只需要运行以下命令就可以了</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git update-index --no-assume-unchanged &#x2F;path&#x2F;to&#x2F;file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> update-index --no-assume-unchanged /path/to/file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="6-只clone一个最新的commit"><a href="#6-只clone一个最新的commit" class="headerlink" title="6.只clone一个最新的commit"></a>6.只clone一个最新的commit</h3><p>这种方法可以避免clone github上的项目因为太大而太慢..</p>
 <p>git clone –depth=1 <a target="_blank" rel="noopener" href="https://github.com/angular/angular-seed.git">https://github.com/angular/angular-seed.git</a> <your-project-name></p>
@@ -813,44 +813,44 @@ git apply --check patch.diff # 测试应用patch<span aria-hidden="true" class="
     </header>
 
     <div class="post-content"><h2 id="1-fork代码"><a href="#1-fork代码" class="headerlink" title="1.fork代码"></a>1.fork代码</h2><p>点击项目主页的fork按钮，你懂的</p>
-<h2 id="2-在本地创建dev分支进行开发"><a href="#2-在本地创建dev分支进行开发" class="headerlink" title="2.在本地创建dev分支进行开发"></a>2.在本地创建dev分支进行开发</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git clone &lt;your focked project&gt;
-git branch dev #新建分支dev
-git checkout dev #切换分支为dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-在本地创建dev分支进行开发"><a href="#2-在本地创建dev分支进行开发" class="headerlink" title="2.在本地创建dev分支进行开发"></a>2.在本地创建dev分支进行开发</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token operator">&lt;</span>your focked project<span class="token operator">></span>
+<span class="token function">git</span> branch dev <span class="token comment">#新建分支dev</span>
+<span class="token function">git</span> checkout dev <span class="token comment">#切换分支为dev</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>后面两句可以合并,等价于:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git clone &lt;your fork&gt;
-git checkout -b dev #新建并切换到分支dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token operator">&lt;</span>your fork<span class="token operator">></span>
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> dev <span class="token comment">#新建并切换到分支dev</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="3-写代码和提交"><a href="#3-写代码和提交" class="headerlink" title="3.写代码和提交"></a>3.写代码和提交</h2><p>当你在你的分支上写了很多代码后,可以随时提交到自己fork的远程仓库里,默认是origin,用于保存当前的工作状态:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git add -A #添加全部,也可以只添加某个文件夹或者修改的文件: git add &lt;glob pattern&gt;
-git commit -m &lt;message&gt;
-git push origin dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">-A</span> <span class="token comment">#添加全部,也可以只添加某个文件夹或者修改的文件: git add &lt;glob pattern></span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token operator">&lt;</span>message<span class="token operator">></span>
+<span class="token function">git</span> push origin dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>如果想更新最新的代码,你需要使用以下代码添加上游仓库:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git remote add upstream &lt;上游仓库地址&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token function">add</span> upstream <span class="token operator">&lt;</span>上游仓库地址<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>然后通过下面命令查看:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git remote -v<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>当你觉得自己的部分已经写好了,可以提交到上游仓库了,需要先将自己的commit合并到</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git rebase -i &lt;commit&gt; #合并commit,&lt;http:&#x2F;&#x2F;blog.csdn.net&#x2F;zmyde2010&#x2F;article&#x2F;details&#x2F;8603810&gt;
-git fetch upstream master
-git rebase upstream&#x2F;master #重置提交顺序，并检查是否有冲突，将自己的提交放在master的最上方
- git push origin dev -f #强制更新到fork版本库的master分支
-# 最后提一个pull request将自己fork的版本库的dev分支提交给主项目的master分支，自己的master分支只有在别人给你贡献代码时才有用,别人fork了你fork的项目，然后往你的master分支提pull request，然后再将你的dev分支和别人的分支合并到你fork的版本库的master分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase <span class="token parameter variable">-i</span> <span class="token operator">&lt;</span>commit<span class="token operator">></span> <span class="token comment">#合并commit,&lt;http://blog.csdn.net/zmyde2010/article/details/8603810></span>
+<span class="token function">git</span> fetch upstream master
+<span class="token function">git</span> rebase upstream/master <span class="token comment">#重置提交顺序，并检查是否有冲突，将自己的提交放在master的最上方</span>
+ <span class="token function">git</span> push origin dev <span class="token parameter variable">-f</span> <span class="token comment">#强制更新到fork版本库的master分支</span>
+<span class="token comment"># 最后提一个pull request将自己fork的版本库的dev分支提交给主项目的master分支，自己的master分支只有在别人给你贡献代码时才有用,别人fork了你fork的项目，然后往你的master分支提pull request，然后再将你的dev分支和别人的分支合并到你fork的版本库的master分支</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>也可以使用<code>pull --rebase</code>:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git rebase -i &lt;commit&gt;
-git pull --rebase upstream master
-git push origin dev -f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase <span class="token parameter variable">-i</span> <span class="token operator">&lt;</span>commit<span class="token operator">></span>
+<span class="token function">git</span> pull <span class="token parameter variable">--rebase</span> upstream master
+<span class="token function">git</span> push origin dev <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>写好代码后，最好先用<code>git status</code>查看当前项目的状态,<br>然后将需要提交的文件用<code>git add</code>添加到版本库中<br>然后再运行<code>git commit -m &lt;message&gt;</code>进行提交</p>
 <h2 id="4-同步上游版本库"><a href="#4-同步上游版本库" class="headerlink" title="4.同步上游版本库"></a>4.同步上游版本库</h2><p>fork相当于在服务器上clone整个项目，如果要保持fork的代码最新，需要先clone到本地，然后添加上游项目的地址，再进行更新。</p>
 <p>比如一个项目的地址是：<a target="_blank" rel="noopener" href="http://code.dapps.douban.com/market.git">http://code.dapps.douban.com/market.git</a><br>我fork后的地址为：<a target="_blank" rel="noopener" href="http://code.dapps.douban.com/yangzhen/market.git">http://code.dapps.douban.com/yangzhen/market.git</a></p>
 <p>然后需要运行的命令行：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># clone到本地
-git clone http:&#x2F;&#x2F;code.dapps.douban.com&#x2F;yangzhen&#x2F;market.git
-# 添加上游版本库的源
-git remote add upstream http:&#x2F;&#x2F;code.dapps.douban.com&#x2F;market.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># clone到本地</span>
+<span class="token function">git</span> clone http://code.dapps.douban.com/yangzhen/market.git
+<span class="token comment"># 添加上游版本库的源</span>
+<span class="token function">git</span> remote <span class="token function">add</span> upstream http://code.dapps.douban.com/market.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>之后就可以写代码和在本地commit了。<br>git commit 有用的参数<br>-m –message (必选) 提交的备注<br>-A –all 提交前add所有改动的代码<br>-i –include 在提交前add特定的文件<br>-o –only 只提交特定的某个文件<br>–short 简洁显示<br>–amend 只更新上次的提交（相当于将本次提交合并到上次提交）</p>
 <p>在每次pull request前做如下操作，即可实现和上游版本库同步</p>
@@ -861,10 +861,10 @@ git rebase upstream&#x2F;&#123;branch name&#125;<span aria-hidden="true" class="
 <p>其中rebase的作用是合并分支代码,<br>checkout和rebase 会把你的分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中),然后把”mywork”分支更新 为最新的”origin”分支，最后把保存的这些补丁应用到”mywork”分支上。（具体可见 <a target="_blank" rel="noopener" href="http://blog.csdn.net/hudashi/article/details/7664631">http://blog.csdn.net/hudashi/article/details/7664631</a> ）</p>
 <h2 id="5-修正rebase冲突"><a href="#5-修正rebase冲突" class="headerlink" title="5.修正rebase冲突"></a>5.修正rebase冲突</h2><p>请看这个博客：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/sinojelly/archive/2011/08/07/2130172.html">http://www.cnblogs.com/sinojelly/archive/2011/08/07/2130172.html</a></p>
 <h2 id="6-撤销上次rebase的修改"><a href="#6-撤销上次rebase的修改" class="headerlink" title="6.撤销上次rebase的修改"></a>6.撤销上次rebase的修改</h2><p>实际上，在rebase之前的提交会以ORIG_HEAD之名存留。如果rebase之后无法复原到原先的状态，可以用git reset –hard ORIG_HEAD复原到rebase之前的状态</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git reset --hard ORIG_HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset <span class="token parameter variable">--hard</span> ORIG_HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
-<h2 id="7-从别人那里pull代码"><a href="#7-从别人那里pull代码" class="headerlink" title="7.从别人那里pull代码"></a>7.从别人那里pull代码</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">git pull --rebase &lt;remote&gt; &lt;branch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="7-从别人那里pull代码"><a href="#7-从别人那里pull代码" class="headerlink" title="7.从别人那里pull代码"></a>7.从别人那里pull代码</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull <span class="token parameter variable">--rebase</span> <span class="token operator">&lt;</span>remote<span class="token operator">></span> <span class="token operator">&lt;</span>branch<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="8-更多的git内容"><a href="#8-更多的git内容" class="headerlink" title="8.更多的git内容"></a>8.更多的git内容</h2><p><a href="../git-base/">git</a></p>
 
@@ -893,7 +893,7 @@ git rebase upstream&#x2F;&#123;branch name&#125;<span aria-hidden="true" class="
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

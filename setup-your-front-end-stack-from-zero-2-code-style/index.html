@@ -38,7 +38,7 @@
 </script>
 
     <title>代码风格-从0搭建一个完整的前端开发技术栈(2) - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -130,21 +130,21 @@
     </div>
   </div><div class="post-content"><p>为了充分体现代码的逼格，良好统一的代码风格是必不可少的。而lint工具更是团队规范开发的必备利器。这里我们直接使用最流行的airbnb的lint配置，使用已有的配置比自己一个个查文档去配也方便快捷许多。</p>
 <h2 id="airbnb-javascript"><a href="#airbnb-javascript" class="headerlink" title="airbnb/javascript"></a>airbnb/javascript</h2><p>介绍：<a target="_blank" rel="noopener" href="https://github.com/airbnb/javascript">https://github.com/airbnb/javascript</a><br>eslint主页： <a target="_blank" rel="noopener" href="http://eslint.org/">http://eslint.org/</a></p>
-<h3 id="安装lint包"><a href="#安装lint包" class="headerlink" title="安装lint包"></a>安装lint包</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm install --save-dev eslint-config-airbnb eslint@^2.9.0 eslint-plugin-jsx-a11y@^1.2.0 eslint-plugin-import@^1.7.0 eslint-plugin-react@^5.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="安装lint包"><a href="#安装lint包" class="headerlink" title="安装lint包"></a>安装lint包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev eslint-config-airbnb eslint@^2.9.0 eslint-plugin-jsx-a11y@^1.2.0 eslint-plugin-import@^1.7.0 eslint-plugin-react@^5.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h3><p>然后直接在项目目录下添加.eslintrc文件就可以了</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// Use this file as a starting point for your project's .eslintrc.</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Use this file as a starting point for your project's .eslintrc.</span>
 <span class="token comment">// Copy this file, and add rule overrides as needed.</span>
 <span class="token punctuation">&#123;</span>
-  <span class="token string">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span>
+  <span class="token string-property property">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>或者将配置写入package.json里面, airbnb的代码风格居然需要写分号，对于无分号党果断不能忍，于是在rules字段中添加<code>semi: [&quot;error&quot;, &quot;never&quot;]</code>覆盖掉了。更多eslint的配置可以参考<a target="_blank" rel="noopener" href="http://eslint.org/docs/user-guide">http://eslint.org/docs/user-guide</a></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
   <span class="token comment">//...</span>
-  <span class="token string">"eslintConfig"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span><span class="token punctuation">,</span>
-    <span class="token string">"rules"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      <span class="token string">"semi"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token string-property property">"eslintConfig"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"rules"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"semi"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token string">"error"</span><span class="token punctuation">,</span>
         <span class="token string">"never"</span>
       <span class="token punctuation">]</span>
@@ -158,11 +158,11 @@
 <p>安装插件：</p>
 <p><code>apm install linter linter-eslint</code></p>
 <h3 id="一些细节问题"><a href="#一些细节问题" class="headerlink" title="一些细节问题"></a>一些细节问题</h3><h4 id="关闭某段代码的eslint"><a href="#关闭某段代码的eslint" class="headerlink" title="关闭某段代码的eslint"></a>关闭某段代码的eslint</h4><p>关闭全部规则:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/* eslint-disable */</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/* eslint-disable */</span>
 <span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// 一般alert是会提醒的</span>
 <span class="token comment">/* eslint-enable */</span>  <span class="token comment">//如果整个文件都关闭则不需要最后的enable了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>关闭部分规则：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/* eslint-disable no-alert, no-console */</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/* eslint-disable no-alert, no-console */</span>
 
 <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -171,7 +171,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="忽略某些目录或文件"><a href="#忽略某些目录或文件" class="headerlink" title="忽略某些目录或文件"></a>忽略某些目录或文件</h4><p>使用<code>.eslintignore</code>文件，和<code>.gitignore</code>差不多</p>
 <h4 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h4><p><a target="_blank" rel="noopener" href="http://eslint.org/docs/user-guide/configuring#specifying-environments">http://eslint.org/docs/user-guide/configuring#specifying-environments</a></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/* global var1, var2 */</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/* global var1, var2 */</span>
 
 <span class="token comment">// or</span>
 
@@ -179,9 +179,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 <span class="token comment">// or</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token string">"env"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-        <span class="token string">"browser"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        <span class="token string">"node"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token string-property property">"env"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-property property">"browser"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"node"</span><span class="token operator">:</span> <span class="token boolean">true</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -189,13 +189,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="airbnb-css"><a href="#airbnb-css" class="headerlink" title="airbnb/css"></a>airbnb/css</h2><p>airbnb的css/sass风格: <a target="_blank" rel="noopener" href="https://github.com/airbnb/css">https://github.com/airbnb/css</a><br>scss-lint.yml配置文件：<a target="_blank" rel="noopener" href="https://github.com/airbnb/css/blob/master/.scss-lint.yml">https://github.com/airbnb/css/blob/master/.scss-lint.yml</a></p>
 <h2 id="EditorConfig"><a href="#EditorConfig" class="headerlink" title="EditorConfig"></a>EditorConfig</h2><p>EditorConfig是一种通用编辑器配置文件，目前主流编辑器和IDE应该都对其有所支持，目的是保持项目的代码风格统一，诸如缩进，最后一行。。。这里直接抄了一个<a target="_blank" rel="noopener" href="https://github.com/mxstbr/react-boilerplate">react-boilerplate</a>的</p>
 <p>更多配置细节请看EditorConfig项目主页： <a target="_blank" rel="noopener" href="http://editorconfig.org/">http://editorconfig.org/</a></p>
-<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token constant">root</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token key attr-name">root</span> <span class="token punctuation">=</span> <span class="token value attr-value">true</span>
 
-<span class="token selector">[*]</span>
-<span class="token constant">end_of_line</span> <span class="token attr-value"><span class="token punctuation">=</span> lf</span>
-<span class="token constant">insert_final_newline</span> <span class="token attr-value"><span class="token punctuation">=</span> false</span>
-<span class="token constant">indent_style</span> <span class="token attr-value"><span class="token punctuation">=</span> space</span>
-<span class="token constant">indent_size</span> <span class="token attr-value"><span class="token punctuation">=</span> 2</span>
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">*</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">end_of_line</span> <span class="token punctuation">=</span> <span class="token value attr-value">lf</span>
+<span class="token key attr-name">insert_final_newline</span> <span class="token punctuation">=</span> <span class="token value attr-value">false</span>
+<span class="token key attr-name">indent_style</span> <span class="token punctuation">=</span> <span class="token value attr-value">space</span>
+<span class="token key attr-name">indent_size</span> <span class="token punctuation">=</span> <span class="token value attr-value">2</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       </div>
@@ -246,7 +246,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

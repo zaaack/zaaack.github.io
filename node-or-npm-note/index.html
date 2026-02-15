@@ -38,7 +38,7 @@
 </script>
 
     <title>node/npm笔记 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -128,32 +128,32 @@
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8"><span class="toc-text">发布应用</span></a></li></ol>
     </div>
-  </div><div class="post-content"><h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 不安装devDependencies
-npm i --production
-# 如果可以的就使用本地全局的依赖link到当前模块目录下
-npm i --link
+  </div><div class="post-content"><h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 不安装devDependencies</span>
+<span class="token function">npm</span> i <span class="token parameter variable">--production</span>
+<span class="token comment"># 如果可以的就使用本地全局的依赖link到当前模块目录下</span>
+<span class="token function">npm</span> i <span class="token parameter variable">--link</span>
 
-# 安装时更新package.json
-# 保存到dependencies
-npm i --save,-S &lt;pacakge&gt;
-# 保存到devDependencies
-npm i --save-dev,-D &lt;pacakge&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 安装时更新package.json</span>
+<span class="token comment"># 保存到dependencies</span>
+<span class="token function">npm</span> i --save,-S <span class="token operator">&lt;</span>pacakge<span class="token operator">></span>
+<span class="token comment"># 保存到devDependencies</span>
+<span class="token function">npm</span> i --save-dev,-D <span class="token operator">&lt;</span>pacakge<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h2><p>需要注意的是发布应用必须使用官方源，不能使用淘宝源</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 链接到本地环境变量目录下
-npm link
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 链接到本地环境变量目录下</span>
+<span class="token function">npm</span> <span class="token function">link</span>
 
-# 注册
-npm adduser
+<span class="token comment"># 注册</span>
+<span class="token function">npm</span> adduser
 
-# 登陆
-npm login
+<span class="token comment"># 登陆</span>
+<span class="token function">npm</span> login
 
-## 发布, 目录下
-npm publish
+<span class="token comment">## 发布, 目录下</span>
+<span class="token function">npm</span> publish
 
-## 不发布
-npm unpublish &lt;package&gt;@&lt;version&gt;
+<span class="token comment">## 不发布</span>
+<span class="token function">npm</span> unpublish <span class="token operator">&lt;</span>package<span class="token operator">></span>@<span class="token operator">&lt;</span>version<span class="token operator">></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>忽略文件，<code>.npmignore</code>, 同<code>.gitignore</code></p>
@@ -205,7 +205,7 @@ npm unpublish &lt;package&gt;@&lt;version&gt;
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

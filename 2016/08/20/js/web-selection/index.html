@@ -38,7 +38,7 @@
 </script>
 
     <title>web-selection - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -128,7 +128,7 @@
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%93%8D%E4%BD%9C%E5%85%89%E6%A0%87"><span class="toc-text">js操作光标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#textarea-%E6%88%96%E8%80%85-input%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">textarea 或者 input的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#div-contenteditable-%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%88%E5%85%B6%E5%AE%9E%E5%B0%B1%E6%98%AF%E5%92%8C%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E7%9A%84%E6%99%AE%E9%80%9A%E8%8A%82%E7%82%B9%E7%9A%84%E6%83%85%E5%86%B5%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84%EF%BC%89"><span class="toc-text">div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）</span></a></li></ol></li></ol>
     </div>
-  </div><div class="post-content"><h2 id="js操作光标"><a href="#js操作光标" class="headerlink" title="js操作光标"></a>js操作光标</h2><h3 id="textarea-或者-input的情况"><a href="#textarea-或者-input的情况" class="headerlink" title="textarea 或者 input的情况"></a>textarea 或者 input的情况</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getCursorPosition</span> <span class="token punctuation">(</span><span class="token parameter">ctrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//获取光标位置函数</span>
+  </div><div class="post-content"><h2 id="js操作光标"><a href="#js操作光标" class="headerlink" title="js操作光标"></a>js操作光标</h2><h3 id="textarea-或者-input的情况"><a href="#textarea-或者-input的情况" class="headerlink" title="textarea 或者 input的情况"></a>textarea 或者 input的情况</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getCursorPosition</span> <span class="token punctuation">(</span><span class="token parameter">ctrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//获取光标位置函数</span>
     <span class="token keyword">var</span> pos <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment">// IE Support</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>selection<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
       ctrl<span class="token punctuation">.</span><span class="token function">focus</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -155,7 +155,7 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）"><a href="#div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）" class="headerlink" title="div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）"></a>div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<h3 id="div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）"><a href="#div-contenteditable-的情况（其实就是和不能输入的普通节点的情况是一样的）" class="headerlink" title="div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）"></a>div+contenteditable 的情况（其实就是和不能输入的普通节点的情况是一样的）</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">var</span> sel <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">getSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 获取全部range</span>
@@ -169,10 +169,10 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>range的属性:</p>
-<pre class="line-numbers language-coffee" data-language="coffee"><code class="language-coffee">startContainer: Node # 开始位置所在节点
-startOffset: number # 开始位置在所在节点的偏移
-endContainer: Node # 结束位置在所在节点的偏移
-endOffset: number # 结束位置在所在节点的偏移<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-coffeescript" data-language="coffeescript"><code class="language-coffeescript"><span class="token property">startContainer</span><span class="token operator">:</span> Node <span class="token comment"># 开始位置所在节点</span>
+<span class="token property">startOffset</span><span class="token operator">:</span> number <span class="token comment"># 开始位置在所在节点的偏移</span>
+<span class="token property">endContainer</span><span class="token operator">:</span> Node <span class="token comment"># 结束位置在所在节点的偏移</span>
+<span class="token property">endOffset</span><span class="token operator">:</span> number <span class="token comment"># 结束位置在所在节点的偏移</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>需要注意的是这里的节点是Node而不是Element， 区别请看：<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html">http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType?redirectlocale=en-US&amp;redirectslug=nodeType">https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType?redirectlocale=en-US&amp;redirectslug=nodeType</a></p>
 <p>简单讲Element就是我们平时所看到的标签节点，它是Node的子集，Node还包括</p>
@@ -266,7 +266,7 @@ endOffset: number # 结束位置在所在节点的偏移<span aria-hidden="true"
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

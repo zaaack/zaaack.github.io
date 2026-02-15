@@ -38,7 +38,7 @@
 </script>
 
     <title>electron笔记 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -133,24 +133,24 @@
 <h3 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h3><p>前段时间在做 <a target="_blank" rel="noopener" href="https://github.com/zaaack/ELaunch">ELaunch</a>, 踩了不少坑，记录一下。</p>
 <h4 id="编译native-包"><a href="#编译native-包" class="headerlink" title="编译native 包"></a>编译native 包</h4><p>npm install 时会对包含native代码的包进行编译，但是是根据本地安装的node版本编译的，而不是electron中包含的node， 因此electron需要重新编译一次：</p>
 <p>官方文档： <a target="_blank" rel="noopener" href="http://electron.atom.io/docs/tutorial/using-native-node-modules/">http://electron.atom.io/docs/tutorial/using-native-node-modules/</a></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm install --save-dev electron-rebuild
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev electron-rebuild
 
-# Every time you run &quot;npm install&quot;, run this:
-.&#x2F;node_modules&#x2F;.bin&#x2F;electron-rebuild
+<span class="token comment"># Every time you run "npm install", run this:</span>
+./node_modules/.bin/electron-rebuild
 
-# On Windows if you have trouble, try:
-.\node_modules\.bin\electron-rebuild.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># On Windows if you have trouble, try:</span>
+.<span class="token punctuation">\</span>node_modules<span class="token punctuation">\</span>.bin<span class="token punctuation">\</span>electron-rebuild.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="mac-下隐藏窗口不会自动将焦点交还给原先窗口"><a href="#mac-下隐藏窗口不会自动将焦点交还给原先窗口" class="headerlink" title="mac 下隐藏窗口不会自动将焦点交还给原先窗口"></a>mac 下隐藏窗口不会自动将焦点交还给原先窗口</h4><p>类似iterm2/alfred快捷键呼出的效果 这是mac下独有的bug，windows和linux下默认就是需要的。</p>
 <p>在mac下其实已经有解决办法了， 就是</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">
-## 隐藏
-mainWin.hide()
-app.hide &amp;&amp; app.hide()
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
+<span class="token comment">## 隐藏</span>
+mainWin.hide<span class="token punctuation">(</span><span class="token punctuation">)</span>
+app.hide <span class="token operator">&amp;&amp;</span> app.hide<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-## 显示
-mainWin.show()
-app.show &amp;&amp; app.show()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">## 显示</span>
+mainWin.show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+app.show <span class="token operator">&amp;&amp;</span> app.show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>issue: <a target="_blank" rel="noopener" href="https://github.com/electron/electron/issues/6669">https://github.com/electron/electron/issues/6669</a></p>
 <h4 id="mac下不能使用复制黏贴快捷键"><a href="#mac下不能使用复制黏贴快捷键" class="headerlink" title="mac下不能使用复制黏贴快捷键"></a>mac下不能使用复制黏贴快捷键</h4><p>需要手动创建菜单，添加快捷键</p>
@@ -200,7 +200,7 @@ app.show &amp;&amp; app.show()<span aria-hidden="true" class="line-numbers-rows"
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

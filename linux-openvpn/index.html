@@ -38,7 +38,7 @@
 </script>
 
     <title>解决linux配置openvpn客户端不能push dns的问题 - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -124,8 +124,8 @@
     </header>
 
     <div class="post-content"><p>在openvpn的配置文件**.conf中添加下面两行</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">up &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf
-down &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后需要手动安装包:<br><code>sudo apt-get install openresolv</code><br>or<br><code>sudo apt-get install resolvconf</code></p>
 <p>由于在linux下很多软件都可以修改dns配置文件（<code>/etc/resolv.conf</code>)，为了避免冲突一般使用<code>openresolv</code>和<code>resolvconf</code>来管理dns配置。但是若遇到两者都不能自动修改<code>/etc/resolv.conf</code>文件的问题，可以手动编辑<code>/etc/openvpn/update-resolv-conf</code>文件来实现修改dns：</p>
 <p> <a target="_blank" rel="noopener" href="https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121">https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121</a></p>
@@ -177,7 +177,7 @@ down &#x2F;etc&#x2F;openvpn&#x2F;update-resolv-conf<span aria-hidden="true" clas
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>

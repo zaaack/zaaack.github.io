@@ -38,7 +38,7 @@
 </script>
 
     <title>flow学习笔记-从0搭建一个完整的前端开发技术栈(3) - Zack's Blog</title>
-  <meta name="generator" content="Hexo 5.4.0"></head>
+  <meta name="generator" content="Hexo 5.4.2"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
@@ -133,23 +133,23 @@
 <p>flow项目主页： <a target="_blank" rel="noopener" href="https://flowtype.org/">https://flowtype.org</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>mac: <code>brew install flow</code><br>linux: <code>sudo apt-get install flow</code> or 源码编译<br>windows: 最新版貌似有支持windows的了 <a target="_blank" rel="noopener" href="https://github.com/facebook/flow/releases/">https://github.com/facebook/flow/releases/</a> ,下载下来把二进制包放入环境变量中就行了</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>在项目根目录下运行<code>flow init</code>新建配置文件<br>然后在你的代码中第一行写上:</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">@flow
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">@flow
 
-<span class="token keyword">var</span> str<span class="token operator">:</span> number <span class="token operator">=</span> <span class="token string">'hello world!'</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">str</span><span class="token operator">:</span> number <span class="token operator">=</span> <span class="token string">'hello world!'</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行<code>flow check</code>,然后你就能看到华丽的报错了。。</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> a<span class="token operator">:</span>string <span class="token operator">=</span> <span class="token string">'aa'</span> <span class="token comment">// string 类型</span>
-<span class="token keyword">var</span> b<span class="token operator">:</span>string<span class="token operator">|</span>number <span class="token operator">=</span> <span class="token string">'aa'</span> <span class="token comment">// string或number类型</span>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token literal-property property">a</span><span class="token operator">:</span>string <span class="token operator">=</span> <span class="token string">'aa'</span> <span class="token comment">// string 类型</span>
+<span class="token keyword">var</span> <span class="token literal-property property">b</span><span class="token operator">:</span>string<span class="token operator">|</span>number <span class="token operator">=</span> <span class="token string">'aa'</span> <span class="token comment">// string或number类型</span>
 b <span class="token operator">=</span> <span class="token number">1</span>
 
-type <span class="token constant">I</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> number<span class="token punctuation">&#125;</span> <span class="token operator">&amp;</span> <span class="token punctuation">&#123;</span>b<span class="token operator">:</span> number<span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">//类型的并集</span>
-<span class="token keyword">var</span> x<span class="token operator">:</span> <span class="token constant">I</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-x <span class="token operator">=</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> c<span class="token operator">:</span> <span class="token string">"three"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+type <span class="token constant">I</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">&#125;</span> <span class="token operator">&amp;</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">//类型的并集</span>
+<span class="token keyword">var</span> <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token constant">I</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token string">"three"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">var</span> a<span class="token operator">:</span>Array<span class="token operator">&lt;</span>string<span class="token operator">|</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'aaa'</span><span class="token punctuation">]</span> <span class="token comment">// 带泛型的数组类型</span>
+<span class="token keyword">var</span> <span class="token literal-property property">a</span><span class="token operator">:</span>Array<span class="token operator">&lt;</span>string<span class="token operator">|</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'aaa'</span><span class="token punctuation">]</span> <span class="token comment">// 带泛型的数组类型</span>
 
-<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token operator">:</span> number<span class="token punctuation">,</span> b<span class="token operator">:</span> number</span><span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token punctuation">&#123;</span> <span class="token comment">// 定义函数的参数和返回值的类型</span>
+<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token punctuation">&#123;</span> <span class="token comment">// 定义函数的参数和返回值的类型</span>
   <span class="token keyword">return</span> a <span class="token operator">+</span> b
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -163,21 +163,21 @@ x <span class="token operator">=</span> <span class="token punctuation">&#123;</
 <p>从这个角度看any完全相当于JavaScript中的变量类型，官网上对于mixed有个很容易懂的关于函数的例子<br><a target="_blank" rel="noopener" href="https://flowtype.org/docs/builtins.html#mixed">https://flowtype.org/docs/builtins.html#mixed</a></p>
 <p>还有array/object呢? 其实flow也支持引用类型，因此这些类型都可以用引用的概念来代替了。。</p>
 <h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>其实引用类型是和值类型相区分的，只不过any和mixed也放入上一节了，所以和官方文档一致，用内置类型表示。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token comment">// @flow</span>
 <span class="token comment">// 假如你定义了一个类，那么这个类的实例的类型就是这个类，例如：</span>
 <span class="token keyword">var</span> <span class="token function-variable function">A</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>aa <span class="token operator">=</span> <span class="token string">'aaa'</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">var</span> a1<span class="token operator">:</span><span class="token constant">A</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> <span class="token literal-property property">a1</span><span class="token operator">:</span><span class="token constant">A</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 除此之外数组还有泛型：</span>
 
-<span class="token keyword">var</span> a2<span class="token operator">:</span> Array<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> <span class="token literal-property property">a2</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span>
 
 <span class="token comment">// 数组还能这样表示：</span>
-<span class="token keyword">var</span> a3<span class="token operator">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> a4<span class="token operator">:</span> <span class="token punctuation">(</span>string<span class="token operator">|</span>number<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span> <span class="token comment">//不加括号由于优先级问题则表示为string或number[]类型</span>
+<span class="token keyword">var</span> <span class="token literal-property property">a3</span><span class="token operator">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> <span class="token literal-property property">a4</span><span class="token operator">:</span> <span class="token punctuation">(</span>string<span class="token operator">|</span>number<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token string">'bbb'</span><span class="token punctuation">]</span> <span class="token comment">//不加括号由于优先级问题则表示为string或number[]类型</span>
 
 <span class="token comment">//函数泛型，学过 C++ || Java || C# 的不必多说</span>
 <span class="token keyword">function</span> reversed<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">(</span>array<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
@@ -197,9 +197,9 @@ x <span class="token operator">=</span> <span class="token punctuation">&#123;</
 
 <span class="token comment">// 类就不介绍了，一样的，这里放上类泛型的demo：</span>
 <span class="token keyword">class</span> <span class="token class-name">Box</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
-  _value<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+  <span class="token literal-property property">_value</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
 
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token constant">T</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>_value <span class="token operator">=</span> value<span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
 
@@ -210,26 +210,26 @@ x <span class="token operator">=</span> <span class="token punctuation">&#123;</
 <span class="token comment">// 对象类型，感觉其实就是类类型，只是不需要继承父类罢了，咦，这不就是接口吗？其实和接口还是有差异的，对象类型直接作用于对象，是Java里面没有的，后面提到的接口类型作用于类，和Java的接口更类似</span>
 <span class="token comment">// type可以用来定义类型， 至于为啥上面的不用定义，因为JavaScript已经有可以用来描述的对象了啊～</span>
 type Person <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token comment">//这是对象类型，规范对象每个属性的类型</span>
-  name<span class="token operator">:</span> string<span class="token punctuation">,</span>
-  age<span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token comment">//字段</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> string<span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token comment">//字段</span>
   <span class="token punctuation">(</span>param1<span class="token operator">:</span> string<span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token comment">//定义了参数和返回值的函数，感觉是不是和java的接口很像？感觉JavaScript越来越强大了: )</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 函数类型，和接口中的一样</span>
-type <span class="token function-variable function">TimesTwo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token operator">=></span> number<span class="token punctuation">;</span>
+type <span class="token function-variable function">TimesTwo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">value</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token operator">=></span> number<span class="token punctuation">;</span>
 
 <span class="token comment">// 数组类型</span>
-<span class="token keyword">var</span> array_of_num<span class="token operator">:</span> number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> array_of_num_alt<span class="token operator">:</span> Array<span class="token operator">&lt;</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> optional_array_of_num<span class="token operator">:</span> <span class="token operator">?</span>number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">//问号可以快捷定义可空(null/void)类型</span>
-<span class="token keyword">var</span> array_of_optional_num<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token operator">?</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">array_of_num</span><span class="token operator">:</span> number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">array_of_num_alt</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">optional_array_of_num</span><span class="token operator">:</span> <span class="token operator">?</span>number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">//问号可以快捷定义可空(null/void)类型</span>
+<span class="token keyword">var</span> <span class="token literal-property property">array_of_optional_num</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token operator">?</span>number<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 元组类型，参考python的元组</span>
-<span class="token keyword">var</span> tuple_of_str_and_num<span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">,</span> number<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Hi"</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">tuple_of_str_and_num</span><span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">,</span> number<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Hi"</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token comment">//接口类型，额，前面貌似有个对象类型，其实这两者还是有差异的，对象类型是作用于对象上，而接口是作用于类上的</span>
 <span class="token keyword">interface</span> <span class="token class-name">Comparable</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
-  <span class="token function">compare</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token function">compare</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
 <span class="token comment">//type类型支持es6语法：</span>
@@ -239,10 +239,10 @@ type <span class="token function-variable function">TimesTwo</span> <span class=
 
 <span class="token comment">//other.js</span>
 <span class="token keyword">import</span> type <span class="token punctuation">&#123;</span> Foo <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"./foo"</span>
-<span class="token keyword">var</span> foo<span class="token operator">:</span> Foo <span class="token operator">=</span> <span class="token string">"Hello"</span>
+<span class="token keyword">var</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> Foo <span class="token operator">=</span> <span class="token string">"Hello"</span>
 
 <span class="token comment">// 解构赋值</span>
-<span class="token keyword">var</span> <span class="token punctuation">&#123;</span>a<span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token punctuation">&#123;</span>c<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> string<span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token punctuation">&#123;</span>c<span class="token operator">:</span> number<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token punctuation">&#123;</span>c<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> <span class="token punctuation">&#123;</span>a<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>c<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> string<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">c</span><span class="token operator">:</span> number<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
 
 
 <span class="token comment">// 类型转换，懒得写了，从官网贴代码了：</span>
@@ -253,10 +253,10 @@ type <span class="token function-variable function">TimesTwo</span> <span class=
 
 <span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 <span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Base</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token keyword">var</span> child<span class="token operator">:</span> Child <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">child</span><span class="token operator">:</span> Child <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// Upcast from Child to Base, a more general type: OK</span>
-<span class="token keyword">var</span> base<span class="token operator">:</span> Base <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token literal-property property">base</span><span class="token operator">:</span> Base <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// Upcast from Child to Base, a more general type: OK</span>
 <span class="token punctuation">(</span>child<span class="token operator">:</span> Base<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -278,45 +278,45 @@ type <span class="token function-variable function">TimesTwo</span> <span class=
 <li>[options]: 参数配置 <a target="_blank" rel="noopener" href="https://flowtype.org/docs/advanced-configuration.html#options">https://flowtype.org/docs/advanced-configuration.html#options</a></li>
 </ul>
 <h3 id="第三方库"><a href="#第三方库" class="headerlink" title="第三方库"></a>第三方库</h3><p>flow出于性能考虑默认会忽略node_modules（引入模块自动解析成any），但是项目中一般都会用到第三方库，咋办？用React不要怕，facebook全家桶不是白叫的，早就内置支持了。。但是如果是其他的，就得自己定义了：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">[libs]
-interfaces&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>libs<span class="token punctuation">]</span>
+interfaces/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// interfaces/underscore.js</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// interfaces/underscore.js</span>
 declare <span class="token keyword">class</span> <span class="token class-name">Underscore</span> <span class="token punctuation">&#123;</span>
-  findWhere<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">(</span>list<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">,</span> properties<span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+  findWhere<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">(</span>list<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token literal-property property">properties</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
-declare <span class="token keyword">var</span> _<span class="token operator">:</span> Underscore<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+declare <span class="token keyword">var</span> <span class="token literal-property property">_</span><span class="token operator">:</span> Underscore<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>其实这才是完整的静态语言支持的关键，typescript有typings包来管理三方依赖的类型定义，flow生态其实也有: <a target="_blank" rel="noopener" href="https://github.com/flowtype/flow-typed">https://github.com/flowtype/flow-typed</a></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm install -g flow-typed
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> flow-typed
 
-cd &#x2F;path&#x2F;to&#x2F;my&#x2F;project
-flow-typed install -f 0.27 rxjs@5.0.0 # &#96;-f 0.27&#96; specifies the Flow version we&#39;re using for this project
-# &#39;rxjs_v5.0.x.js&#39; installed at &#x2F;path&#x2F;to&#x2F;my&#x2F;project&#x2F;flow-typed&#x2F;npm&#x2F;rxjs_v5.0.xjs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token builtin class-name">cd</span> /path/to/my/project
+flow-typed <span class="token function">install</span> <span class="token parameter variable">-f</span> <span class="token number">0.27</span> rxjs@5.0.0 <span class="token comment"># `-f 0.27` specifies the Flow version we're using for this project</span>
+<span class="token comment"># 'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>支持的第三方包和相关版本有：<br><a target="_blank" rel="noopener" href="https://github.com/flowtype/flow-typed/tree/master/definitions/npm">https://github.com/flowtype/flow-typed/tree/master/definitions/npm</a></p>
 <p>不知道有没有直接从第三方包生成类型定义或者从typescript的typings转换过来的工具。。</p>
 <h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>flow只是静态检查工具，要想真正发挥强类型的优势，没有配套的lint和代码提示工具是远远不够的。。在这里就不得不推荐facebook全家桶之一的<a target="_blank" rel="noopener" href="https://nuclide.io/">nuclide.io</a> IDE了，该项目建立在 <a target="_blank" rel="noopener" href="https://atom.io/">Atom</a> 编辑器上，对flow有着近乎完美的支持（除了偶尔出现各种bug，笔者写这篇文章时还给nulide提了最新版atom(v1.9)上flow失效的bug）..</p>
 <p>如图就是nuclide的flow lint效果，据说和atom的<code>linter</code>包冲突，需要disable<code>linter</code>，不过依赖linter的包也可以依赖nuclide，并不影响。<br><img src="/images/2016/08/587ee75d-0d08-4de2-8e15-bc647647090e.png"></p>
 <p>此外还有自动完成功能，但是略坑的是貌似不支持node或browser的api, 也许以后会有第三方flow定义的type库吧，现在还是配合<a target="_blank" rel="noopener" href="https://atom.io/packages/atom-ternjs">ternjs</a>比较合理。。</p>
 <p>but, 最新版的npm已经把所有的依赖包扁平化了，这意味着每个包目录下都不包括依赖包，这样的话如果只单独引入某个模块并不会引入依赖的模块（依然自动解析成any），但是我们却可以享受到引入模块的提示功能，比如flow-typed里面并没有包含react，因此如果想提示react可以直接这样：</p>
-<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token selector">[include]</span>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">include</span><span class="token punctuation">]</span></span>
 ./node_modules/react
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后就可以在<code>React.PropTypes.</code>时就会有提示了:<br><img src="/images/2016/08/ca0859af-fceb-44cc-9570-df14fd80030a.png"></p>
 <h3 id="和webpack-babel整合"><a href="#和webpack-babel整合" class="headerlink" title="和webpack/babel整合"></a>和webpack/babel整合</h3><p>毫无疑问这种语法是不被浏览器和node支持的，因此也需要工具在编译时移除所有flow语法，官方推荐是<code>babel-plugin-transform-flow-strip-types</code></p>
 <h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装:"></a>安装:</h4><p><code>npm i -D babel-plugin-transform-flow-strip-types</code></p>
-<h4 id="webpack配置："><a href="#webpack配置：" class="headerlink" title="webpack配置："></a>webpack配置：</h4><pre class="line-numbers language-js" data-language="js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+<h4 id="webpack配置："><a href="#webpack配置：" class="headerlink" title="webpack配置："></a>webpack配置：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// ...</span>
   <span class="token comment">//</span>
-  modules<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    loaders<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
-        test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.(js|jsx)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
-        exclude<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(node_modules|bower_components)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'babel'</span><span class="token punctuation">,</span>
-        query<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-          presets<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-          plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">,</span> <span class="token string">'transform-flow-strip-types'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">loaders</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.(js|jsx)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">exclude</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(node_modules|bower_components)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'babel'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">query</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">presets</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">,</span> <span class="token string">'transform-flow-strip-types'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
       <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span>
@@ -328,43 +328,43 @@ flow-typed install -f 0.27 rxjs@5.0.0 # &#96;-f 0.27&#96; specifies the Flow ver
 <h3 id="和eslint整合"><a href="#和eslint整合" class="headerlink" title="和eslint整合"></a>和eslint整合</h3><p>需要注意的是eslint是不支持flow语法的，不过还好已经有了非常完善的插件可以支持<a target="_blank" rel="noopener" href="https://github.com/gajus/eslint-plugin-flowtype">eslint-plugin-flowtype</a></p>
 <h4 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h4><p><code>npm i -D eslint babel-eslint eslint-plugin-flowtype</code></p>
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>然后在你的.eslintrc文件或者package.json的eslintConfig字段中配置如下就行，而且和airbnb的配置也不冲突。。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token punctuation">&#123;</span>
-    <span class="token string">"parser"</span><span class="token operator">:</span> <span class="token string">"babel-eslint"</span><span class="token punctuation">,</span>
-    <span class="token string">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span><span class="token punctuation">,</span> <span class="token comment">// 如果安装前面的配置下来这里是有airbnb的。。</span>
-    <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"parser"</span><span class="token operator">:</span> <span class="token string">"babel-eslint"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span><span class="token punctuation">,</span> <span class="token comment">// 如果安装前面的配置下来这里是有airbnb的。。</span>
+    <span class="token string-property property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token string">"flowtype"</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">"rules"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-        <span class="token string">"semi"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 无分号党果断关闭了分号</span>
+    <span class="token string-property property">"rules"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-property property">"semi"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 无分号党果断关闭了分号</span>
           <span class="token string">"error"</span><span class="token punctuation">,</span>
           <span class="token string">"never"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"flowtype/define-flow-type"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment">// 避免flow的type定义却未使用的error</span>
-        <span class="token string">"flowtype/require-parameter-type"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// 每个函数的参数都要写类型，太严格了，匿名函数也是如此，我关了。。</span>
-        <span class="token string">"flowtype/require-return-type"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">//要求有返回类型，这个不错，开着</span>
+        <span class="token string-property property">"flowtype/define-flow-type"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment">// 避免flow的type定义却未使用的error</span>
+        <span class="token string-property property">"flowtype/require-parameter-type"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// 每个函数的参数都要写类型，太严格了，匿名函数也是如此，我关了。。</span>
+        <span class="token string-property property">"flowtype/require-return-type"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">//要求有返回类型，这个不错，开着</span>
             <span class="token number">1</span><span class="token punctuation">,</span>
             <span class="token string">"always"</span><span class="token punctuation">,</span>
             <span class="token punctuation">&#123;</span>
-                <span class="token string">"annotateUndefined"</span><span class="token operator">:</span> <span class="token string">"never"</span>
+                <span class="token string-property property">"annotateUndefined"</span><span class="token operator">:</span> <span class="token string">"never"</span>
             <span class="token punctuation">&#125;</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"flowtype/space-after-type-colon"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 类型的冒号后面加空格，为了美观果断得开</span>
+        <span class="token string-property property">"flowtype/space-after-type-colon"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 类型的冒号后面加空格，为了美观果断得开</span>
             <span class="token number">1</span><span class="token punctuation">,</span>
             <span class="token string">"always"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"flowtype/space-before-type-colon"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 类型的冒号前加空格，太变态了，关</span>
+        <span class="token string-property property">"flowtype/space-before-type-colon"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 类型的冒号前加空格，太变态了，关</span>
             <span class="token number">1</span><span class="token punctuation">,</span>
             <span class="token string">"never"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"flowtype/type-id-match"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 自定义的type的名称后面都得加上Type, 如type fooType = &#123;&#125;, 感觉很不错的样子，暂时用不上，不管。。</span>
+        <span class="token string-property property">"flowtype/type-id-match"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 自定义的type的名称后面都得加上Type, 如type fooType = &#123;&#125;, 感觉很不错的样子，暂时用不上，不管。。</span>
             <span class="token number">1</span><span class="token punctuation">,</span>
             <span class="token string">"^([A-Z][a-z0-9]+)+Type$"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"flowtype/use-flow-type"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token comment">// 避免 flow type 的别名的 no-unused-vars 错误</span>
+        <span class="token string-property property">"flowtype/use-flow-type"</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token comment">// 避免 flow type 的别名的 no-unused-vars 错误</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token string">"settings"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-        <span class="token string">"flowtype"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            <span class="token string">"onlyFilesWithFlowAnnotation"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token string-property property">"settings"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-property property">"flowtype"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token string-property property">"onlyFilesWithFlowAnnotation"</span><span class="token operator">:</span> <span class="token boolean">false</span>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -417,7 +417,7 @@ flow-typed install -f 0.27 rxjs@5.0.0 # &#96;-f 0.27&#96; specifies the Flow ver
     <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">&copy;2015 - 2024<span class="heart">
+  <span class="copyright-year">&copy;2015 - 2026<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Zack</span>
