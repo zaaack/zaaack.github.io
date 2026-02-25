@@ -114,43 +114,6 @@
         <div class="content-wrapper">
           <div id="content" class="content"><section id="posts" class="posts"><article class="post">
     <header class="post-header">
-      <h1 class="post-title"><a class="post-link" href="/ios-safari-bubbling/">ios上safari非默认可点击的元素的点击事件无法冒泡问题的解决</a>
-        </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2016-07-29
-        </span></div>
-    </header>
-
-    <div class="post-content"><p>在ios的safari上的事件系统有个很古老的bug，在较老的zepto和react上都全线中枪，直至今日也是这样。。</p>
-<p>比如以下这两种写法很有可能在ios上无效：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token string">'div.target'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'clicked!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> App <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-    <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-      <span class="token keyword">return</span> <span class="token punctuation">(</span>
-        <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>onClick<span class="token punctuation">&#125;</span><span class="token operator">></span>点我<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-      <span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">onClick</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'jsx clicked!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>解决办法，用css在需要冒泡点击的元素上设置</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.clickable</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-        </div></article>
-      <article class="post">
-    <header class="post-header">
       <h1 class="post-title"><a class="post-link" href="/js-regex-note/">javascript的正则踩坑笔记</a>
         </h1>
 
@@ -770,6 +733,110 @@ down /etc/openvpn/update-resolv-conf<span aria-hidden="true" class="line-numbers
 <p>然后需要手动安装包:<br><code>sudo apt-get install openresolv</code><br>or<br><code>sudo apt-get install resolvconf</code></p>
 <p>由于在linux下很多软件都可以修改dns配置文件（<code>/etc/resolv.conf</code>)，为了避免冲突一般使用<code>openresolv</code>和<code>resolvconf</code>来管理dns配置。但是若遇到两者都不能自动修改<code>/etc/resolv.conf</code>文件的问题，可以手动编辑<code>/etc/openvpn/update-resolv-conf</code>文件来实现修改dns：</p>
 <p> <a target="_blank" rel="noopener" href="https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121">https://gist.github.com/zaaack/7ab3d00c688115c7ad80d44d2ffbd121</a></p>
+
+        </div></article>
+      <article class="post">
+    <header class="post-header">
+      <h1 class="post-title"><a class="post-link" href="/vagrant-in-linux/">linux下配置vagrant的笔记</a>
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-06-17
+        </span></div>
+    </header>
+
+    <div class="post-content"><h1 id="linux配置vagrant"><a href="#linux配置vagrant" class="headerlink" title="linux配置vagrant"></a>linux配置vagrant</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.vagrantup.com/docs/">https://www.vagrantup.com/docs/</a></p>
+</blockquote>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="从本地box导入"><a href="#从本地box导入" class="headerlink" title="从本地box导入"></a>从本地box导入</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vagrant box <span class="token function">add</span> <span class="token operator">&lt;</span>box name<span class="token operator">></span> <span class="token operator">&lt;</span>path to box<span class="token operator">></span> <span class="token comment">#导入box文件</span>
+vagrant init <span class="token comment">#初始化一个Vagrantfile配置文件，若已有则跳过此步</span>
+vagrant up <span class="token comment">#启动vagrant</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="配置共享"><a href="#配置共享" class="headerlink" title="配置共享"></a>配置共享</h3><p>linux和osx都支持nfs共享，但是我用的deepinlinux(基于debian)默认没有nfs包，因此需要先手动安装</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nfs-kernel-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后配置Vagrantfile文件</p>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># -*- mode: ruby -*-</span>
+<span class="token comment"># vi: set ft=ruby :</span>
+
+<span class="token comment"># All Vagrant configuration is done below. The "2" in Vagrant.configure</span>
+<span class="token comment"># configures the configuration version (we support older styles for</span>
+<span class="token comment"># backwards compatibility). Please don't change it unless you know what</span>
+<span class="token comment"># you're doing.</span>
+Vagrant<span class="token punctuation">.</span>configure<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>config<span class="token operator">|</span>
+  <span class="token comment"># The most common configuration options are documented and commented below.</span>
+  <span class="token comment"># For a complete reference, please see the online documentation at</span>
+  <span class="token comment"># https://docs.vagrantup.com.</span>
+
+  <span class="token comment"># Every Vagrant development environment requires a box. You can search for</span>
+  <span class="token comment"># boxes at https://atlas.hashicorp.com/search.</span>
+  <span class="token comment">#这里必须和vagrant box add &lt;box name> &lt;path to box>的box name一致</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>box <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"shire"</span></span>
+
+  <span class="token comment"># Disable automatic box update checking. If you disable this, then</span>
+  <span class="token comment"># boxes will only be checked for updates when the user runs</span>
+  <span class="token comment"># `vagrant box outdated`. This is not recommended.</span>
+  <span class="token comment"># config.vm.box_check_update = false</span>
+
+  <span class="token comment"># Create a forwarded port mapping which allows access to a specific port</span>
+  <span class="token comment"># within the machine from a port on the host machine. In the example below,</span>
+  <span class="token comment"># accessing "localhost:8080" will access port 80 on the guest machine.</span>
+  <span class="token comment"># config.vm.network "forwarded_port", guest: 80, host: 8080</span>
+
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>host_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"vagrant"</span></span>
+<span class="token comment"># vagrant默认是通过端口转发和虚拟机通信，也就是虚拟机可以像主机一样用127.0.0.1访问。不过这种方式无法在外部连接端口很多的软件，比如mysql。</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9010</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9010</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9015</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9015</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token symbol">:forwarded_port</span><span class="token punctuation">,</span> <span class="token symbol">guest</span><span class="token operator">:</span> <span class="token number">9200</span><span class="token punctuation">,</span> <span class="token symbol">host</span><span class="token operator">:</span> <span class="token number">9200</span>
+
+  <span class="token comment"># Create a private network, which allows host-only access to the machine</span>
+  <span class="token comment"># using a specific IP.</span>
+  <span class="token comment">#这种方式可以用主机上的mysql管理软件连接虚拟机的mysql</span>
+ config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>network <span class="token string-literal"><span class="token string">"private_network"</span></span><span class="token punctuation">,</span> <span class="token symbol">ip</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"192.168.33.10"</span></span>
+
+ <span class="token comment"># config.vm.network "private_network", type: "dhcp"</span>
+
+  <span class="token comment"># Create a public network, which generally matched to bridged network.</span>
+  <span class="token comment"># Bridged networks make the machine appear as another physical device on</span>
+  <span class="token comment"># your network.</span>
+  <span class="token comment"># config.vm.network "public_network"</span>
+
+  <span class="token comment"># Share an additional folder to the guest VM. The first argument is</span>
+  <span class="token comment"># the path on the host to the actual folder. The second argument is</span>
+  <span class="token comment"># the path on the guest to mount the folder. And the optional third</span>
+  <span class="token comment"># argument is a set of non-required options.</span>
+  <span class="token comment">#config.vm.synced_folder "../vagrant", "/home/vagrant"</span>
+
+  <span class="token comment"># config.vm.synced_folder "../code/market", "/home/vagrant/market", type: "smb"</span>
+  <span class="token comment">#这样就可以配置nfs方式的同步了，第一个参数是本机目录，第二个参数是虚拟机目录。</span>
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>synced_folder <span class="token string-literal"><span class="token string">"../share/"</span></span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">"/home/vagrant/share/"</span></span><span class="token punctuation">,</span> <span class="token symbol">type</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"nfs"</span></span><span class="token punctuation">,</span>  <span class="token symbol">nfs_udp</span><span class="token operator">:</span> <span class="token boolean">false</span>
+
+
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>password <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'vagrant'</span></span>
+  config<span class="token punctuation">.</span>ssh<span class="token punctuation">.</span>insert_key <span class="token operator">=</span> <span class="token string-literal"><span class="token string">'true'</span></span>
+
+
+  config<span class="token punctuation">.</span>vm<span class="token punctuation">.</span>provider <span class="token string-literal"><span class="token string">"virtualbox"</span></span> <span class="token keyword">do</span> <span class="token operator">|</span>vb<span class="token operator">|</span>
+    <span class="token comment"># Display the VirtualBox GUI when booting the machine</span>
+    <span class="token comment">#vb.gui = true</span>
+    <span class="token comment">#如果嫌虚拟机太慢可以多分配些资源</span>
+    <span class="token comment"># Customize the amount of memory on the VM:</span>
+    vb<span class="token punctuation">.</span>memory <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"2048"</span></span>
+    vb<span class="token punctuation">.</span>cpus<span class="token operator">=</span><span class="token number">4</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="常用命令介绍"><a href="#常用命令介绍" class="headerlink" title="常用命令介绍"></a>常用命令介绍</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vagrant status <span class="token comment">#当前虚拟机的状况</span>
+vagrant global-status <span class="token comment">#全局虚拟机的状态</span>
+vagrant box list <span class="token comment">#查看本地已添加的box</span>
+vagrant up <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#启动虚拟机</span>
+vagrant <span class="token function">suspend</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#休眠虚拟机</span>
+vagrant resume <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#恢复虚拟机</span>
+vagrant reload <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token punctuation">[</span>--provision<span class="token punctuation">]</span> <span class="token comment">#重新载入配置文件,需要重启,[--provision]表示同时根据配置文件更新虚拟机内的依赖环境</span>
+vagrant <span class="token function">ssh</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#进入虚拟环境</span>
+vagrant <span class="token function">halt</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#关机</span>
+vagrant provision <span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token comment">#在一个正在运行的虚拟机中更新依赖</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         </div></article>
       <nav class="pagination"><a class="prev" href="/page/2/">
